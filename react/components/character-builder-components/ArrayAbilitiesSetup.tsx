@@ -1,30 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Pressable, Text, View } from 'react-native';
-import { AbilityScores, SCORE } from '../../model/properties';
+import { AbilityScores, SCORE } from '../../model/character';
 import SetStaticScoreModal from './SetStaticScoreModal';
 
 function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
   const array = [14, 12, 11, 10, 9, 7];
 
-  const setupState = () => {
-    const scores: AbilityScores = {
-      cha: null,
-      con: null,
-      dex: null,
-      int: null,
-      str: null,
-      wis: null,
-    };
-
-    Object.keys(props.scores).forEach(k => {
-      if (props.scores[k as keyof AbilityScores])
-        scores[k as keyof AbilityScores] = props.scores[k as keyof AbilityScores];
-    });
-
-    return scores;
-  };
-
-  const [scores, setScores] = useState<AbilityScores>(setupState());
+  const [scores, setScores] = useState<AbilityScores>(props.scores);
   const [modal, setModal] = useState<{
     visible: boolean;
     selectedValue?: number;
@@ -33,6 +15,8 @@ function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
     visible: false,
     selectedValue: 14,
   });
+
+  useEffect(() => props.onAbilityScoresChange(scores), [scores]);
 
   const getScoreAt = (value: number | undefined): string | undefined => {
     if (!value) return undefined;
@@ -53,7 +37,6 @@ function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
 
   return (
     <View>
-      <Text>{modal.visible}</Text>
       <Modal animationType="slide" visible={modal.visible}>
         <SetStaticScoreModal
           confirmHandler={value => handleScoreAssignment(value)}
@@ -87,5 +70,5 @@ export default ArrayAbilitiesSetup;
 
 export interface ArrayAbilitiesSetupProps {
   scores: AbilityScores;
-  setupHandler: (scores: AbilityScores) => void;
+  onAbilityScoresChange: (scores: AbilityScores) => void;
 }

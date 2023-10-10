@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { AbilityScores, SCORE } from '../../model/properties';
+import { AbilityScores, SCORE } from '../../model/character';
 import AppBtn from '../generics/AppBtn';
 
 function SetStaticScoreModal(props: SetStaticScoreModalProps): JSX.Element {

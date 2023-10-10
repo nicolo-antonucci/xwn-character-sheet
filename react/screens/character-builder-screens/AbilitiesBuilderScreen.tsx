@@ -3,8 +3,7 @@ import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import ArrayAbilitiesSetup from '../../components/character-builder-components/ArrayAbilitiesSetup';
 import RollAbilitiesSetup from '../../components/character-builder-components/RollAbilitiesSetup';
 import AppBtn from '../../components/generics/AppBtn';
-import { RULESET } from '../../model/properties';
-import { AbilityScores } from '../../model/character';
+import { AbilityScores, Character } from '../../model/character';
 
 type ScoreGen = 'array' | 'roll';
 
@@ -19,14 +18,7 @@ function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProps): JSX.Element
   };
 
   const [scoreGen, setScoreGen] = useState(ScoreGen.ARRAY);
-  const [scores, setScores] = useState<AbilityScores>({
-    str: null,
-    dex: null,
-    con: null,
-    int: null,
-    wis: null,
-    cha: null,
-  });
+  const [scores, setScores] = useState<AbilityScores>(props.character.abilityScores);
 
   useEffect(() => props.onAbilityScoresChange(scores), [scores]);
 
@@ -41,7 +33,7 @@ function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProps): JSX.Element
         </View>
         <View>
           {scoreGen === ScoreGen.ARRAY ? (
-            <ArrayAbilitiesSetup scores={scores} setupHandler={scores => setScores(scores)} />
+            <ArrayAbilitiesSetup scores={scores} onAbilityScoresChange={scores => setScores(scores)} />
           ) : (
             <RollAbilitiesSetup scores={scores} setupHandler={scores => setScores(scores)} />
           )}
@@ -54,6 +46,6 @@ function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProps): JSX.Element
 export default BuilderAbilitiesScreen;
 
 export interface BuilderAbilitiesScreenProps {
-  ruleset: RULESET;
+  character: Character;
   onAbilityScoresChange: (scores: AbilityScores) => void;
 }

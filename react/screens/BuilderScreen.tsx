@@ -35,7 +35,7 @@ function BuilderScreen(): JSX.Element {
       <Tab.Screen name="Abilities">
         {() => (
           <BuilderAbilitiesScreen
-            ruleset={ruleset}
+            character={character}
             onAbilityScoresChange={handleAbilityScoresChange}
           ></BuilderAbilitiesScreen>
         )}
