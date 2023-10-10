@@ -1,14 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View } from 'react-native';
-import { RooStackParamList } from './react/model/props';
+import { RootStackParamList } from './react/model/props';
 import BuilderScreen from './react/screens/BuilderScreen';
 import CharactersScreen from './react/screens/CharactersScreen';
 import DatabaseScreen from './react/screens/DatabaseScreen';
 import HomeScreen from './react/screens/MainScreen';
 
 function App(): JSX.Element {
-  const Stack = createNativeStackNavigator<RooStackParamList>();
+  const Stack = createNativeStackNavigator<RootStackParamList>();
 
   return (
     <View style={{ flex: 1 }}>

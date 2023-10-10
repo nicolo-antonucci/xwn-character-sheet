@@ -1,8 +1,8 @@
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
-import AppBtn from '../components/AppBtn';
-import { NavigationProps } from '../model/props';
+import AppBtn from '../components/generics/AppBtn';
+import { RootNavigationProps } from '../model/props';
 
-function HomeScreen({ navigation }: NavigationProps): JSX.Element {
+function HomeScreen({ navigation }: RootNavigationProps): JSX.Element {
   const backgroundStyle = {
     backgroundColor: '#FFF',
     flex: 1,

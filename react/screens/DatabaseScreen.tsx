@@ -1,7 +1,7 @@
 import { SafeAreaView, StatusBar, View, Text } from 'react-native';
-import { NavigationProps } from '../model/props';
+import { RootNavigationProps } from '../model/props';
 
-function DatabaseScreen({ navigation }: NavigationProps): JSX.Element {
+function DatabaseScreen({ navigation }: RootNavigationProps): JSX.Element {
   const backgroundStyle = {
     backgroundColor: '#FFF',
   };
