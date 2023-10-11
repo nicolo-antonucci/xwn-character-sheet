@@ -10,6 +10,7 @@
   },
   "plugins": ["prettier", "react"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-console": "warn"
   }
 }

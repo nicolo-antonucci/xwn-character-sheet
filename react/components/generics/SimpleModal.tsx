@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native';
-import AppBtn from './AppBtn';
+import { View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
 function SimpleModal(props: SimpleModalProps): JSX.Element {
   return (
@@ -9,8 +9,8 @@ function SimpleModal(props: SimpleModalProps): JSX.Element {
         <Text key={`alert-content-${i}`}>{txt}</Text>
       ))}
       <View>
-        <AppBtn text="CONFIRM" onPress={props.confirmHandler}></AppBtn>
-        <AppBtn text="CANCEL" onPress={props.undoHandler}></AppBtn>
+        <Button onPress={props.confirmHandler}>Confirm</Button>
+        <Button onPress={props.undoHandler}>Cancel</Button>
       </View>
     </View>
   );

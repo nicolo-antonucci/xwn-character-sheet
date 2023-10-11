@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Modal, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 import { AbilityScores, SCORE } from '../../model/character';
-import AppBtn from '../generics/AppBtn';
-import SetRolledScoresModal from './SetRolledScoreModal';
 import SimpleModal from '../generics/SimpleModal';
+import SetRolledScoresModal from './SetRolledScoreModal';
 
 function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.Element {
   const [rolledScores, setRolledScores] = useState<
@@ -116,13 +116,12 @@ function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.Element {
           <Text key={`rs-${i}`}>{rs.value}</Text>
         ))}
       </View>
-      <AppBtn text={rolledScores.length === 0 ? 'Roll' : 'Reroll'} onPress={checkBeforeRoll}></AppBtn>
+      <Button onPress={checkBeforeRoll}>{rolledScores.length === 0 ? 'Roll' : 'Reroll'}</Button>
       <View>
         {Object.values(SCORE).map((s, index) => (
-          <Pressable key={index} onPress={() => openModal(s)}>
-            <Text>{s.toUpperCase()}</Text>
-            <Text>{props.scores[s] ?? 'Assign'}</Text>
-          </Pressable>
+          <Button key={index} onPress={() => openModal(s)}>
+            <Text>{s.toUpperCase()} {props.scores[s] ?? 'Assign'}</Text>
+          </Button>
         ))}
       </View>
     </View>

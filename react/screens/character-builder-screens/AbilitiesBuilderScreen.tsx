@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 import ArrayAbilitiesSetup from '../../components/character-builder-components/ArrayAbilitiesSetup';
 import RollAbilitiesSetup from '../../components/character-builder-components/RollAbilitiesSetup';
-import AppBtn from '../../components/generics/AppBtn';
 import { AbilityScores, Character } from '../../model/character';
 
 type ScoreGen = 'array' | 'roll';
@@ -28,8 +28,8 @@ function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProps): JSX.Element
       <View>
         <Text>Choose a method to generate ability scores</Text>
         <View>
-          <AppBtn text="Array (14...)" onPress={() => setScoreGen(ScoreGen.ARRAY)}></AppBtn>
-          <AppBtn text="Roll (3d6 x 6)" onPress={() => setScoreGen(ScoreGen.ROLL)}></AppBtn>
+          <Button onPress={() => setScoreGen(ScoreGen.ARRAY)}>Array (14...)</Button>
+          <Button onPress={() => setScoreGen(ScoreGen.ROLL)}>Roll (3d6 x 6)</Button>
         </View>
         <View>
           {scoreGen === ScoreGen.ARRAY ? (

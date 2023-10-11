@@ -1,13 +1,12 @@
-import { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
-import AppBtn from '../generics/AppBtn';
-import { SCORE, AbilityScores } from '../../model/character';
+import { View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
+import { SCORE } from '../../model/character';
 
 function SetRolledScoresModal(props: SetRolledScoresModalProps): JSX.Element {
   const errorTemplate = (
     <View>
       <Text>Error processing information</Text>
-      <AppBtn text="Close" onPress={props.undoHandler} />
+      <Button onPress={props.undoHandler}>Close</Button>
     </View>
   );
 
@@ -20,15 +19,15 @@ function SetRolledScoresModal(props: SetRolledScoresModalProps): JSX.Element {
             ` (current value: ${props.rolledScores.find(rs => rs.score === props.score)?.value})`}
         </Text>
         {props.rolledScores.map((s, index) => (
-          <Pressable key={`select-score-${index}`} onPress={() => props.confirmHandler(s.value, props.score)}>
-            <Text>{s.value + (s.score ? ` (${s.score})` : '')}</Text>
-          </Pressable>
+          <Button key={`select-score-${index}`} onPress={() => props.confirmHandler(s.value, props.score)}>
+            {s.value + (s.score ? ` (${s.score.toUpperCase()})` : '')}
+          </Button>
         ))}
       </View>
 
       <View>
-        <AppBtn text="UNASSIGN" onPress={() => props.confirmHandler(undefined, props.score)}></AppBtn>
-        <AppBtn text="CANCEL" onPress={props.undoHandler}></AppBtn>
+        <Button onPress={() => props.confirmHandler(undefined, props.score)}>Unassign</Button>
+        <Button onPress={props.undoHandler}>Cancel</Button>
       </View>
     </View>
   );

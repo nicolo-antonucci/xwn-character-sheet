@@ -1,5 +1,5 @@
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
-import AppBtn from '../components/generics/AppBtn';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 import { RootNavigationProps } from '../model/props';
 
 function HomeScreen({ navigation }: RootNavigationProps): JSX.Element {
@@ -40,13 +40,9 @@ function HomeScreen({ navigation }: RootNavigationProps): JSX.Element {
           >
             xWN Character Sheet
           </Text>
-          <AppBtn text="Create Character" style={{ color: '#fff' }} onPress={() => navigationHandler('Builder')} />
-          <AppBtn
-            text="View Character"
-            style={{ color: '#fff' }}
-            onPress={() => navigationHandler('Characters')}
-          />
-          <AppBtn text="Edit Database" style={{ color: '#fff' }} onPress={() => navigationHandler('Database')} />
+          <Button onPress={() => navigationHandler('Builder')}>Create Character</Button>
+          <Button onPress={() => navigationHandler('Characters')}>View Character</Button>
+          <Button onPress={() => navigationHandler('Database')}>Edit Database</Button>
         </View>
       </ScrollView>
     </SafeAreaView>

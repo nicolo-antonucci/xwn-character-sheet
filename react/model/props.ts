@@ -10,8 +10,9 @@ export type RootStackParamList = {
 export type RootNavigationProps = NativeStackScreenProps<RootStackParamList>;
 
 export type CBStackParamList = {
-  Landing: undefined;
+  Options: undefined;
   Abilities: undefined;
+  Background: undefined;
 };
 
 export type CBNavigationProps = NativeStackScreenProps<CBStackParamList>;

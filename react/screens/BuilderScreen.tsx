@@ -4,7 +4,9 @@ import { AbilityScores, Character } from '../model/character';
 import { RULESET } from '../model/properties';
 import { CBStackParamList } from '../model/props';
 import BuilderAbilitiesScreen from './character-builder-screens/AbilitiesBuilderScreen';
-import BuilderLandingScreen from './character-builder-screens/LandingBuilderScreen';
+import BuilderOptionsScreen from './character-builder-screens/OptionsBuilderScreen';
+import BackgroundBuilderScreen from './character-builder-screens/BackgroundBuilderScreen';
+import { BGBenefit, Background, BenefitPickType } from '../model/backgrounds';
 
 function BuilderScreen(): JSX.Element {
   const Tab = createMaterialTopTabNavigator<CBStackParamList>();
@@ -16,15 +18,23 @@ function BuilderScreen(): JSX.Element {
     setCharacter({ ...character, ruleset });
   }, [ruleset]);
 
+  useEffect(() => console.log(character), [character]);
+
   const handleAbilityScoresChange = (abilityScores: AbilityScores) => {
     setCharacter({ ...character, abilityScores });
   };
 
+  const handleBackgroundChanges = (changes: {
+    background: Background | null;
+    benefitPickType: BenefitPickType | null;
+    bgBenefits: BGBenefit[] | null;
+  }) => {};
+
   return (
-    <Tab.Navigator initialRouteName="Landing">
-      <Tab.Screen name="Landing">
+    <Tab.Navigator initialRouteName="Options">
+      <Tab.Screen name="Options">
         {props => (
-          <BuilderLandingScreen
+          <BuilderOptionsScreen
             navigation={props.navigation}
             route={props.navigation}
             ruleset={ruleset}
@@ -38,6 +48,14 @@ function BuilderScreen(): JSX.Element {
             character={character}
             onAbilityScoresChange={handleAbilityScoresChange}
           ></BuilderAbilitiesScreen>
+        )}
+      </Tab.Screen>
+      <Tab.Screen name="Background">
+        {() => (
+          <BackgroundBuilderScreen
+            character={character}
+            onBackgroundChanges={handleBackgroundChanges}
+          ></BackgroundBuilderScreen>
         )}
       </Tab.Screen>
     </Tab.Navigator>

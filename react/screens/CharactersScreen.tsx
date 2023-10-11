@@ -1,4 +1,5 @@
-import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, View } from 'react-native';
+import { Text } from 'react-native-paper';
 
 function CharactersScreen(): JSX.Element {
   const backgroundStyle = {

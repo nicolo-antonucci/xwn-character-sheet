@@ -1,4 +1,5 @@
-import { SafeAreaView, StatusBar, View, Text } from 'react-native';
+import { SafeAreaView, StatusBar, View } from 'react-native';
+import { Text } from 'react-native-paper';
 import { RootNavigationProps } from '../model/props';
 
 function DatabaseScreen({ navigation }: RootNavigationProps): JSX.Element {
