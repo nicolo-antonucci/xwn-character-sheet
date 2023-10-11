@@ -19,8 +19,8 @@ function SetStaticScoreModal(props: SetStaticScoreModalProps): JSX.Element {
         ))}
       </View>
 
-      <AppBtn text="CONFIRM" touchHandler={() => props.confirmHandler(score)}></AppBtn>
-      <AppBtn text="CANCEL" touchHandler={props.undoHandler}></AppBtn>
+      <AppBtn text="CONFIRM" onPress={() => props.confirmHandler(score)}></AppBtn>
+      <AppBtn text="CANCEL" onPress={props.undoHandler}></AppBtn>
     </View>
   );
 }

@@ -1,40 +1,49 @@
 import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { AbilityScores, SCORE } from '../../model/character';
 import AppBtn from '../generics/AppBtn';
+import { SCORE, AbilityScores } from '../../model/character';
 
-function SetStaticScoreModal(props: SetStaticScoreModalProps): JSX.Element {
-  const [score, setScore] = useState<SCORE | null>(null);
+function SetRolledScoresModal(props: SetRolledScoresModalProps): JSX.Element {
+  const errorTemplate = (
+    <View>
+      <Text>Error processing information</Text>
+      <AppBtn text="Close" onPress={props.undoHandler} />
+    </View>
+  );
 
-  return (
+  const assignTemplate = (
     <View>
       <View>
-        {Object.keys(props.scores).map((s, index) => (
-          <Pressable key={`select-score-${index}`} onPress={() => setScore(s as SCORE)}>
-            <Text>
-              {s.toUpperCase() +
-                (props.scores[s as keyof AbilityScores] ? ` (${props.scores[s as keyof AbilityScores]})` : '')}
-            </Text>
+        <Text>
+          Choose a value for {props.score?.toUpperCase()}{' '}
+          {props.rolledScores.find(rs => rs.score === props.score) &&
+            ` (current value: ${props.rolledScores.find(rs => rs.score === props.score)?.value})`}
+        </Text>
+        {props.rolledScores.map((s, index) => (
+          <Pressable key={`select-score-${index}`} onPress={() => props.confirmHandler(s.value, props.score)}>
+            <Text>{s.value + (s.score ? ` (${s.score})` : '')}</Text>
           </Pressable>
         ))}
       </View>
 
-      <AppBtn text="CONFIRM" touchHandler={() => props.confirmHandler(score)}></AppBtn>
-      <AppBtn text="CANCEL" touchHandler={props.undoHandler}></AppBtn>
+      <View>
+        <AppBtn text="UNASSIGN" onPress={() => props.confirmHandler(undefined, props.score)}></AppBtn>
+        <AppBtn text="CANCEL" onPress={props.undoHandler}></AppBtn>
+      </View>
     </View>
   );
+
+  return <View>{props.score ? assignTemplate : errorTemplate}</View>;
 }
 
-export default SetStaticScoreModal;
+export default SetRolledScoresModal;
 
-export interface SetStaticScoreModalProps {
+export interface SetRolledScoresModalProps {
   rolledScores: {
     value: number;
     score?: SCORE;
-  };
-  value: number | undefined;
-  score: string | undefined;
-  scores: AbilityScores;
-  confirmHandler: (score: SCORE | null) => void;
+  }[];
+  score: SCORE | undefined;
+  confirmHandler: (value: number | undefined, score: SCORE | undefined) => void;
   undoHandler: () => void;
 }

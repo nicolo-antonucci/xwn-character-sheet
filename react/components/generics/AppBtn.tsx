@@ -13,7 +13,7 @@ function AppBtn(props: AppBtnProps): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={props.touchHandler}>
+      <Pressable onPress={props.onPress}>
         <View>
           {props.icon && props.iconPosition !== 'right' && <Image source={{ uri: props.icon }} />}
           <Text style={styles.text}>{props.text.toUpperCase()}</Text>
@@ -36,5 +36,5 @@ export interface AppBtnProps {
     width?: number;
     height?: number;
   };
-  touchHandler: () => void;
+  onPress: () => void;
 }

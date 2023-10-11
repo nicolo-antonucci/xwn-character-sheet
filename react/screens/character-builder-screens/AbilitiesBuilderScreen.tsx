@@ -28,14 +28,14 @@ function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProps): JSX.Element
       <View>
         <Text>Choose a method to generate ability scores</Text>
         <View>
-          <AppBtn text="Array (14...)" touchHandler={() => setScoreGen(ScoreGen.ARRAY)}></AppBtn>
-          <AppBtn text="Roll (3d6 x 6)" touchHandler={() => setScoreGen(ScoreGen.ROLL)}></AppBtn>
+          <AppBtn text="Array (14...)" onPress={() => setScoreGen(ScoreGen.ARRAY)}></AppBtn>
+          <AppBtn text="Roll (3d6 x 6)" onPress={() => setScoreGen(ScoreGen.ROLL)}></AppBtn>
         </View>
         <View>
           {scoreGen === ScoreGen.ARRAY ? (
             <ArrayAbilitiesSetup scores={scores} onAbilityScoresChange={scores => setScores(scores)} />
           ) : (
-            <RollAbilitiesSetup scores={scores} setupHandler={scores => setScores(scores)} />
+            <RollAbilitiesSetup scores={scores} onAbilityScoresChange={scores => setScores(scores)} />
           )}
         </View>
       </View>

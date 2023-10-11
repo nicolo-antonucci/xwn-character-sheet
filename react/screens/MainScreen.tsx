@@ -40,13 +40,13 @@ function HomeScreen({ navigation }: RootNavigationProps): JSX.Element {
           >
             xWN Character Sheet
           </Text>
-          <AppBtn text="Create Character" style={{ color: '#fff' }} touchHandler={() => navigationHandler('Builder')} />
+          <AppBtn text="Create Character" style={{ color: '#fff' }} onPress={() => navigationHandler('Builder')} />
           <AppBtn
             text="View Character"
             style={{ color: '#fff' }}
-            touchHandler={() => navigationHandler('Characters')}
+            onPress={() => navigationHandler('Characters')}
           />
-          <AppBtn text="Edit Database" style={{ color: '#fff' }} touchHandler={() => navigationHandler('Database')} />
+          <AppBtn text="Edit Database" style={{ color: '#fff' }} onPress={() => navigationHandler('Database')} />
         </View>
       </ScrollView>
     </SafeAreaView>

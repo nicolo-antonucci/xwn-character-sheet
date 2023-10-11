@@ -10,7 +10,6 @@ function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
   const [modal, setModal] = useState<{
     visible: boolean;
     selectedValue?: number;
-    title?: string;
   }>({
     visible: false,
     selectedValue: 14,
@@ -46,10 +45,11 @@ function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
           undoHandler={() => setModal({ visible: false })}
         ></SetStaticScoreModal>
       </Modal>
+
       <View>
-        {array.map((val, index) => (
+        {array.map((val, i) => (
           <Pressable
-            key={index}
+            key={`values-btn-${i}`}
             onPress={() =>
               setModal({
                 visible: true,
