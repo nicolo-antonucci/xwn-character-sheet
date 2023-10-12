@@ -3,17 +3,14 @@ import { SafeAreaView, StatusBar, View } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
 import { RULESET } from '../../model/properties';
 import { CBNavigationProps } from '../../model/props';
+import { Style } from '../../styles/StyleSheet';
 
-function BuilderOptionsScreen(props: BuilderOptionsScreenProps): JSX.Element {
+export default function BuilderOptionsScreen(props: BuilderOptionsScreenProps): JSX.Element {
   const firstUpdate = useRef(true);
   const [rs, setRS] = useState<RULESET>(props.ruleset);
 
   const handleValueChange = (value: string) => {
     if (([RULESET.SWN, RULESET.WWN] as string[]).includes(value)) setRS(value as RULESET);
-  };
-
-  const backgroundStyle = {
-    backgroundColor: '#FFF',
   };
 
   useEffect(() => {
@@ -26,17 +23,17 @@ function BuilderOptionsScreen(props: BuilderOptionsScreenProps): JSX.Element {
   }, [rs]);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={backgroundStyle.backgroundColor} />
-      <View>
-        <Text>Create a character</Text>
-        <Text>Choose a ruleset</Text>
+    <SafeAreaView style={Style.safeAreaContainer}>
+      <StatusBar barStyle={'light-content'} />
+      <View style={Style.builderContainer}>
+        <Text style={Style.title}>Create a character</Text>
+        <Text style={Style.subHeading}>Choose a ruleset</Text>
         <RadioButton.Group onValueChange={handleValueChange} value={rs}>
-          <View>
+          <View style={Style.rowFlex}>
             <RadioButton value={RULESET.SWN} />
             <Text>Stars Without Number</Text>
           </View>
-          <View>
+          <View style={Style.rowFlex}>
             <RadioButton value={RULESET.WWN} />
             <Text>Worlds Without Number</Text>
           </View>
@@ -46,7 +43,6 @@ function BuilderOptionsScreen(props: BuilderOptionsScreenProps): JSX.Element {
   );
 }
 
-export default BuilderOptionsScreen;
 
 export interface BuilderOptionsScreenProps extends CBNavigationProps {
   ruleset: RULESET;

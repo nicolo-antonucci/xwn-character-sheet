@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Modal, Pressable, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { View } from 'react-native';
+import { Button, Modal, Portal } from 'react-native-paper';
 import { AbilityScores, SCORE } from '../../model/character';
+import { Style } from '../../styles/StyleSheet';
 import SetStaticScoreModal from './SetStaticScoreModal';
 
 interface DefaultArrayScoreMap {
@@ -13,7 +14,7 @@ interface DefaultArrayScoreMap {
   7: SCORE | undefined;
 }
 
-function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
+export default function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
   const [scores, setScores] = useState<DefaultArrayScoreMap>({
     14: Object.keys(props.scores).find(s => props.scores[s as keyof AbilityScores] === 14) as SCORE | undefined,
     12: Object.keys(props.scores).find(s => props.scores[s as keyof AbilityScores] === 12) as SCORE | undefined,
@@ -64,38 +65,41 @@ function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
 
   return (
     <View>
-      <Modal animationType="slide" visible={modal.visible}>
-        <SetStaticScoreModal
-          confirmHandler={score => handleScoreAssignment(score)}
-          value={modal.selectedValue}
-          score={getScoreAt(modal.selectedValue)}
-          scores={mapToAbilityScores(scores)}
-          undoHandler={() => setModal({ visible: false })}
-        ></SetStaticScoreModal>
-      </Modal>
+      <Portal>
+        <Modal visible={modal.visible}>
+          <SetStaticScoreModal
+            confirmHandler={score => handleScoreAssignment(score)}
+            value={modal.selectedValue}
+            score={getScoreAt(modal.selectedValue)}
+            scores={mapToAbilityScores(scores)}
+            undoHandler={() => setModal({ visible: false })}
+          ></SetStaticScoreModal>
+        </Modal>
+      </Portal>
 
-      <View>
+      <View style={Style.scoreBtnsContainer}>
         {Object.keys(scores)
           .sort((a, b) => (+a > +b ? -1 : 1))
           .map((val, i) => (
             <Button
               key={`values-btn-${i}`}
+              mode="elevated"
               onPress={() =>
                 setModal({
                   visible: true,
                   selectedValue: +val,
                 })
               }
+              style={Style.scoreBtn}
             >
-              <Text>{val} {getScoreAt(+val)?.toUpperCase() ?? 'Choose'}</Text>
+              {val}
+              {getScoreAt(+val) && `: ${getScoreAt(+val)?.toUpperCase()}`}
             </Button>
           ))}
       </View>
     </View>
   );
 }
-
-export default ArrayAbilitiesSetup;
 
 export interface ArrayAbilitiesSetupProps {
   scores: AbilityScores;

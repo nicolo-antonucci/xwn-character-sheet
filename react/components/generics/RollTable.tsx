@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-function RollTable(props: RollTableProps): JSX.Element {
+export default function RollTable(props: RollTableProps): JSX.Element {
   return (
     <View>
       <View>
@@ -31,8 +31,6 @@ function RollTable(props: RollTableProps): JSX.Element {
     </View>
   );
 }
-
-export default RollTable;
 
 export interface RollTableProps {
   elements: {

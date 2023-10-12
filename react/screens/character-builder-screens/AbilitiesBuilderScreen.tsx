@@ -4,6 +4,7 @@ import { Button, Text } from 'react-native-paper';
 import ArrayAbilitiesSetup from '../../components/character-builder-components/ArrayAbilitiesSetup';
 import RollAbilitiesSetup from '../../components/character-builder-components/RollAbilitiesSetup';
 import { AbilityScores, Character } from '../../model/character';
+import { Style } from '../../styles/StyleSheet';
 
 type ScoreGen = 'array' | 'roll';
 
@@ -12,24 +13,25 @@ const ScoreGen = {
   ROLL: 'roll' as ScoreGen,
 };
 
-function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProps): JSX.Element {
-  const backgroundStyle = {
-    backgroundColor: '#FFF',
-  };
-
+export default function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProps): JSX.Element {
   const [scoreGen, setScoreGen] = useState(ScoreGen.ARRAY);
   const [scores, setScores] = useState<AbilityScores>(props.character.abilityScores);
 
   useEffect(() => props.onAbilityScoresChange(scores), [scores]);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={backgroundStyle.backgroundColor} />
-      <View>
-        <Text>Choose a method to generate ability scores</Text>
-        <View>
-          <Button onPress={() => setScoreGen(ScoreGen.ARRAY)}>Array (14...)</Button>
-          <Button onPress={() => setScoreGen(ScoreGen.ROLL)}>Roll (3d6 x 6)</Button>
+    <SafeAreaView style={Style.safeAreaContainer}>
+      <StatusBar barStyle={'light-content'} />
+      <View style={Style.builderContainer}>
+        <Text style={Style.title}>Ability Scores</Text>
+        <Text style={Style.subHeading}>Choose a method to generate ability scores</Text>
+        <View style={Style.rowFlex}>
+          <Button mode="contained" onPress={() => setScoreGen(ScoreGen.ARRAY)} style={Style.f1}>
+            14, 12, 11, 10, 9, 7
+          </Button>
+          <Button mode="contained" onPress={() => setScoreGen(ScoreGen.ROLL)} style={Style.f1}>
+            Roll (3d6 x 6)
+          </Button>
         </View>
         <View>
           {scoreGen === ScoreGen.ARRAY ? (
@@ -42,8 +44,6 @@ function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProps): JSX.Element
     </SafeAreaView>
   );
 }
-
-export default BuilderAbilitiesScreen;
 
 export interface BuilderAbilitiesScreenProps {
   character: Character;

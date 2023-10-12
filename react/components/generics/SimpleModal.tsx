@@ -1,22 +1,27 @@
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
+import { Style } from '../../styles/StyleSheet';
 
-function SimpleModal(props: SimpleModalProps): JSX.Element {
+export default function SimpleModal(props: SimpleModalProps): JSX.Element {
   return (
-    <View>
-      <Text>{props.title}</Text>
-      {props.content.map((txt, i) => (
-        <Text key={`alert-content-${i}`}>{txt}</Text>
-      ))}
+    <View style={Style.modal}>
+      <Text style={Style.title}>{props.title}</Text>
       <View>
-        <Button onPress={props.confirmHandler}>Confirm</Button>
-        <Button onPress={props.undoHandler}>Cancel</Button>
+        {props.content.map((txt, i) => (
+          <Text key={`alert-content-${i}`}>{txt}</Text>
+        ))}
+      </View>
+      <View style={Style.rowFlex}>
+        <Button mode="contained" onPress={props.undoHandler}>
+          Cancel
+        </Button>
+        <Button mode="contained" onPress={props.confirmHandler}>
+          Confirm
+        </Button>
       </View>
     </View>
   );
 }
-
-export default SimpleModal;
 
 export interface SimpleModalProps {
   title: string;

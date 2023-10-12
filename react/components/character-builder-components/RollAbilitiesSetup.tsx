@@ -1,23 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Modal, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { View } from 'react-native';
+import { Button, Modal, Portal, Text } from 'react-native-paper';
 import { AbilityScores, SCORE } from '../../model/character';
+import { Style } from '../../styles/StyleSheet';
 import SimpleModal from '../generics/SimpleModal';
 import SetRolledScoresModal from './SetRolledScoreModal';
 
-function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.Element {
-  const [rolledScores, setRolledScores] = useState<
-    {
+export default function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.Element {
+  const [rolledScores, setRolledScores] = useState<{
+    [k: string]: {
       value: number;
       score?: SCORE;
-    }[]
-  >([]);
-  const [modal, setModal] = useState<{
-    visible: boolean;
-    selectedScore?: SCORE;
-  }>({
-    visible: false,
-  });
+    };
+  }>({});
+  const [modalScore, setModalScore] = useState<SCORE | undefined>(undefined);
   const [alert, setAlert] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,106 +25,125 @@ function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.Element {
       str: null,
       wis: null,
     };
-    rolledScores.forEach(rs => {
-      if (rs.score) scores[rs.score as keyof AbilityScores] = rs.value;
+    Object.values(rolledScores).forEach(rs => {
+      const rsScore = rs.score;
+      if (rsScore) scores[rsScore as keyof AbilityScores] = rs.value;
     });
     props.onAbilityScoresChange(scores);
   }, [rolledScores]);
 
   const checkBeforeRoll = () => {
-    if (rolledScores.length === 0) rollScores();
+    if (Object.values(rolledScores).length === 0) rollScores();
     else setAlert(true);
   };
 
   const rollScores = () => {
     const values: {
-      value: number;
-      score?: SCORE;
-    }[] = [];
+      [k: string]: {
+        value: number;
+        score?: SCORE;
+      };
+    } = {};
     for (let i = 0; i < 6; i++) {
       let roll = 0;
       for (let j = 0; j < 3; j++) {
         roll += Math.ceil((Math.random() * (1 - 6) + 6) % 6);
       }
-      values.push({ value: roll });
+      values[i] = { value: roll };
     }
     setRolledScores(values);
   };
 
   const openModal = (score: SCORE) => {
-    setModal({ visible: true, selectedScore: score });
+    setModalScore(score);
   };
 
-  const handleScoreAssignment = (value: number | undefined, score: SCORE | undefined) => {
-    setModal({ visible: false });
+  const handleScoreAssignment = (key: string | undefined, score: SCORE | undefined, prevKey: string | undefined) => {
+    setModalScore(undefined);
 
-    if (!score) return;
+    if (!key) return;
 
-    if (!value) {
-      const prev = rolledScores.findIndex(rs => rs.score === score);
-      if (prev === -1) return;
-      setRolledScores(
-        rolledScores.map((rs, i) => {
-          if (prev === i) return { value: rs.value };
-          else return rs;
-        }),
-      );
-    } else {
-      setRolledScores(
-        rolledScores.map(rs => {
-          if (rs.value === value) return { value, score };
-          else if (rs.score === score) return { value: rs.value };
-          else return rs;
-        }),
-      );
+    if (!score) {
+      setRolledScores({
+        ...rolledScores,
+        [key]: { value: rolledScores[key].value },
+      });
+      return;
     }
+    if (prevKey)
+      setRolledScores({
+        ...rolledScores,
+        [prevKey]: { value: rolledScores[prevKey].value },
+        [key]: { value: rolledScores[key].value, score },
+      });
+    else
+      setRolledScores({
+        ...rolledScores,
+        [key]: { value: rolledScores[key].value, score },
+      });
   };
+
+  const renderScores = () => {};
 
   return (
     <View>
-      <Modal animationType="slide" visible={alert}>
-        <SimpleModal
-          title="Attention"
-          confirmHandler={() => {
-            setAlert(false);
-            rollScores();
-          }}
-          content={[
-            'There are previously rolled and assigned scores.',
-            'Rerolling will delete all current information.',
-            'Proceed anyway?',
-          ]}
-          undoHandler={() => setAlert(false)}
-        ></SimpleModal>
-      </Modal>
+      <Portal>
+        <Modal visible={alert}>
+          <SimpleModal
+            title="Attention"
+            confirmHandler={() => {
+              setAlert(false);
+              rollScores();
+            }}
+            content={[
+              'There are previously rolled and assigned scores.',
+              'Rerolling will delete all current information.',
+              'Proceed anyway?',
+            ]}
+            undoHandler={() => setAlert(false)}
+          ></SimpleModal>
+        </Modal>
 
-      <Modal animationType="slide" visible={modal.visible}>
-        <SetRolledScoresModal
-          confirmHandler={(value, score) => handleScoreAssignment(value, score)}
-          rolledScores={rolledScores}
-          score={modal.selectedScore}
-          undoHandler={() => setModal({ visible: false })}
-        ></SetRolledScoresModal>
-      </Modal>
+        <Modal visible={!!modalScore}>
+          <SetRolledScoresModal
+            confirmHandler={handleScoreAssignment}
+            rolledScores={rolledScores}
+            score={modalScore as SCORE}
+            undoHandler={() => setModalScore(undefined)}
+          ></SetRolledScoresModal>
+        </Modal>
+      </Portal>
 
-      <View>
-        {rolledScores.map((rs, i) => (
-          <Text key={`rs-${i}`}>{rs.value}</Text>
-        ))}
-      </View>
-      <Button onPress={checkBeforeRoll}>{rolledScores.length === 0 ? 'Roll' : 'Reroll'}</Button>
-      <View>
-        {Object.values(SCORE).map((s, index) => (
-          <Button key={index} onPress={() => openModal(s)}>
-            <Text>{s.toUpperCase()} {props.scores[s] ?? 'Assign'}</Text>
-          </Button>
-        ))}
+      <View style={Style.scoresContainer}>
+        {Object.values(rolledScores).length > 0 && (
+          <View style={Style.rowFlex}>
+            {Object.values(rolledScores)
+              .sort((a, b) => (a.value > b.value ? -1 : 1))
+              .map((rs, i) => (
+                <Text key={`rs-${i}`} style={Style.title}>
+                  {rs.value}
+                </Text>
+              ))}
+          </View>
+        )}
+
+        {Object.values(rolledScores).length > 0 && (
+          <View style={Style.scoreBtnsContainer}>
+            {Object.values(SCORE).map((s, index) => (
+              <Button key={index} mode="elevated" onPress={() => openModal(s)} style={Style.scoreBtn}>
+                {s.toUpperCase()}{props.scores[s] && `: ${props.scores[s]}`}
+              </Button>
+            ))}
+          </View>
+        )}
+
+        <Button mode="contained-tonal" onPress={checkBeforeRoll}>
+          {Object.values(rolledScores).length === 0 ? 'Roll!' : 'Reroll'}
+        </Button>
       </View>
     </View>
   );
 }
-
-export default RollAbilitiesSetup;
 
 export interface RollAbilitiesSetupProps {
   scores: AbilityScores;

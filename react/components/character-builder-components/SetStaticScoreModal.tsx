@@ -1,26 +1,40 @@
 import { View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import { AbilityScores, SCORE } from '../../model/character';
+import { Style } from '../../styles/StyleSheet';
+import { sortAbilityScores } from '../../commons/Utils';
 
-function SetStaticScoreModal(props: SetStaticScoreModalProps): JSX.Element {
+export default function SetStaticScoreModal(props: SetStaticScoreModalProps): JSX.Element {
   return (
-    <View>
-      <View>
-        {Object.keys(props.scores).map((s, index) => (
-          <Button key={`select-score-${index}`} onPress={() => props.confirmHandler(s as SCORE)}>
-            {s.toUpperCase() +
-              (props.scores[s as keyof AbilityScores] ? ` (${props.scores[s as keyof AbilityScores]})` : '')}
-          </Button>
-        ))}
+    <View style={Style.modal}>
+      <Text style={Style.title}>Assign {props.value} to a score</Text>
+      <View style={Style.scoreBtnsContainer}>
+        {Object.keys(props.scores)
+          .sort(sortAbilityScores)
+          .map((s, index) => (
+            <Button
+              key={`select-score-${index}`}
+              mode="contained-tonal"
+              onPress={() => props.confirmHandler(s as SCORE)}
+              style={Style.scoreBtn}
+            >
+              {s.toUpperCase()}
+              {props.scores[s as keyof AbilityScores] && ` (${props.scores[s as keyof AbilityScores]})`}
+            </Button>
+          ))}
       </View>
 
-      <Button onPress={() => props.confirmHandler(null)}>Unassign</Button>
-      <Button onPress={props.undoHandler}>Cancel</Button>
+      <View style={Style.rowFlex}>
+        <Button mode="contained" onPress={props.undoHandler}>
+          Cancel
+        </Button>
+        <Button mode="contained" onPress={() => props.confirmHandler(null)}>
+          Unassign
+        </Button>
+      </View>
     </View>
   );
 }
-
-export default SetStaticScoreModal;
 
 export interface SetStaticScoreModalProps {
   value: number | undefined;

@@ -1,8 +1,17 @@
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { SCORE } from '../../model/character';
+import { Style } from '../../styles/StyleSheet';
 
-function SetRolledScoresModal(props: SetRolledScoresModalProps): JSX.Element {
+export default function SetRolledScoresModal(props: SetRolledScoresModalProps): JSX.Element {
+  const findKeyForScore = (score: SCORE) => {
+    return Object.keys(props.rolledScores).find(k => props.rolledScores[k].score === score);
+  };
+
+  const findScoreValue = (score: SCORE) => {
+    return Object.values(props.rolledScores).find(rs => rs.score === props.score)?.value;
+  };
+
   const errorTemplate = (
     <View>
       <Text>Error processing information</Text>
@@ -11,23 +20,31 @@ function SetRolledScoresModal(props: SetRolledScoresModalProps): JSX.Element {
   );
 
   const assignTemplate = (
-    <View>
-      <View>
-        <Text>
-          Choose a value for {props.score?.toUpperCase()}{' '}
-          {props.rolledScores.find(rs => rs.score === props.score) &&
-            ` (current value: ${props.rolledScores.find(rs => rs.score === props.score)?.value})`}
-        </Text>
-        {props.rolledScores.map((s, index) => (
-          <Button key={`select-score-${index}`} onPress={() => props.confirmHandler(s.value, props.score)}>
-            {s.value + (s.score ? ` (${s.score.toUpperCase()})` : '')}
-          </Button>
-        ))}
+    <View style={Style.modal}>
+      <Text style={Style.title}>Choose a value for {props.score?.toUpperCase()}</Text>
+      <View style={Style.scoreBtnsContainer}>
+        {Object.keys(props.rolledScores)
+          .sort((a, b) => (props.rolledScores[a].value > props.rolledScores[b].value ? -1 : 1))
+          .map(k => (
+            <Button
+              key={`select-score-${k}`}
+              mode="contained-tonal"
+              onPress={() => props.confirmHandler(k, props.score, findKeyForScore(props.score))}
+              style={Style.scoreBtn}
+            >
+              {props.rolledScores[k].value +
+                (props.rolledScores[k].score ? ` (${props.rolledScores[k]?.score?.toUpperCase()})` : '')}
+            </Button>
+          ))}
       </View>
 
-      <View>
-        <Button onPress={() => props.confirmHandler(undefined, props.score)}>Unassign</Button>
-        <Button onPress={props.undoHandler}>Cancel</Button>
+      <View style={Style.rowFlex}>
+        <Button mode="contained" onPress={props.undoHandler}>
+          Cancel
+        </Button>
+        <Button mode="contained" onPress={() => props.confirmHandler(findKeyForScore(props.score))}>
+          Unassign
+        </Button>
       </View>
     </View>
   );
@@ -35,14 +52,14 @@ function SetRolledScoresModal(props: SetRolledScoresModalProps): JSX.Element {
   return <View>{props.score ? assignTemplate : errorTemplate}</View>;
 }
 
-export default SetRolledScoresModal;
-
 export interface SetRolledScoresModalProps {
   rolledScores: {
-    value: number;
-    score?: SCORE;
-  }[];
-  score: SCORE | undefined;
-  confirmHandler: (value: number | undefined, score: SCORE | undefined) => void;
+    [k: string]: {
+      value: number;
+      score?: SCORE;
+    };
+  };
+  score: SCORE;
+  confirmHandler: (key: string | undefined, score?: SCORE, prevKey?: string) => void;
   undoHandler: () => void;
 }

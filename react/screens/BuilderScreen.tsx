@@ -1,14 +1,15 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useEffect, useState } from 'react';
+import { BGBenefit, Background, BenefitPickType } from '../model/backgrounds';
 import { AbilityScores, Character } from '../model/character';
 import { RULESET } from '../model/properties';
-import { CBStackParamList } from '../model/props';
+import { CBStackParamList, RootNavigationProps } from '../model/props';
+import { MatTopTabsScreenOpts, Style } from '../styles/StyleSheet';
 import BuilderAbilitiesScreen from './character-builder-screens/AbilitiesBuilderScreen';
-import BuilderOptionsScreen from './character-builder-screens/OptionsBuilderScreen';
 import BackgroundBuilderScreen from './character-builder-screens/BackgroundBuilderScreen';
-import { BGBenefit, Background, BenefitPickType } from '../model/backgrounds';
+import BuilderOptionsScreen from './character-builder-screens/OptionsBuilderScreen';
 
-function BuilderScreen(): JSX.Element {
+export default function BuilderScreen({ navigation }: RootNavigationProps): JSX.Element {
   const Tab = createMaterialTopTabNavigator<CBStackParamList>();
 
   const [ruleset, setRuleset] = useState(RULESET.WWN);
@@ -31,7 +32,7 @@ function BuilderScreen(): JSX.Element {
   }) => {};
 
   return (
-    <Tab.Navigator initialRouteName="Options">
+    <Tab.Navigator initialRouteName="Options" style={Style.matTopTabs} screenOptions={MatTopTabsScreenOpts}>
       <Tab.Screen name="Options">
         {props => (
           <BuilderOptionsScreen
@@ -61,5 +62,3 @@ function BuilderScreen(): JSX.Element {
     </Tab.Navigator>
   );
 }
-
-export default BuilderScreen;

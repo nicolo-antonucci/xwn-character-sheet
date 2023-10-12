@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import backgrounds from '../../../../assets/rules/backgrounds.json';
-import { Background, WWNBACKGROUND } from '../../../model/backgrounds';
 import RollTable from '../../../components/generics/RollTable';
+import { Background, WWNBACKGROUND } from '../../../model/backgrounds';
 
-function BackgroundPickerScreen(props: BackgroundPickerScreenProps): JSX.Element {
+export default function BackgroundPickerScreen(props: BackgroundPickerScreenProps): JSX.Element {
   const [bg, setBg] = useState<Background | null>();
   const [showBg, setShowBg] = useState<WWNBACKGROUND | null>(null);
 
@@ -29,8 +29,22 @@ function BackgroundPickerScreen(props: BackgroundPickerScreenProps): JSX.Element
                 <View></View>
                 <View></View>
               </View>
-              <RollTable></RollTable>
-              <RollTable></RollTable>
+              <RollTable
+                tableId={`${background.name}-growth-table`}
+                title="Growth"
+                elements={background.growthChoices.map(el => ({
+                  label: el,
+                  weight: 1,
+                }))}
+              ></RollTable>
+              <RollTable
+                tableId={`${background.name}-learning-table`}
+                title="Learning"
+                elements={background.learningChoices.map(el => ({
+                  label: el,
+                  weight: 1,
+                }))}
+              ></RollTable>
             </View>
           )}
         </View>
@@ -38,7 +52,5 @@ function BackgroundPickerScreen(props: BackgroundPickerScreenProps): JSX.Element
     </View>
   );
 }
-
-export default BackgroundPickerScreen;
 
 export interface BackgroundPickerScreenProps {}

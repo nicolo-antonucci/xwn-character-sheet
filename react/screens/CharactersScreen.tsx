@@ -1,7 +1,7 @@
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-function CharactersScreen(): JSX.Element {
+export default function CharactersScreen(): JSX.Element {
   const backgroundStyle = {
     backgroundColor: '#FFF',
   };
@@ -15,5 +15,3 @@ function CharactersScreen(): JSX.Element {
     </SafeAreaView>
   );
 }
-
-export default CharactersScreen;
