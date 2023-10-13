@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MaterialBottomTabNavigationProp } from 'react-native-paper';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -16,3 +17,10 @@ export type CBStackParamList = {
 };
 
 export type CBNavigationProps = NativeStackScreenProps<CBStackParamList>;
+
+export type BGSelectParamList = {
+  Backgrounds: undefined;
+  Perks: undefined;
+};
+
+export type BGSelectNavigationProps = MaterialBottomTabNavigationProp<BGSelectParamList>;

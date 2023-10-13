@@ -9,9 +9,9 @@ import BuilderAbilitiesScreen from './character-builder-screens/AbilitiesBuilder
 import BackgroundBuilderScreen from './character-builder-screens/BackgroundBuilderScreen';
 import BuilderOptionsScreen from './character-builder-screens/OptionsBuilderScreen';
 
-export default function BuilderScreen({ navigation }: RootNavigationProps): JSX.Element {
-  const Tab = createMaterialTopTabNavigator<CBStackParamList>();
+const Tab = createMaterialTopTabNavigator<CBStackParamList>();
 
+export default function BuilderScreen({ navigation }: RootNavigationProps): JSX.Element {
   const [ruleset, setRuleset] = useState(RULESET.WWN);
   const [character, setCharacter] = useState<Character>(new Character());
 
@@ -21,15 +21,13 @@ export default function BuilderScreen({ navigation }: RootNavigationProps): JSX.
 
   useEffect(() => console.log(character), [character]);
 
-  const handleAbilityScoresChange = (abilityScores: AbilityScores) => {
-    setCharacter({ ...character, abilityScores });
-  };
+  const handleAbilityScoresChange = (abilityScores: AbilityScores) => setCharacter({ ...character, abilityScores });
 
-  const handleBackgroundChanges = (changes: {
+  const handleBackgroundChanges = (characterBackground: {
     background: Background | null;
     benefitPickType: BenefitPickType | null;
     bgBenefits: BGBenefit[] | null;
-  }) => {};
+  }) => setCharacter({ ...character, characterBackground });
 
   return (
     <Tab.Navigator initialRouteName="Options" style={Style.matTopTabs} screenOptions={MatTopTabsScreenOpts}>
@@ -43,7 +41,7 @@ export default function BuilderScreen({ navigation }: RootNavigationProps): JSX.
           />
         )}
       </Tab.Screen>
-      <Tab.Screen name="Abilities">
+      <Tab.Screen name="Abilities" >
         {() => (
           <BuilderAbilitiesScreen
             character={character}
@@ -51,7 +49,7 @@ export default function BuilderScreen({ navigation }: RootNavigationProps): JSX.
           ></BuilderAbilitiesScreen>
         )}
       </Tab.Screen>
-      <Tab.Screen name="Background">
+      <Tab.Screen name="Background" >
         {() => (
           <BackgroundBuilderScreen
             character={character}

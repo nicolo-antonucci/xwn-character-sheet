@@ -29,15 +29,13 @@ export const Style = StyleSheet.create({
     paddingHorizontal: 12,
   },
   backgroundsContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
+    height: '100%',
     gap: 24,
     paddingHorizontal: 12,
     paddingTop: 24,
   },
   bgNavigatorContainer: {
-    
+    height: '50%',
   },
   scoresContainer: {
     flexDirection: 'column',
@@ -53,6 +51,25 @@ export const Style = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 24,
     width: '85%',
+  },
+  bgCard: {
+    margin: 12,
+    paddingHorizontal: 12,
+  },
+  bgCardHeader: {
+    paddingVertical: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  bgName: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  bgDetails: {
+    gap: 12,
+    paddingVertical: 12,
   },
   scoreBtnsContainer: {
     alignItems: 'center',

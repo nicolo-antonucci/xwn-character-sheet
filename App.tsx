@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { RootStackParamList } from './react/model/props';
 import BuilderScreen from './react/screens/BuilderScreen';
 import CharactersScreen from './react/screens/CharactersScreen';
@@ -10,11 +11,16 @@ import HomeScreen from './react/screens/HomeScreen';
 import { Style } from './react/styles/StyleSheet';
 import { Theme } from './react/styles/Theme';
 
-export default function App(): JSX.Element {
-  const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
+export default function App(): JSX.Element {
   return (
-    <PaperProvider theme={Theme}>
+    <PaperProvider
+      theme={Theme}
+      settings={{
+        icon: props => <FontAwesome5 {...props} />,
+      }}
+    >
       <View style={Style.f1}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">

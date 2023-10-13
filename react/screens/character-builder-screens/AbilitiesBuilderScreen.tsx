@@ -26,10 +26,10 @@ export default function BuilderAbilitiesScreen(props: BuilderAbilitiesScreenProp
         <Text style={Style.title}>Ability Scores</Text>
         <Text style={Style.subHeading}>Choose a method to generate ability scores</Text>
         <View style={Style.rowFlex}>
-          <Button mode="contained" onPress={() => setScoreGen(ScoreGen.ARRAY)} style={Style.f1}>
+          <Button icon='list' mode="contained" onPress={() => setScoreGen(ScoreGen.ARRAY)} style={Style.f1}>
             14, 12, 11, 10, 9, 7
           </Button>
-          <Button mode="contained" onPress={() => setScoreGen(ScoreGen.ROLL)} style={Style.f1}>
+          <Button icon='dice' mode="contained" onPress={() => setScoreGen(ScoreGen.ROLL)} style={Style.f1}>
             Roll (3d6 x 6)
           </Button>
         </View>

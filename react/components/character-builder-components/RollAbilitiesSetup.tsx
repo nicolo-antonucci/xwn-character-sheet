@@ -131,13 +131,14 @@ export default function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.
           <View style={Style.scoreBtnsContainer}>
             {Object.values(SCORE).map((s, index) => (
               <Button key={index} mode="elevated" onPress={() => openModal(s)} style={Style.scoreBtn}>
-                {s.toUpperCase()}{props.scores[s] && `: ${props.scores[s]}`}
+                {s.toUpperCase()}
+                {props.scores[s] && `: ${props.scores[s]}`}
               </Button>
             ))}
           </View>
         )}
 
-        <Button mode="contained-tonal" onPress={checkBeforeRoll}>
+        <Button icon="dice-d6" mode="contained-tonal" onPress={checkBeforeRoll}>
           {Object.values(rolledScores).length === 0 ? 'Roll!' : 'Reroll'}
         </Button>
       </View>

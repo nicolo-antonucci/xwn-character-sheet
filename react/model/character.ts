@@ -1,3 +1,4 @@
+import { generateId } from '../commons/Utils';
 import { BGBenefit, Background, BenefitPickType, WWNBACKGROUND } from './backgrounds';
 import { RULESET } from './properties';
 import { SWNSKILLS, Skills, WWNSKILLS } from './skills';
@@ -37,6 +38,7 @@ export interface Focus {
 }
 
 export class Character {
+  id: string;
   ruleset: RULESET | null = null;
   abilityScores: AbilityScores;
   characterBackground: {
@@ -48,6 +50,7 @@ export class Character {
   foci: Focus[];
 
   constructor() {
+    this.id = generateId();
     this.abilityScores = {
       cha: null,
       con: null,

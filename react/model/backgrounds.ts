@@ -78,10 +78,11 @@ export interface BGBenefit {
 }
 
 export interface Background {
-  name: WWNBACKGROUND | null;
-  description: string | null;
-  freeSkill: SWNSKILLS | WWNSKILLS;
-  quickPicks: SWNSKILLS[] | WWNSKILLS[];
-  growthChoices: (SWNSKILLS | WWNSKILLS | BGBenefitValue)[];
-  learningChoices: (SWNSKILLS | WWNSKILLS | BGBenefitValue)[];
+  id: number;
+  name?: WWNBACKGROUND | null;
+  description?: string | null;
+  freeSkill?: SWNSKILLS | WWNSKILLS;
+  quickPicks?: SWNSKILLS[] | WWNSKILLS[];
+  growthChoices?: (SWNSKILLS | WWNSKILLS | BGBenefitValue)[];
+  learningChoices?: (SWNSKILLS | WWNSKILLS | BGBenefitValue)[];
 }

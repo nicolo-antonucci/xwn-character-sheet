@@ -1,56 +1,51 @@
-import { useState } from 'react';
-import { View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
 import backgrounds from '../../../../assets/rules/backgrounds.json';
-import RollTable from '../../../components/generics/RollTable';
-import { Background, WWNBACKGROUND } from '../../../model/backgrounds';
+import BackgroundCard from '../../../components/generics/BackgroundCard';
+import { Background } from '../../../model/backgrounds';
+import { Character } from '../../../model/character';
+import { Style } from '../../../styles/StyleSheet';
 
 export default function BackgroundPickerScreen(props: BackgroundPickerScreenProps): JSX.Element {
-  const [bg, setBg] = useState<Background | null>();
-  const [showBg, setShowBg] = useState<WWNBACKGROUND | null>(null);
+  const [bg, setBg] = useState<Background | null>(props.character.characterBackground.background);
 
-  const toggleBg = (backgroundName: WWNBACKGROUND | null) => {
-    if (showBg === backgroundName) setShowBg(null);
-    else setShowBg(backgroundName);
+  useEffect(
+    () =>
+      props.onBackgroundChange(
+        bg
+          ? {
+              id: bg.id,
+            }
+          : null,
+      ),
+    [bg],
+  );
+
+  const handleSelectionToggle = (background: Background, val: boolean) => {
+    if (bg?.name === background.name) {
+      if (!val) setBg(null);
+      return;
+    }
+
+    if (val) setBg(background);
   };
 
   return (
-    <View>
-      {(backgrounds as Background[]).map((background, i) => (
-        <View key={`bg-entry-${i}`}>
-          <View>
-            <Button onPress={() => toggleBg(background.name)}>{background.name}</Button>
-            <Button>Choose</Button>
-          </View>
-          {showBg === background.name && (
-            <View>
-              <Text>{background.description}</Text>
-              <View>
-                <View></View>
-                <View></View>
-              </View>
-              <RollTable
-                tableId={`${background.name}-growth-table`}
-                title="Growth"
-                elements={background.growthChoices.map(el => ({
-                  label: el,
-                  weight: 1,
-                }))}
-              ></RollTable>
-              <RollTable
-                tableId={`${background.name}-learning-table`}
-                title="Learning"
-                elements={background.learningChoices.map(el => ({
-                  label: el,
-                  weight: 1,
-                }))}
-              ></RollTable>
-            </View>
-          )}
-        </View>
+    <ScrollView style={Style.f1}>
+      {(backgrounds as Background[]).map(background => (
+        <BackgroundCard
+          key={`bg-entry-${background.id}`}
+          background={background}
+          chosen={bg?.name === background.name}
+          edit={true}
+          onSelectionToggle={val => handleSelectionToggle(background, val)}
+        ></BackgroundCard>
       ))}
-    </View>
+    </ScrollView>
   );
 }
 
-export interface BackgroundPickerScreenProps {}
+export interface BackgroundPickerScreenProps {
+  character: Character;
+  onBackgroundChange: (bg: Background | null) => void;
+}
