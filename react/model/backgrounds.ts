@@ -63,19 +63,19 @@ export const BGBenefitType = {
   QUICK: 'quick' as BGBenefitType,
 };
 
-export type BGBenefitValue = 'Any Skill' | 'Any Combat' | 'Any Non-Combat' | '+1 Any Stat' | '+2 Physical' | '+2 Mental';
+export type BGChoiceBenefit = 'Any Skill' | 'Any Combat' | 'Any Non-Combat' | '+1 Any Stat' | '+2 Physical' | '+2 Mental';
 
-export const BGBenefitValue = {
-  ANY_SKILL: 'Any Skill' as BGBenefitValue,
-  ANY_COMBAT: 'Any Combat' as BGBenefitValue,
-  ANY_SCORE: '+1 Any Stat' as BGBenefitValue,
-  PHYSICAL: '+2 Physical' as BGBenefitValue,
-  MENTAL: '+2 Mental' as BGBenefitValue,
+export const BGChoiceBenefit = {
+  ANY_SKILL: 'Any Skill' as BGChoiceBenefit,
+  ANY_COMBAT: 'Any Combat' as BGChoiceBenefit,
+  ANY_SCORE: '+1 Any Stat' as BGChoiceBenefit,
+  PHYSICAL: '+2 Physical' as BGChoiceBenefit,
+  MENTAL: '+2 Mental' as BGChoiceBenefit,
 };
 
 export interface BGBenefit {
   type: BGBenefitType;
-  value: SWNSKILLS | WWNSKILLS | BGBenefitValue;
+  value: SWNSKILLS | WWNSKILLS | BGChoiceBenefit;
   secondaryValue?: SWNSKILLS | WWNSKILLS | SCORE;
 }
 
@@ -85,6 +85,6 @@ export interface Background {
   description?: string | null;
   freeSkill?: SKILL_CHOICE | SWNSKILLS | WWNSKILLS;
   quickPicks?: (SKILL_CHOICE | SWNSKILLS | WWNSKILLS)[];
-  growthChoices?: (SWNSKILLS | WWNSKILLS | BGBenefitValue)[];
-  learningChoices?: (SWNSKILLS | WWNSKILLS | BGBenefitValue)[];
+  growthChoices?: (SWNSKILLS | WWNSKILLS | BGChoiceBenefit)[];
+  learningChoices?: (SWNSKILLS | WWNSKILLS | BGChoiceBenefit)[];
 }

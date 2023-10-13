@@ -21,7 +21,7 @@ export default function BuilderOptionsScreen(props: CBNavigationProps): JSX.Elem
         <Text style={Style.subHeading}>Choose a ruleset</Text>
         <RadioButton.Group onValueChange={handleValueChange} value={builderCtx?.character.ruleset ?? ''}>
           <View style={Style.rowFlex}>
-            <RadioButton value={RULESET.SWN} />
+            <RadioButton disabled={true} value={RULESET.SWN} />
             <Text>Stars Without Number</Text>
           </View>
           <View style={Style.rowFlex}>

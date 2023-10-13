@@ -7,6 +7,7 @@ import QuickBGPerks from '../../../components/character-builder-components/Quick
 import { BGBenefitPickType, BGBenefitType, Background } from '../../../model/backgrounds';
 import { BuilderContext } from '../../../store/context/builder-context';
 import { Style } from '../../../styles/StyleSheet';
+import RollBGPerks from '../../../components/character-builder-components/RollBGPerks';
 
 export default function BackgroundPerksScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
@@ -66,7 +67,7 @@ export default function BackgroundPerksScreen(): JSX.Element {
 
       {getPickType() === BGBenefitPickType.CHOSEN && <ChooseBGPerks />}
 
-      {getPickType() === BGBenefitPickType.ROLLED && <></>}
+      {getPickType() === BGBenefitPickType.ROLLED && <RollBGPerks />}
     </View>
   );
 }
