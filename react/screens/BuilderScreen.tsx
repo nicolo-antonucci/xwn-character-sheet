@@ -1,62 +1,23 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { useEffect, useState } from 'react';
-import { BGBenefit, Background, BenefitPickType } from '../model/backgrounds';
-import { AbilityScores, Character } from '../model/character';
-import { RULESET } from '../model/properties';
 import { CBStackParamList, RootNavigationProps } from '../model/props';
+import BuilderContextProvider from '../store/context/builder-context';
 import { MatTopTabsScreenOpts, Style } from '../styles/StyleSheet';
 import BuilderAbilitiesScreen from './character-builder-screens/AbilitiesBuilderScreen';
 import BackgroundBuilderScreen from './character-builder-screens/BackgroundBuilderScreen';
-import BuilderOptionsScreen from './character-builder-screens/OptionsBuilderScreen';
+import BuilderOptionsScreen from './character-builder-screens/BuilderOptionsScreen';
 
 const Tab = createMaterialTopTabNavigator<CBStackParamList>();
 
 export default function BuilderScreen({ navigation }: RootNavigationProps): JSX.Element {
-  const [ruleset, setRuleset] = useState(RULESET.WWN);
-  const [character, setCharacter] = useState<Character>(new Character());
-
-  useEffect(() => {
-    setCharacter({ ...character, ruleset });
-  }, [ruleset]);
-
-  useEffect(() => console.log(character), [character]);
-
-  const handleAbilityScoresChange = (abilityScores: AbilityScores) => setCharacter({ ...character, abilityScores });
-
-  const handleBackgroundChanges = (characterBackground: {
-    background: Background | null;
-    benefitPickType: BenefitPickType | null;
-    bgBenefits: BGBenefit[] | null;
-  }) => setCharacter({ ...character, characterBackground });
-
   return (
-    <Tab.Navigator initialRouteName="Options" style={Style.matTopTabs} screenOptions={MatTopTabsScreenOpts}>
-      <Tab.Screen name="Options">
-        {props => (
-          <BuilderOptionsScreen
-            navigation={props.navigation}
-            route={props.navigation}
-            ruleset={ruleset}
-            rulesetSelectioNhandler={ruleset => setRuleset(ruleset)}
-          />
-        )}
-      </Tab.Screen>
-      <Tab.Screen name="Abilities" >
-        {() => (
-          <BuilderAbilitiesScreen
-            character={character}
-            onAbilityScoresChange={handleAbilityScoresChange}
-          ></BuilderAbilitiesScreen>
-        )}
-      </Tab.Screen>
-      <Tab.Screen name="Background" >
-        {() => (
-          <BackgroundBuilderScreen
-            character={character}
-            onBackgroundChanges={handleBackgroundChanges}
-          ></BackgroundBuilderScreen>
-        )}
-      </Tab.Screen>
-    </Tab.Navigator>
+    <BuilderContextProvider>
+      <Tab.Navigator initialRouteName="Options" style={Style.matTopTabs} screenOptions={MatTopTabsScreenOpts}>
+        <Tab.Screen name="Options">
+          {props => <BuilderOptionsScreen navigation={props.navigation} route={props.navigation} />}
+        </Tab.Screen>
+        <Tab.Screen name="Abilities">{() => <BuilderAbilitiesScreen></BuilderAbilitiesScreen>}</Tab.Screen>
+        <Tab.Screen name="Background">{() => <BackgroundBuilderScreen></BackgroundBuilderScreen>}</Tab.Screen>
+      </Tab.Navigator>
+    </BuilderContextProvider>
   );
 }

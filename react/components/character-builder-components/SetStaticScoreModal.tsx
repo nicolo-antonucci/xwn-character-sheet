@@ -8,7 +8,7 @@ export default function SetStaticScoreModal(props: SetStaticScoreModalProps): JS
   return (
     <View style={Style.modal}>
       <Text style={Style.title}>Assign {props.value} to a score</Text>
-      <View style={Style.scoreBtnsContainer}>
+      <View style={Style.modalOptBtnContainer}>
         {Object.keys(props.scores)
           .sort(sortAbilityScores)
           .map((s, index) => (
@@ -16,7 +16,7 @@ export default function SetStaticScoreModal(props: SetStaticScoreModalProps): JS
               key={`select-score-${index}`}
               mode="contained-tonal"
               onPress={() => props.confirmHandler(s as SCORE)}
-              style={Style.scoreBtn}
+              style={Style.optionBtn}
             >
               {s.toUpperCase()}
               {props.scores[s as keyof AbilityScores] && ` (${props.scores[s as keyof AbilityScores]})`}

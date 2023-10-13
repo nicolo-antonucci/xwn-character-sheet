@@ -1,19 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Button, Modal, Portal, Text } from 'react-native-paper';
 import { AbilityScores, SCORE } from '../../model/character';
+import { BuilderContext } from '../../store/context/builder-context';
 import { Style } from '../../styles/StyleSheet';
 import SimpleModal from '../generics/SimpleModal';
 import SetRolledScoresModal from './SetRolledScoreModal';
 
-export default function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.Element {
+export default function RollAbilitiesSetup(): JSX.Element {
+  const builderCtx = useContext(BuilderContext);
+
   const [rolledScores, setRolledScores] = useState<{
     [k: string]: {
       value: number;
       score?: SCORE;
     };
   }>({});
+
   const [modalScore, setModalScore] = useState<SCORE | undefined>(undefined);
+
   const [alert, setAlert] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,7 +34,7 @@ export default function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.
       const rsScore = rs.score;
       if (rsScore) scores[rsScore as keyof AbilityScores] = rs.value;
     });
-    props.onAbilityScoresChange(scores);
+    builderCtx?.setAbilityScores(scores);
   }, [rolledScores]);
 
   const checkBeforeRoll = () => {
@@ -128,11 +133,11 @@ export default function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.
         )}
 
         {Object.values(rolledScores).length > 0 && (
-          <View style={Style.scoreBtnsContainer}>
+          <View style={Style.modalOptBtnContainer}>
             {Object.values(SCORE).map((s, index) => (
-              <Button key={index} mode="elevated" onPress={() => openModal(s)} style={Style.scoreBtn}>
+              <Button key={index} mode="elevated" onPress={() => openModal(s)} style={Style.optionBtn}>
                 {s.toUpperCase()}
-                {props.scores[s] && `: ${props.scores[s]}`}
+                {builderCtx?.character.abilityScores[s] && `: ${builderCtx?.character.abilityScores[s]}`}
               </Button>
             ))}
           </View>
@@ -144,9 +149,4 @@ export default function RollAbilitiesSetup(props: RollAbilitiesSetupProps): JSX.
       </View>
     </View>
   );
-}
-
-export interface RollAbilitiesSetupProps {
-  scores: AbilityScores;
-  onAbilityScoresChange: (scores: AbilityScores) => void;
 }

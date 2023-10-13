@@ -1,33 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { ScrollView } from 'react-native';
 import backgrounds from '../../../../assets/rules/backgrounds.json';
 import BackgroundCard from '../../../components/generics/BackgroundCard';
 import { Background } from '../../../model/backgrounds';
-import { Character } from '../../../model/character';
+import { BuilderContext } from '../../../store/context/builder-context';
 import { Style } from '../../../styles/StyleSheet';
 
-export default function BackgroundPickerScreen(props: BackgroundPickerScreenProps): JSX.Element {
-  const [bg, setBg] = useState<Background | null>(props.character.characterBackground.background);
-
-  useEffect(
-    () =>
-      props.onBackgroundChange(
-        bg
-          ? {
-              id: bg.id,
-            }
-          : null,
-      ),
-    [bg],
-  );
+export default function BackgroundPickerScreen(): JSX.Element {
+  const builderCtx = useContext(BuilderContext);
 
   const handleSelectionToggle = (background: Background, val: boolean) => {
-    if (bg?.name === background.name) {
-      if (!val) setBg(null);
+    if (builderCtx?.character.characterBackground.background?.id === background.id) {
+      if (!val) builderCtx?.setBackground(null);
       return;
     }
 
-    if (val) setBg(background);
+    if (val) builderCtx?.setBackground(background);
   };
 
   return (
@@ -36,16 +24,11 @@ export default function BackgroundPickerScreen(props: BackgroundPickerScreenProp
         <BackgroundCard
           key={`bg-entry-${background.id}`}
           background={background}
-          chosen={bg?.name === background.name}
+          chosen={builderCtx?.character.characterBackground.background?.id === background.id}
           edit={true}
           onSelectionToggle={val => handleSelectionToggle(background, val)}
         ></BackgroundCard>
       ))}
     </ScrollView>
   );
-}
-
-export interface BackgroundPickerScreenProps {
-  character: Character;
-  onBackgroundChange: (bg: Background | null) => void;
 }

@@ -8,10 +8,6 @@ export default function SetRolledScoresModal(props: SetRolledScoresModalProps): 
     return Object.keys(props.rolledScores).find(k => props.rolledScores[k].score === score);
   };
 
-  const findScoreValue = (score: SCORE) => {
-    return Object.values(props.rolledScores).find(rs => rs.score === props.score)?.value;
-  };
-
   const errorTemplate = (
     <View>
       <Text>Error processing information</Text>
@@ -22,7 +18,7 @@ export default function SetRolledScoresModal(props: SetRolledScoresModalProps): 
   const assignTemplate = (
     <View style={Style.modal}>
       <Text style={Style.title}>Choose a value for {props.score?.toUpperCase()}</Text>
-      <View style={Style.scoreBtnsContainer}>
+      <View style={Style.modalOptBtnContainer}>
         {Object.keys(props.rolledScores)
           .sort((a, b) => (props.rolledScores[a].value > props.rolledScores[b].value ? -1 : 1))
           .map(k => (
@@ -30,7 +26,7 @@ export default function SetRolledScoresModal(props: SetRolledScoresModalProps): 
               key={`select-score-${k}`}
               mode="contained-tonal"
               onPress={() => props.confirmHandler(k, props.score, findKeyForScore(props.score))}
-              style={Style.scoreBtn}
+              style={Style.optionBtn}
             >
               {props.rolledScores[k].value +
                 (props.rolledScores[k].score ? ` (${props.rolledScores[k]?.score?.toUpperCase()})` : '')}

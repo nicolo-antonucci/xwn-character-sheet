@@ -1,5 +1,5 @@
 import { generateId } from '../commons/Utils';
-import { BGBenefit, Background, BenefitPickType, WWNBACKGROUND } from './backgrounds';
+import { BGBenefit, Background, BGBenefitPickType, WWNBACKGROUND } from './backgrounds';
 import { RULESET } from './properties';
 import { SWNSKILLS, Skills, WWNSKILLS } from './skills';
 
@@ -39,11 +39,11 @@ export interface Focus {
 
 export class Character {
   id: string;
-  ruleset: RULESET | null = null;
+  ruleset: RULESET = RULESET.WWN;
   abilityScores: AbilityScores;
   characterBackground: {
     background: Background | null;
-    benefitPickType: BenefitPickType | null;
+    benefitPickType: BGBenefitPickType | null;
     bgBenefits: BGBenefit[] | null;
   };
   skills: Skills | null;

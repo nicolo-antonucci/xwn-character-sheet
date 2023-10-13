@@ -1,5 +1,5 @@
 import { SCORE } from './character';
-import { SWNSKILLS, WWNSKILLS } from './skills';
+import { SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from './skills';
 
 export type WWNBACKGROUND =
   | 'Artisan'
@@ -46,22 +46,24 @@ export const WWNBACKGROUND = {
   WANDERER: 'Wanderer' as WWNBACKGROUND,
 };
 
-export type BenefitPickType = 'rolled' | 'chosen';
+export type BGBenefitPickType = 'free' | 'quick' | 'rolled' | 'chosen';
 
-export const BenefitPickType = {
-  CHOSEN: 'chosen' as BenefitPickType,
-  ROLLED: 'rolled' as BenefitPickType,
+export const BGBenefitPickType = {
+  FREE: 'free' as BGBenefitPickType,
+  QUICK: 'quick' as BGBenefitPickType,
+  CHOSEN: 'chosen' as BGBenefitPickType,
+  ROLLED: 'rolled' as BGBenefitPickType,
 };
 
 export type BGBenefitType = 'growth' | 'learning' | 'quick';
 
 export const BGBenefitType = {
-  GROWTH: 'growth' as BenefitPickType,
-  LEARNING: 'learning' as BenefitPickType,
-  QUICK: 'quick' as BenefitPickType,
+  GROWTH: 'growth' as BGBenefitType,
+  LEARNING: 'learning' as BGBenefitType,
+  QUICK: 'quick' as BGBenefitType,
 };
 
-export type BGBenefitValue = 'Any Skill' | 'Any Combat' | '+1 Any Stat' | '+2 Physical' | '+2 Mental';
+export type BGBenefitValue = 'Any Skill' | 'Any Combat' | 'Any Non-Combat' | '+1 Any Stat' | '+2 Physical' | '+2 Mental';
 
 export const BGBenefitValue = {
   ANY_SKILL: 'Any Skill' as BGBenefitValue,
@@ -81,8 +83,8 @@ export interface Background {
   id: number;
   name?: WWNBACKGROUND | null;
   description?: string | null;
-  freeSkill?: SWNSKILLS | WWNSKILLS;
-  quickPicks?: SWNSKILLS[] | WWNSKILLS[];
+  freeSkill?: SKILL_CHOICE | SWNSKILLS | WWNSKILLS;
+  quickPicks?: (SKILL_CHOICE | SWNSKILLS | WWNSKILLS)[];
   growthChoices?: (SWNSKILLS | WWNSKILLS | BGBenefitValue)[];
   learningChoices?: (SWNSKILLS | WWNSKILLS | BGBenefitValue)[];
 }

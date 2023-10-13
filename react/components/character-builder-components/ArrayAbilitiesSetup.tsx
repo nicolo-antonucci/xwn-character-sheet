@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Button, Modal, Portal } from 'react-native-paper';
 import { AbilityScores, SCORE } from '../../model/character';
+import { BuilderContext } from '../../store/context/builder-context';
 import { Style } from '../../styles/StyleSheet';
 import SetStaticScoreModal from './SetStaticScoreModal';
 
@@ -14,15 +15,30 @@ interface DefaultArrayScoreMap {
   7: SCORE | undefined;
 }
 
-export default function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JSX.Element {
+export default function ArrayAbilitiesSetup(): JSX.Element {
+  const builderCtx = useContext(BuilderContext);
+
   const [scores, setScores] = useState<DefaultArrayScoreMap>({
-    14: Object.keys(props.scores).find(s => props.scores[s as keyof AbilityScores] === 14) as SCORE | undefined,
-    12: Object.keys(props.scores).find(s => props.scores[s as keyof AbilityScores] === 12) as SCORE | undefined,
-    11: Object.keys(props.scores).find(s => props.scores[s as keyof AbilityScores] === 11) as SCORE | undefined,
-    10: Object.keys(props.scores).find(s => props.scores[s as keyof AbilityScores] === 10) as SCORE | undefined,
-    9: Object.keys(props.scores).find(s => props.scores[s as keyof AbilityScores] === 9) as SCORE | undefined,
-    7: Object.keys(props.scores).find(s => props.scores[s as keyof AbilityScores] === 7) as SCORE | undefined,
+    14: Object.keys(builderCtx?.character.abilityScores ?? {}).find(
+      s => builderCtx?.character.abilityScores[s as keyof AbilityScores] === 14,
+    ) as SCORE | undefined,
+    12: Object.keys(builderCtx?.character.abilityScores ?? {}).find(
+      s => builderCtx?.character.abilityScores[s as keyof AbilityScores] === 12,
+    ) as SCORE | undefined,
+    11: Object.keys(builderCtx?.character.abilityScores ?? {}).find(
+      s => builderCtx?.character.abilityScores[s as keyof AbilityScores] === 11,
+    ) as SCORE | undefined,
+    10: Object.keys(builderCtx?.character.abilityScores ?? {}).find(
+      s => builderCtx?.character.abilityScores[s as keyof AbilityScores] === 10,
+    ) as SCORE | undefined,
+    9: Object.keys(builderCtx?.character.abilityScores ?? {}).find(
+      s => builderCtx?.character.abilityScores[s as keyof AbilityScores] === 9,
+    ) as SCORE | undefined,
+    7: Object.keys(builderCtx?.character.abilityScores ?? {}).find(
+      s => builderCtx?.character.abilityScores[s as keyof AbilityScores] === 7,
+    ) as SCORE | undefined,
   });
+
   const [modal, setModal] = useState<{
     visible: boolean;
     selectedValue?: number;
@@ -31,7 +47,7 @@ export default function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JS
     selectedValue: 14,
   });
 
-  useEffect(() => props.onAbilityScoresChange(mapToAbilityScores(scores)), [scores]);
+  useEffect(() => builderCtx?.setAbilityScores(mapToAbilityScores(scores)), [scores]);
 
   const getScoreAt = (value: number | undefined) => {
     return value && [14, 12, 11, 10, 9, 7].includes(value) ? scores[value as keyof DefaultArrayScoreMap] : undefined;
@@ -77,7 +93,7 @@ export default function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JS
         </Modal>
       </Portal>
 
-      <View style={Style.scoreBtnsContainer}>
+      <View style={Style.modalOptBtnContainer}>
         {Object.keys(scores)
           .sort((a, b) => (+a > +b ? -1 : 1))
           .map((val, i) => (
@@ -90,7 +106,7 @@ export default function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JS
                   selectedValue: +val,
                 })
               }
-              style={Style.scoreBtn}
+              style={Style.optionBtn}
             >
               {val}
               {getScoreAt(+val) && `: ${getScoreAt(+val)?.toUpperCase()}`}
@@ -99,9 +115,4 @@ export default function ArrayAbilitiesSetup(props: ArrayAbilitiesSetupProps): JS
       </View>
     </View>
   );
-}
-
-export interface ArrayAbilitiesSetupProps {
-  scores: AbilityScores;
-  onAbilityScoresChange: (scores: AbilityScores) => void;
 }

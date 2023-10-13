@@ -71,14 +71,14 @@ export const Style = StyleSheet.create({
     gap: 12,
     paddingVertical: 12,
   },
-  scoreBtnsContainer: {
+  modalOptBtnContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 12,
     justifyContent: 'center',
   },
-  scoreBtn: {
+  optionBtn: {
     flexBasis: '40%',
   },
   title: {
