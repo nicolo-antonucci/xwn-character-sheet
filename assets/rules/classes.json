@@ -1,0 +1,211 @@
+[
+  {
+    "id": 0,
+    "name": "Expert",
+    "hitDiceModifier": 0,
+    "bab": {
+      "1": 0,
+      "2": 1,
+      "3": 1,
+      "4": 2,
+      "5": 2,
+      "6": 3,
+      "7": 3,
+      "8": 4,
+      "9": 4,
+      "10": 5
+    },
+    "levelOneFoci": ["Any Non-Combat"],
+    "perks": [
+      {
+        "name": "Masterful Expertise",
+        "description": [
+          "Once per scene, the Expert may reroll any non-combat skill check as an Instant action. This allows the Expert to make a roll and then immediately use this ability if the resulting total isn’t good enough to succeed. In cases where it matters, the better of the two rolls may be used."
+        ]
+      },
+      {
+        "name": "Quick Learner",
+        "description": [
+          "When you advance a character level, you gain an extra skill point which may only be spent on gaining or improving non-combat skills or raising attributes. You may save this point to spend later if you wish."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Mage",
+    "hitDiceModifier": -1,
+    "bab": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 2
+    },
+    "levelOneFoci": [],
+    "perks": [
+      {
+        "name": "Arcane tradition",
+        "description": [
+          "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Warrior",
+    "hitDiceModifier": 2,
+    "bab": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10
+    },
+    "levelOneFoci": ["Any Combat"],
+    "perks": [
+      {
+        "name": "Killing Blow",
+        "description": [
+          "Whenever a Warrior inflicts damage with any attack, spell, or special ability they may add half their character level, rounded up, to the damage done. This damage is also added to any Shock they may inflict.",
+          "Combined with Foci meant to improve Shock attacks such as Armsmaster, Close Combatant, or Shocking Assault, this ability ensures that an experienced Warrior will almost always kill any ordinary human soldier or minor monster, regardless of their attack roll result."
+        ]
+      },
+      {
+        "name": "Veteran's Luck",
+        "description": [
+          "Once per scene, as an Instant action, the Warrior may turn a missed attack they have made into a hit. Alternately, they may turn a successful attack against them into a miss, also as an Instant action. This ability is particularly lethal when used with the Make a Snap Attack action and leveled against weaker monsters or ordinary human warriors, as explained on page 44.",
+          "Only one exercise of this ability is possible in a scene, either to force a miss or ensure a hit on a foe; both options may not be employed in the same fight.",
+          "A Warrior may use this ability with crew-served weapons they are assisting in firing. This ability cannot be used to negate environmental damage or damage done to a vehicle or mount they are riding."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Adventurer: Partial Expert/Partial Warrior",
+    "hitDiceModifier": 2,
+    "bab": {
+      "1": 1,
+      "2": 2,
+      "3": 2,
+      "4": 3,
+      "5": 4,
+      "6": 5,
+      "7": 5,
+      "8": 6,
+      "9": 6,
+      "10": 7
+    },
+    "levelOneFoci": ["Any Combat", "Any Non-Combat"],
+    "perks": [
+      {
+        "name": "Quick Learner",
+        "description": [
+          "When you advance a character level, you gain an extra skill point which may only be spent on gaining or improving non-combat skills or raising attributes. You may save this point to spend later if you wish."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Adventurer: Partial Expert/Partial Mage",
+    "hitDiceModifier": 0,
+    "bab": {
+      "1": 0,
+      "2": 1,
+      "3": 1,
+      "4": 2,
+      "5": 2,
+      "6": 3,
+      "7": 3,
+      "8": 4,
+      "9": 4,
+      "10": 5
+    },
+    "levelOneFoci": ["Any Non-Combat"],
+    "perks": [
+      {
+        "name": "Quick Learner",
+        "description": [
+          "When you advance a character level, you gain an extra skill point which may only be spent on gaining or improving non-combat skills or raising attributes. You may save this point to spend later if you wish."
+        ]
+      },
+      {
+        "name": "Arcane tradition",
+        "description": [
+          "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Adventurer: Partial Expert/Partial Mage",
+    "hitDiceModifier": 2,
+    "bab": {
+      "1": 1,
+      "2": 2,
+      "3": 2,
+      "4": 3,
+      "5": 4,
+      "6": 5,
+      "7": 5,
+      "8": 6,
+      "9": 6,
+      "10": 7
+    },
+    "levelOneFoci": ["Any Combat"],
+    "perks": [
+      {
+        "name": "Arcane tradition",
+        "description": [
+          "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Mage: Dual Tradition",
+    "hitDiceModifier": -1,
+    "bab": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 2
+    },
+    "levelOneFoci": [],
+    "perks": [
+      {
+        "name": "Arcane tradition",
+        "description": [
+          "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
+        ]
+      },
+      {
+        "name": "Arcane tradition",
+        "description": [
+          "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
+        ]
+      }
+    ]
+  }
+]

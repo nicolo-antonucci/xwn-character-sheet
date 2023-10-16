@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { BuilderContext } from '../../store/context/builder-context';
 import { Style } from '../../styles/StyleSheet';
 import BackgroundPerksScreen from './background-sub-screens/BackgroundPerksScreen';
@@ -25,7 +25,7 @@ function BackgroundBuilderScreen(): JSX.Element {
             name="Backgrounds"
             options={{
               tabBarLabel: 'Backgrounds',
-              tabBarIcon: ({ color }) => <FontAwesome5 name="book" color={color} size={20} />,
+              tabBarIcon: ({ color }) => <FontAwesome6 name="book" color={color} size={20} />,
             }}
           ></Tab.Screen>
           <Tab.Screen
@@ -33,7 +33,7 @@ function BackgroundBuilderScreen(): JSX.Element {
             name="Perks"
             options={{
               tabBarLabel: 'Perks',
-              tabBarIcon: ({ color }) => <FontAwesome5 name="check-double" color={color} size={20} />,
+              tabBarIcon: ({ color }) => <FontAwesome6 name="check-double" color={color} size={20} />,
             }}
             listeners={{
               tabPress: e => {

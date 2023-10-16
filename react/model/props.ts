@@ -14,6 +14,7 @@ export type CBStackParamList = {
   Options: undefined;
   Abilities: undefined;
   Background: undefined;
+  Class: undefined;
 };
 
 export type CBNavigationProps = NativeStackScreenProps<CBStackParamList>;
