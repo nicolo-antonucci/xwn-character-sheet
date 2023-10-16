@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import backgrounds from '../../../../assets/rules/backgrounds.json';
 import BackgroundCard from '../../../components/generics/BackgroundCard';
 import { Background } from '../../../model/backgrounds';
@@ -19,16 +19,18 @@ export default function BackgroundPickerScreen(): JSX.Element {
   };
 
   return (
-    <ScrollView style={Style.f1}>
-      {(backgrounds as Background[]).map(background => (
+    <FlatList
+      data={backgrounds as Background[]}
+      renderItem={({ item }) => (
         <BackgroundCard
-          key={`bg-entry-${background.id}`}
-          background={background}
-          chosen={builderCtx?.character.characterBackground.background?.id === background.id}
+          key={`bg-entry-${item.id}`}
+          background={item}
+          chosen={builderCtx?.character.characterBackground.background?.id === item.id}
           edit={true}
-          onSelectionToggle={val => handleSelectionToggle(background, val)}
+          onSelectionToggle={val => handleSelectionToggle(item, val)}
         ></BackgroundCard>
-      ))}
-    </ScrollView>
+      )}
+      style={Style.f1}
+    ></FlatList>
   );
 }

@@ -17,7 +17,11 @@ export default function BackgroundCard(props: BackgroundCardProps): JSX.Element 
       <Pressable style={Style.bgCardHeader} onPress={toggleOpen}>
         <Text style={Style.bgName}>{props.background.name?.toUpperCase()}</Text>
         {props.edit && (
-          <Button icon={props.chosen ? "check" : "plus"} mode={props.chosen ? 'contained' : 'outlined'} onPress={toggleChosen}>
+          <Button
+            icon={props.chosen ? 'check' : 'plus'}
+            mode={props.chosen ? 'contained' : 'outlined'}
+            onPress={toggleChosen}
+          >
             {props.chosen ? 'CHOSEN' : 'CHOOSE'}
           </Button>
         )}
@@ -58,7 +62,9 @@ export default function BackgroundCard(props: BackgroundCardProps): JSX.Element 
               }
             ></RollTable>
           </View>
-          <Button icon="chevron-up" onPress={() => setIsOpen(false)}>Collapse</Button>
+          <Button icon="chevron-up" onPress={() => setIsOpen(false)}>
+            Collapse
+          </Button>
         </View>
       )}
     </Card>

@@ -1,6 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { Divider, Text } from 'react-native-paper';
-import { Style } from '../../styles/StyleSheet';
+import { Text } from 'react-native-paper';
 import { Theme } from '../../styles/Theme';
 
 const styles = StyleSheet.create({

@@ -42,6 +42,11 @@ export const Style = StyleSheet.create({
     alignItems: 'center',
     gap: 24,
   },
+  perkCard: {
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    flexDirection: 'row',
+  },
   modal: {
     alignSelf: 'center',
     backgroundColor: Theme.colors.surface,
@@ -65,7 +70,7 @@ export const Style = StyleSheet.create({
   },
   bgName: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   bgDetails: {
     gap: 12,

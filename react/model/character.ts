@@ -1,7 +1,7 @@
 import { generateId } from '../commons/Utils';
-import { BGBenefit, Background, BGBenefitPickType, WWNBACKGROUND } from './backgrounds';
+import { BGBenefit, BGBenefitPickType, Background } from './backgrounds';
 import { RULESET } from './properties';
-import { SWNSKILLS, Skills, WWNSKILLS } from './skills';
+import { Skills } from './skills';
 
 export type SCORE = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
 

@@ -2,11 +2,10 @@ import { useContext } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
 import { RULESET } from '../../model/properties';
-import { CBNavigationProps } from '../../model/props';
 import { BuilderContext } from '../../store/context/builder-context';
 import { Style } from '../../styles/StyleSheet';
 
-export default function BuilderOptionsScreen(props: CBNavigationProps): JSX.Element {
+export default function BuilderOptionsScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
 
   const handleValueChange = (value: string) => {

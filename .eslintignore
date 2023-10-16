@@ -4,3 +4,4 @@ ios/
 .bundle/
 _tests_/
 .vscode/
+**/*.js

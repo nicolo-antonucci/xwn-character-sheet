@@ -63,7 +63,13 @@ export const BGBenefitType = {
   QUICK: 'quick' as BGBenefitType,
 };
 
-export type BGChoiceBenefit = 'Any Skill' | 'Any Combat' | 'Any Non-Combat' | '+1 Any Stat' | '+2 Physical' | '+2 Mental';
+export type BGChoiceBenefit =
+  | 'Any Skill'
+  | 'Any Combat'
+  | 'Any Non-Combat'
+  | '+1 Any Stat'
+  | '+2 Physical'
+  | '+2 Mental';
 
 export const BGChoiceBenefit = {
   ANY_SKILL: 'Any Skill' as BGChoiceBenefit,

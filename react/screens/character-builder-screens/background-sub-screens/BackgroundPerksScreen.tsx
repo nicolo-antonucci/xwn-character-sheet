@@ -28,10 +28,10 @@ export default function BackgroundPerksScreen(): JSX.Element {
   };
 
   return (
-    <View style={{ ...Style.colFlex, paddingHorizontal: 12 }}>
+    <View style={{ ...Style.f1, ...Style.colFlex, paddingHorizontal: 12 }}>
       <Text>
-        You can choose to gain your background's quick picks, choose twice from its Learning table or roll three times
-        combined on its Growth and Learning tables.
+        You can choose to gain your background&apos;s quick picks, choose twice from its Learning table or roll three
+        times combined on its Growth and Learning tables.
       </Text>
       <View style={{ flexDirection: 'row' }}>
         <Text style={{ fontWeight: 'bold' }}>Free Skill: </Text>

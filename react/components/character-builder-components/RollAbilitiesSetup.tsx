@@ -88,8 +88,6 @@ export default function RollAbilitiesSetup(): JSX.Element {
       });
   };
 
-  const renderScores = () => {};
-
   return (
     <View>
       <Portal>

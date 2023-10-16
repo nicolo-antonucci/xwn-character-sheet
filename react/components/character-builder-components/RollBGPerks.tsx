@@ -3,10 +3,13 @@ import { ScrollView, View } from 'react-native';
 import { Button, Card, Modal, Portal, Text } from 'react-native-paper';
 import backgrounds from '../../../assets/rules/backgrounds.json';
 import { BGBenefit, BGBenefitPickType, BGChoiceBenefit } from '../../model/backgrounds';
+import { SCORE } from '../../model/character';
 import { SWNSKILLS, WWNSKILLS } from '../../model/skills';
 import { BuilderContext } from '../../store/context/builder-context';
 import { Style } from '../../styles/StyleSheet';
 import RollTable from '../generics/RollTable';
+import SimpleModal from '../generics/SimpleModal';
+import SetBGChoice from './SetBGChoice';
 
 export default function RollBGPerks(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
@@ -14,7 +17,7 @@ export default function RollBGPerks(): JSX.Element {
   const [rolls, setRolls] = useState<
     {
       skill: SWNSKILLS | WWNSKILLS | BGChoiceBenefit;
-      subChoice?: SWNSKILLS | WWNSKILLS | undefined;
+      subChoice?: SCORE | SWNSKILLS | WWNSKILLS | undefined;
       id: number;
     }[]
   >(
@@ -26,6 +29,10 @@ export default function RollBGPerks(): JSX.Element {
   );
 
   const [modal, setModal] = useState<{ index: number; choiceType: BGChoiceBenefit } | null>(null);
+
+  const [confirmationModal, setConfirmationModal] = useState<{ show: boolean; type?: 'growth' | 'learning' }>({
+    show: false,
+  });
 
   useEffect(() => {
     builderCtx?.setBackgroundPerks(
@@ -42,11 +49,26 @@ export default function RollBGPerks(): JSX.Element {
 
   const getBG = () => backgrounds.find(bg => bg.id === builderCtx?.character.characterBackground.background?.id);
 
-  const rollLearning = () => {
-    const roll = Math.ceil((Math.random() * (1 - 8) + 8) % 8);
-    const skill = getBG()?.learningChoices[roll - 1] as SWNSKILLS | WWNSKILLS | BGChoiceBenefit | undefined;
-    if (!skill) return;
+  const handleRoll = (type: 'growth' | 'learning') => {
+    if (rolls.length === 3) setConfirmationModal({ show: true, type });
+    else {
+      switch (type) {
+        case 'growth':
+          rollGrowth();
+          break;
+        case 'learning':
+          rollLearning();
+          break;
+      }
+    }
+  };
 
+  const setRollResult = (skill: SWNSKILLS | WWNSKILLS | BGChoiceBenefit) => {
+    let result: {
+      skill: SWNSKILLS | WWNSKILLS | BGChoiceBenefit;
+      subChoice?: SWNSKILLS | WWNSKILLS | undefined;
+      id: number;
+    };
     if (
       (
         [
@@ -58,72 +80,151 @@ export default function RollBGPerks(): JSX.Element {
         ] as string[]
       ).includes(skill)
     ) {
+      result = {
+        skill,
+        id: rolls.length,
+        subChoice: undefined,
+      };
     } else {
-      setRolls(current => [
-        ...current,
-        {
-          skill,
-          id: current.length,
-        },
-      ]);
+      result = {
+        skill,
+        id: rolls.length,
+      };
     }
+
+    if (rolls.length === 3) setRolls([result]);
+    else setRolls(current => [...current, result]);
+  };
+
+  const rollLearning = () => {
+    const roll = Math.ceil((Math.random() * (1 - 8) + 8) % 8);
+    const skill = getBG()?.learningChoices[roll - 1] as SWNSKILLS | WWNSKILLS | BGChoiceBenefit | undefined;
+    if (skill) setRollResult(skill);
   };
 
   const rollGrowth = () => {
     const roll = Math.ceil((Math.random() * (1 - 6) + 6) % 6);
     const skill = getBG()?.growthChoices[roll - 1] as SWNSKILLS | WWNSKILLS | BGChoiceBenefit | undefined;
-    if (!skill) return;
+    if (skill) setRollResult(skill);
+  };
 
-    if (
-      (
-        [
-          BGChoiceBenefit.ANY_COMBAT,
-          BGChoiceBenefit.ANY_SCORE,
-          BGChoiceBenefit.ANY_SKILL,
-          BGChoiceBenefit.MENTAL,
-          BGChoiceBenefit.PHYSICAL,
-        ] as string[]
-      ).includes(skill)
-    ) {
-    } else {
-      setRolls(current => [
-        ...current,
-        {
-          skill,
-          id: current.length,
-        },
-      ]);
+  const resetAndRoll = () => {
+    switch (confirmationModal.type) {
+      case 'growth':
+        rollGrowth();
+        break;
+      case 'learning':
+        rollLearning();
+        break;
+      default:
+        break;
     }
+    setConfirmationModal({ show: false });
+  };
+
+  const handleChoice = (subChoice: SCORE | SWNSKILLS | WWNSKILLS) => {
+    setRolls(current =>
+      current.map((el, i) => {
+        if (i === modal?.index) return { ...el, subChoice };
+        return el;
+      }),
+    );
+    setModal(null);
   };
 
   return (
-    <View style={{ width: '100%' }}>
+    <View style={{ ...Style.f1, width: '100%' }}>
       <Portal>
         <Modal visible={modal !== null} onDismiss={() => setModal(null)}>
-          ''
+          <SetBGChoice
+            choice={modal?.choiceType}
+            ruleset={builderCtx?.character.ruleset}
+            onChoice={handleChoice}
+          ></SetBGChoice>
+        </Modal>
+
+        <Modal visible={confirmationModal.show} onDismiss={() => setConfirmationModal({ show: false })}>
+          <SimpleModal
+            confirmHandler={resetAndRoll}
+            title="Attention"
+            content={[
+              'You already rolled three times. Rolling again will delete all previous results.',
+              'Do you really want to proceed?',
+            ]}
+            undoHandler={() => setConfirmationModal({ show: false })}
+          />
         </Modal>
       </Portal>
 
-      <ScrollView contentContainerStyle={{ marginBottom: 100, width: '100%', gap: 12 }}>
-        <View style={Style.colFlex}>
-          {rolls.map((roll, i) => (
-            <Card key={`roll-result-${i}`}>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={{ fontWeight: 'bold' }}>Result: </Text>
-                <Text>{roll.skill}</Text>
-              </View>
-            </Card>
-          ))}
-        </View>
-
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1, gap: 12, paddingBottom: 12 }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={{ ...Style.rowFlex, gap: 6, alignItems: 'flex-start' }}>
-          <Button icon="dice-d6" mode="text" onPress={rollGrowth} style={Style.f1}>
+          <Button icon="dice-d6" mode="text" onPress={() => handleRoll('growth')} style={Style.f1}>
             Roll Growth Table
           </Button>
-          <Button icon="dice-d6" mode="text" onPress={rollLearning} style={Style.f1}>
+          <Button icon="dice-d6" mode="text" onPress={() => handleRoll('learning')} style={Style.f1}>
             Roll Learning Table
           </Button>
         </View>
+
+        {rolls.length > 0 && (
+          <View style={{ ...Style.colFlex, paddingBottom: 12 }}>
+            {rolls.map((roll, index) => (
+              <Card key={`roll-result-${index}`} style={Style.perkCard}>
+                <View style={Style.rowFlex}>
+                  <View>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={{ fontWeight: 'bold' }}>Result: </Text>
+                      <Text>{roll.skill}</Text>
+                    </View>
+                    {(
+                      [
+                        BGChoiceBenefit.ANY_COMBAT,
+                        BGChoiceBenefit.ANY_SCORE,
+                        BGChoiceBenefit.ANY_SKILL,
+                        BGChoiceBenefit.MENTAL,
+                        BGChoiceBenefit.PHYSICAL,
+                      ] as string[]
+                    ).includes(roll.skill) &&
+                      roll.subChoice && (
+                        <View style={{ flexDirection: 'row' }}>
+                          <Text style={{ fontWeight: 'bold' }}>Choice: </Text>
+                          <Text>
+                            {(Object.values(SCORE) as string[]).includes(roll.subChoice)
+                              ? roll.subChoice.toUpperCase()
+                              : roll.subChoice}
+                          </Text>
+                        </View>
+                      )}
+                  </View>
+                  {(
+                    [
+                      BGChoiceBenefit.ANY_COMBAT,
+                      BGChoiceBenefit.ANY_SCORE,
+                      BGChoiceBenefit.ANY_SKILL,
+                      BGChoiceBenefit.MENTAL,
+                      BGChoiceBenefit.PHYSICAL,
+                    ] as string[]
+                  ).includes(roll.skill) && (
+                    <Button
+                      style={{ paddingBottom: 0 }}
+                      onPress={() =>
+                        setModal({
+                          index,
+                          choiceType: roll.skill as BGChoiceBenefit,
+                        })
+                      }
+                    >
+                      {roll.subChoice ? 'Change' : 'Choose'}
+                    </Button>
+                  )}
+                </View>
+              </Card>
+            ))}
+          </View>
+        )}
 
         <View style={{ ...Style.rowFlex, gap: 6, alignItems: 'flex-start' }}>
           <RollTable

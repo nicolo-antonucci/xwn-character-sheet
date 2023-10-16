@@ -47,7 +47,7 @@ export default function ArrayAbilitiesSetup(): JSX.Element {
     selectedValue: 14,
   });
 
-  useEffect(() => builderCtx?.setAbilityScores(mapToAbilityScores(scores)), [scores]);
+  useEffect(() => builderCtx?.setAbilityScores(mapToAbilityScores()), [scores]);
 
   const getScoreAt = (value: number | undefined) => {
     return value && [14, 12, 11, 10, 9, 7].includes(value) ? scores[value as keyof DefaultArrayScoreMap] : undefined;
@@ -58,7 +58,7 @@ export default function ArrayAbilitiesSetup(): JSX.Element {
     return val ? +val : null;
   };
 
-  const mapToAbilityScores = (scores: DefaultArrayScoreMap): AbilityScores => {
+  const mapToAbilityScores = (): AbilityScores => {
     return {
       cha: getValueForScore(SCORE.CHA),
       con: getValueForScore(SCORE.CON),
@@ -87,7 +87,7 @@ export default function ArrayAbilitiesSetup(): JSX.Element {
             confirmHandler={score => handleScoreAssignment(score)}
             value={modal.selectedValue}
             score={getScoreAt(modal.selectedValue)}
-            scores={mapToAbilityScores(scores)}
+            scores={mapToAbilityScores()}
             undoHandler={() => setModal({ visible: false })}
           ></SetStaticScoreModal>
         </Modal>
