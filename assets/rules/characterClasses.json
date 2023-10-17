@@ -94,7 +94,7 @@
   },
   {
     "id": 3,
-    "name": "Adventurer: Partial Expert/Partial Warrior",
+    "name": "Partial Expert/Partial Warrior",
     "hitDiceModifier": 2,
     "bab": {
       "1": 1,
@@ -120,7 +120,7 @@
   },
   {
     "id": 4,
-    "name": "Adventurer: Partial Expert/Partial Mage",
+    "name": "Partial Expert/Partial Mage",
     "hitDiceModifier": 0,
     "bab": {
       "1": 0,
@@ -152,7 +152,7 @@
   },
   {
     "id": 5,
-    "name": "Adventurer: Partial Expert/Partial Mage",
+    "name": "Partial Expert/Partial Mage",
     "hitDiceModifier": 2,
     "bab": {
       "1": 1,

@@ -104,7 +104,7 @@ export default function RollAbilitiesSetup(): JSX.Element {
               'Proceed anyway?',
             ]}
             undoHandler={() => setAlert(false)}
-          ></SimpleModal>
+          />
         </Modal>
 
         <Modal visible={!!modalScore}>
@@ -113,7 +113,7 @@ export default function RollAbilitiesSetup(): JSX.Element {
             rolledScores={rolledScores}
             score={modalScore as SCORE}
             undoHandler={() => setModalScore(undefined)}
-          ></SetRolledScoresModal>
+          />
         </Modal>
       </Portal>
 

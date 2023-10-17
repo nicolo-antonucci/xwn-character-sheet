@@ -1,6 +1,7 @@
 import { ReactElement, createContext, useEffect, useState } from 'react';
 import { BGBenefit, BGBenefitPickType, Background } from '../../model/backgrounds';
 import { AbilityScores, Character } from '../../model/character';
+import { CharacterClass } from '../../model/characterClass';
 import { RULESET } from '../../model/properties';
 
 export const BuilderContext = createContext<{
@@ -10,6 +11,7 @@ export const BuilderContext = createContext<{
   setBackground: (background: Background | null) => void;
   setBackgroundPickType: (bgBenefitPickType: BGBenefitPickType) => void;
   setBackgroundPerks: (bgBenefits: BGBenefit[]) => void;
+  setCharacterClass: (characterClass: CharacterClass | null) => void;
 } | null>(null);
 
 export default function BuilderContextProvider({ children }: BuilderContextProviderProps): JSX.Element {
@@ -73,6 +75,13 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
     }));
   }
 
+  function setCharacterClass(characterClass: CharacterClass | null) {
+    setCharacter(current => ({
+      ...current,
+      characterClass: characterClass ? { id: characterClass.id } : null,
+    }));
+  }
+
   return (
     <BuilderContext.Provider
       value={{
@@ -82,6 +91,7 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
         setBackground,
         setBackgroundPickType,
         setBackgroundPerks,
+        setCharacterClass,
       }}
     >
       {children}

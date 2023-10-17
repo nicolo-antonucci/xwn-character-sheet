@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { Button, Card, Divider, Text } from 'react-native-paper';
+import { CharacterClass } from '../../model/characterClass';
 import { Style } from '../../styles/StyleSheet';
+import ClassTable from './ClassTable';
 
 export default function ClassCard(props: ClassCardProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -11,9 +13,9 @@ export default function ClassCard(props: ClassCardProps): JSX.Element {
   const toggleChosen = () => props.onSelectionToggle(!props.chosen);
 
   return (
-    <Card style={Style.bgCard}>
-      <Pressable style={Style.bgCardHeader} onPress={toggleOpen}>
-        <Text style={Style.bgName}>{props.class.name}</Text>
+    <Card style={Style.detailsCard}>
+      <Pressable style={Style.detailsCardHeader} onPress={toggleOpen}>
+        <Text style={Style.detailsName}>{props.characterClass.name}</Text>
         {props.edit && (
           <Button
             icon={props.chosen ? 'check' : 'plus'}
@@ -26,24 +28,22 @@ export default function ClassCard(props: ClassCardProps): JSX.Element {
       </Pressable>
       {isOpen && <Divider />}
       {isOpen && (
-        <View style={Style.bgDetails}>
-          <ClassTable class={props.class} />
+        <View style={{ ...Style.colFlex, ...Style.detailsBody, width: '100%' }}>
+          <ClassTable characterClass={props.characterClass} tableId={props.characterClass.id.toString()} />
 
-          {props.class.perks.map((p, i) => (
-            <View key={`perk-${props.class.name}-${i}`} style={Style.colFlex}>
-              <Text style={Style.title}>{p.name}</Text>
+          {props.characterClass.perks?.map((p, i) => (
+            <View key={`perk-${props.characterClass.name}-${i}`} style={{ ...Style.colFlex, gap: 6 }}>
+              <Text style={{ ...Style.title, fontSize: 20 }}>{p.name}</Text>
               <Text>{p.description}</Text>
             </View>
           ))}
 
-          {props.class.levelOneFoci.map((f, i) => (
-            <View key={`focus-${props.class.name}-${i}`} style={Style.colFlex}>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={Style.title}>Focus type:</Text>
-                <Text>{f}</Text>
+          {props.characterClass.levelOneFoci?.map((f, i) => (
+            <View key={`focus-${props.characterClass.name}-${i}`} style={Style.colFlex}>
+              <View style={Style.rowFlex}>
+                <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Bonus focus type:</Text>
+                <Text style={{ fontSize: 20 }}>{f}</Text>
               </View>
-
-              <Button>{}</Button>
             </View>
           ))}
         </View>
@@ -53,7 +53,7 @@ export default function ClassCard(props: ClassCardProps): JSX.Element {
 }
 
 export interface ClassCardProps {
-  class: Class;
+  characterClass: CharacterClass;
   edit: boolean;
   chosen: boolean;
   onSelectionToggle: (value: boolean) => void;

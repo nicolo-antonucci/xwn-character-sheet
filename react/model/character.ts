@@ -1,5 +1,7 @@
 import { generateId } from '../commons/Utils';
+import { Focus } from './Focus';
 import { BGBenefit, BGBenefitPickType, Background } from './backgrounds';
+import { CharacterClass } from './characterClass';
 import { RULESET } from './properties';
 import { Skills } from './skills';
 
@@ -23,20 +25,6 @@ export interface AbilityScores {
   cha: number | null;
 }
 
-export interface Benefit {
-  description: string;
-  perks: unknown;
-}
-
-export interface Focus {
-  description: string;
-  benefits: {
-    1: Benefit;
-    2: Benefit;
-  };
-  level: 1 | 2;
-}
-
 export class Character {
   id: string;
   ruleset: RULESET = RULESET.WWN;
@@ -48,6 +36,8 @@ export class Character {
   };
   skills: Skills | null;
   foci: Focus[];
+  characterClass: CharacterClass | null;
+  level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = 1;
 
   constructor() {
     this.id = generateId();
@@ -66,5 +56,6 @@ export class Character {
       benefitPickType: null,
       bgBenefits: null,
     };
+    this.characterClass = null;
   }
 }

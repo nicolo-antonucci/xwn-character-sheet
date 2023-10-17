@@ -92,7 +92,7 @@ export default function ChooseBGPerks(): JSX.Element {
                   disabled={choices.length === 2 && !choices.find(c => c.id === i)}
                   status={choices.find(c => c.id === i) ? 'checked' : 'unchecked'}
                   onPress={() => handleChoice(lp as SWNSKILLS | WWNSKILLS, i)}
-                ></Checkbox>
+                />
                 <Text>{lp}</Text>
               </View>
             ))}

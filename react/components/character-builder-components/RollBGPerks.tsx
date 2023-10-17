@@ -136,11 +136,7 @@ export default function RollBGPerks(): JSX.Element {
     <View style={{ ...Style.f1, width: '100%' }}>
       <Portal>
         <Modal visible={modal !== null} onDismiss={() => setModal(null)}>
-          <SetBGChoice
-            choice={modal?.choiceType}
-            ruleset={builderCtx?.character.ruleset}
-            onChoice={handleChoice}
-          ></SetBGChoice>
+          <SetBGChoice choice={modal?.choiceType} ruleset={builderCtx?.character.ruleset} onChoice={handleChoice} />
         </Modal>
 
         <Modal visible={confirmationModal.show} onDismiss={() => setConfirmationModal({ show: false })}>
@@ -236,7 +232,7 @@ export default function RollBGPerks(): JSX.Element {
                 weight: 1,
               })) ?? []
             }
-          ></RollTable>
+          />
           <RollTable
             tableId={`${getBG()?.name}-learning-table`}
             title="Learning"
@@ -246,7 +242,7 @@ export default function RollBGPerks(): JSX.Element {
                 weight: 1,
               })) ?? []
             }
-          ></RollTable>
+          />
         </View>
       </ScrollView>
     </View>

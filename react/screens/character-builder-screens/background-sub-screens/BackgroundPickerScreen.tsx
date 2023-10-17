@@ -28,7 +28,7 @@ export default function BackgroundPickerScreen(): JSX.Element {
           chosen={builderCtx?.character.characterBackground.background?.id === item.id}
           edit={true}
           onSelectionToggle={val => handleSelectionToggle(item, val)}
-        ></BackgroundCard>
+        />
       )}
       style={Style.f1}
     ></FlatList>

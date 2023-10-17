@@ -13,9 +13,9 @@ export default function BackgroundCard(props: BackgroundCardProps): JSX.Element 
   const toggleChosen = () => props.onSelectionToggle(!props.chosen);
 
   return (
-    <Card style={Style.bgCard}>
-      <Pressable style={Style.bgCardHeader} onPress={toggleOpen}>
-        <Text style={Style.bgName}>{props.background.name?.toUpperCase()}</Text>
+    <Card style={Style.detailsCard}>
+      <Pressable style={Style.detailsCardHeader} onPress={toggleOpen}>
+        <Text style={Style.detailsName}>{props.background.name?.toUpperCase()}</Text>
         {props.edit && (
           <Button
             icon={props.chosen ? 'check' : 'plus'}
@@ -28,7 +28,7 @@ export default function BackgroundCard(props: BackgroundCardProps): JSX.Element 
       </Pressable>
       {isOpen && <Divider />}
       {isOpen && (
-        <View style={Style.bgDetails}>
+        <View style={Style.detailsBody}>
           <Text>{props.background.description}</Text>
           <View style={{ ...Style.rowFlex, alignItems: 'flex-start', justifyContent: 'space-around' }}>
             <View style={{ ...Style.colFlex, gap: 6 }}>
@@ -50,7 +50,7 @@ export default function BackgroundCard(props: BackgroundCardProps): JSX.Element 
                   weight: 1,
                 })) ?? []
               }
-            ></RollTable>
+            />
             <RollTable
               tableId={`${props.background.name}-learning-table`}
               title="Learning"
@@ -60,7 +60,7 @@ export default function BackgroundCard(props: BackgroundCardProps): JSX.Element 
                   weight: 1,
                 })) ?? []
               }
-            ></RollTable>
+            />
           </View>
           <Button icon="chevron-up" onPress={() => setIsOpen(false)}>
             Collapse

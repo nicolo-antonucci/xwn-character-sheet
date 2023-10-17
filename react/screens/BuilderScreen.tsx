@@ -5,7 +5,7 @@ import { MatTopTabsScreenOpts, Style } from '../styles/StyleSheet';
 import BuilderAbilitiesScreen from './character-builder-screens/AbilitiesBuilderScreen';
 import BackgroundBuilderScreen from './character-builder-screens/BackgroundBuilderScreen';
 import BuilderOptionsScreen from './character-builder-screens/BuilderOptionsScreen';
-import ClassPickerScreen from './character-builder-screens/ClassPickerScreen';
+import ClassBuilderScreen from './character-builder-screens/ClassBuilderScreen';
 
 const Tab = createMaterialTopTabNavigator<CBStackParamList>();
 
@@ -26,7 +26,7 @@ export default function BuilderScreen(): JSX.Element {
         <Tab.Screen name="Options" component={BuilderOptionsScreen} />
         <Tab.Screen name="Abilities" component={BuilderAbilitiesScreen} />
         <Tab.Screen name="Background" component={BackgroundBuilderScreen} />
-        <Tab.Screen name="Class" component={ClassPickerScreen} />
+        <Tab.Screen name="Class" component={ClassBuilderScreen} />
       </Tab.Navigator>
     </BuilderContextProvider>
   );

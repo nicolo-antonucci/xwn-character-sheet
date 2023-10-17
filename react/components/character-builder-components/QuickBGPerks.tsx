@@ -40,7 +40,7 @@ export default function QuickBGPerks(): JSX.Element {
             }}
             type={SKILL_CHOICE.ANY_COMBAT}
             undoHandler={() => setModal(null)}
-          ></SelectSkill>
+          />
         </Modal>
       </Portal>
 

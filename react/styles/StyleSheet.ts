@@ -28,13 +28,13 @@ export const Style = StyleSheet.create({
     paddingVertical: 24,
     paddingHorizontal: 12,
   },
-  backgroundsContainer: {
+  builderScreensContainer: {
     height: '100%',
     gap: 24,
     paddingHorizontal: 12,
     paddingTop: 24,
   },
-  bgNavigatorContainer: {
+  builderNavigatorContainer: {
     height: '50%',
   },
   scoresContainer: {
@@ -57,24 +57,25 @@ export const Style = StyleSheet.create({
     paddingVertical: 24,
     width: '85%',
   },
-  bgCard: {
+  detailsCard: {
     margin: 12,
     paddingHorizontal: 12,
   },
-  bgCardHeader: {
+  detailsCardHeader: {
     paddingVertical: 12,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: 12,
   },
-  bgName: {
+  detailsName: {
     fontSize: 16,
     fontWeight: 'bold',
   },
-  bgDetails: {
+  detailsBody: {
     gap: 12,
-    paddingVertical: 12,
+    paddingTop: 12,
+    paddingBottom: 24,
   },
   modalOptBtnContainer: {
     alignItems: 'center',
@@ -113,6 +114,33 @@ export const Style = StyleSheet.create({
   },
   f1: {
     flex: 1,
+  },
+  tableHeader: {
+    backgroundColor: Theme.colors.primaryContainer,
+    borderWidth: 1,
+    borderColor: Theme.colors.onPrimaryContainer,
+    flexDirection: 'row',
+  },
+  tableHeaderTxt: {
+    padding: 6,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: Theme.colors.onPrimaryContainer,
+    borderColor: Theme.colors.onPrimaryContainer,
+  },
+  tableRow: {
+    flexDirection: 'row',
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: Theme.colors.onPrimaryContainer,
+  },
+  tableRowTxt: {
+    padding: 6,
+    fontSize: 12,
+    borderColor: Theme.colors.onPrimaryContainer,
+    textAlign: 'center',
   },
 });
 

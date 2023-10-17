@@ -1,0 +1,51 @@
+[
+  {
+    "id": 0,
+    "name": "Alert",
+    "description": "You are keenly aware of your surroundings and virtually impossible to take unaware.",
+    "lv1": {
+      "description": "Gain Notice as a bonus skill. You cannot be surprised, nor can others use the Execution Attack option on you. If the GM rolls initiative by sides, you can add a +1 bonus to your side’s initiative roll, though multiple Alert PCs don’t stack this bonus. If you roll initiative individually, you can roll it twice and take the better result.",
+      "perks": {
+        "skill": "Notice"
+      }
+    },
+    "lv2": {
+      "description": "You always act first in a combat round unless someone else involved is also this Alert."
+    }
+  },
+  {
+    "id": 1,
+    "name": "Armored Magic",
+    "description": "Usable only by Mage heroes who would otherwise be prevented from casting spells or using arts while armored, this Focus reflects special training in channeling magic through the hindering materials of conventional armor.",
+    "lv1": {
+      "description": "You can cast spells or use arts while wearing armor that has an Encumbrance value of no more than two. You can use a shield while casting, provided your other hand is empty for gesturing."
+    },
+    "lv2": {
+      "description": "You can cast spells while wearing armor of any Encumbrance. You’ve also learned to cast spells while both your hands are full, though not bound."
+    }
+  },
+  {
+    "id": 2,
+    "name": "Armsmaster",
+    "description": "You have an unusual competence with thrown weapons and melee attacks. This Focus’ benefits do not apply to unarmed attacks or non-thrown projectile weapons. This Focus’ bonuses also don’t stack with Deadeye or other Foci that add a skill’s level to your damage or Shock.",
+    "lv1": {
+      "description": "Gain Stab as a bonus skill. You can Ready a Stowed melee or thrown weapon as an Instant action. You may add your Stab skill level to a melee or thrown weapon’s damage roll or Shock damage, assuming it has any to begin with.",
+      "perks": { "skill": "Stab" }
+    },
+    "lv2": {
+      "description": "The Shock from your melee attacks always treats the target as if they have AC 10. Gain a +1 bonus to hit with all thrown or melee attacks."
+    },}
+    {
+      "id": 3,
+      "name": "Artisan",
+      "description": "You have remarkable gifts as a crafter and can often improvise techniques even in fields unrelated to your usual background. You are able to create mods for equipment even if you are not an Expert, as per the rules on page 56.",
+      "lv1": {
+        "description": "Gain Craft as a bonus skill. Your Craft skill is treated as one level higher, up to a maximum of 5, for purposes of crafting and maintaining mods. Mods you build require one fewer unit of arcane salvage, down to a minimum of one. Your Craft skill is applicable to any normal crafting profession’s work, allowing you to fashion their wares without penalty.",
+        "perks": { "skill": "Craft"}
+      },
+      "lv2": {
+        "description": "The first mod you add to an item requires no Maintenance and only half the silver piece cost usually required. This benefit is in addition to the benefits of installing a mod in masterwork gear you build. You automatically succeed at any attempt to build masterwork gear, and once per month you can reduce a created mod’s salvage cost by one further unit, down to a minimum of zero."
+      }
+    }
+  
+]
