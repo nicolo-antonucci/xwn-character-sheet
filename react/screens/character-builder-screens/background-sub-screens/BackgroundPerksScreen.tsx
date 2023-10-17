@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import backgrounds from '../../../../assets/rules/backgrounds.json';
+import backgrounds from '../../../../assets/rules/wwnBackgrounds.json';
 import ChooseBGPerks from '../../../components/character-builder-components/ChooseBGPerks';
 import QuickBGPerks from '../../../components/character-builder-components/QuickBGPerks';
 import { BGBenefitPickType, BGBenefitType, Background } from '../../../model/backgrounds';

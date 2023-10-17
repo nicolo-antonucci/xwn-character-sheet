@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Button, Modal, Portal, Text } from 'react-native-paper';
-import backgrounds from '../../../assets/rules/backgrounds.json';
+import backgrounds from '../../../assets/rules/wwnBackgrounds.json';
 import { Background } from '../../model/backgrounds';
 import { SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../model/skills';
 import { BuilderContext } from '../../store/context/builder-context';

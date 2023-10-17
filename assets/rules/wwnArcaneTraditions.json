@@ -1,0 +1,447 @@
+[
+  {
+    "id": 0,
+    "name": "High Mage",
+    "fullTable": {
+      "1": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 2
+      },
+      "2": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "3": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 4
+      },
+      "4": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 5,
+        "artsGained": 1
+      },
+      "5": {
+        "maxLevel": 3,
+        "spellsCast": 3,
+        "spellsPrepared": 6
+      },
+      "6": {
+        "maxLevel": 3,
+        "spellsCast": 3,
+        "spellsPrepared": 7,
+        "artsGained": 1
+      },
+      "7": {
+        "maxLevel": 4,
+        "spellsCast": 4,
+        "spellsPrepared": 8
+      },
+      "8": {
+        "maxLevel": 4,
+        "spellsCast": 4,
+        "spellsPrepared": 9,
+        "artsGained": 1
+      },
+      "9": {
+        "maxLevel": 5,
+        "spellsCast": 5,
+        "spellsPrepared": 10
+      },
+      "10": {
+        "maxLevel": 5,
+        "spellsCast": 6,
+        "spellsPrepared": 12,
+        "artsGained": 1
+      }
+    },
+    "partialTable": {
+      "1": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 2,
+        "artsGained": 1
+      },
+      "2": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "3": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "4": {
+        "maxLevel": 1,
+        "spellsCast": 2,
+        "spellsPrepared": 4
+      },
+      "5": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 5
+      },
+      "6": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 6,
+        "artsGained": 1
+      },
+      "7": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 7
+      },
+      "8": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 7
+      },
+      "9": {
+        "maxLevel": 3,
+        "spellsCast": 4,
+        "spellsPrepared": 8,
+        "artsGained": 1
+      },
+      "10": {
+        "maxLevel": 3,
+        "spellsCast": 4,
+        "spellsPrepared": 9
+      }
+    }
+  },
+  {
+    "id": 1,
+    "name": "Elementalist",
+    "fullTable": {
+      "1": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "2": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "3": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 4
+      },
+      "4": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 5,
+        "artsGained": 1
+      },
+      "5": {
+        "maxLevel": 3,
+        "spellsCast": 3,
+        "spellsPrepared": 6
+      },
+      "6": {
+        "maxLevel": 3,
+        "spellsCast": 3,
+        "spellsPrepared": 7,
+        "artsGained": 1
+      },
+      "7": {
+        "maxLevel": 4,
+        "spellsCast": 4,
+        "spellsPrepared": 8
+      },
+      "8": {
+        "maxLevel": 4,
+        "spellsCast": 4,
+        "spellsPrepared": 9,
+        "artsGained": 1
+      },
+      "9": {
+        "maxLevel": 5,
+        "spellsCast": 5,
+        "spellsPrepared": 10
+      },
+      "10": {
+        "maxLevel": 5,
+        "spellsCast": 6,
+        "spellsPrepared": 12,
+        "artsGained": 1
+      }
+    },
+    "partialTable": {
+      "1": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 2,
+        "artsGained": 1
+      },
+      "2": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3
+      },
+      "3": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "4": {
+        "maxLevel": 1,
+        "spellsCast": 2,
+        "spellsPrepared": 4
+      },
+      "5": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 5
+      },
+      "6": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 6,
+        "artsGained": 1
+      },
+      "7": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 7
+      },
+      "8": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 7
+      },
+      "9": {
+        "maxLevel": 3,
+        "spellsCast": 4,
+        "spellsPrepared": 8,
+        "artsGained": 1
+      },
+      "10": {
+        "maxLevel": 3,
+        "spellsCast": 4,
+        "spellsPrepared": 9
+      }
+    }
+  },
+  {
+    "id": 2,
+    "name": "Healer",
+    "partialTable": {
+      "1": {
+        "artsGained": 1
+      },
+      "2": {
+        "artsGained": 1
+      },
+      "3": {},
+      "4": {
+        "artsGained": 1
+      },
+      "5": {
+        "artsGained": 1
+      },
+      "6": {
+        "artsGained": 1
+      },
+      "7": {},
+      "8": {
+        "artsGained": 1
+      },
+      "9": {},
+      "10": {
+        "artsGained": 1
+      }
+    }
+  },
+  {
+    "id": 3,
+    "name": "Necromancer",
+    "fullTable": {
+      "1": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "2": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "3": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 4
+      },
+      "4": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 5,
+        "artsGained": 1
+      },
+      "5": {
+        "maxLevel": 3,
+        "spellsCast": 3,
+        "spellsPrepared": 6
+      },
+      "6": {
+        "maxLevel": 3,
+        "spellsCast": 3,
+        "spellsPrepared": 7,
+        "artsGained": 1
+      },
+      "7": {
+        "maxLevel": 4,
+        "spellsCast": 4,
+        "spellsPrepared": 8
+      },
+      "8": {
+        "maxLevel": 4,
+        "spellsCast": 4,
+        "spellsPrepared": 9,
+        "artsGained": 1
+      },
+      "9": {
+        "maxLevel": 5,
+        "spellsCast": 5,
+        "spellsPrepared": 10
+      },
+      "10": {
+        "maxLevel": 5,
+        "spellsCast": 6,
+        "spellsPrepared": 12,
+        "artsGained": 1
+      }
+    },
+    "partialTable": {
+      "1": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 2,
+        "artsGained": 1
+      },
+      "2": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3
+      },
+      "3": {
+        "maxLevel": 1,
+        "spellsCast": 1,
+        "spellsPrepared": 3,
+        "artsGained": 1
+      },
+      "4": {
+        "maxLevel": 1,
+        "spellsCast": 2,
+        "spellsPrepared": 4
+      },
+      "5": {
+        "maxLevel": 2,
+        "spellsCast": 2,
+        "spellsPrepared": 5
+      },
+      "6": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 6,
+        "artsGained": 1
+      },
+      "7": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 7
+      },
+      "8": {
+        "maxLevel": 2,
+        "spellsCast": 3,
+        "spellsPrepared": 7
+      },
+      "9": {
+        "maxLevel": 3,
+        "spellsCast": 4,
+        "spellsPrepared": 8,
+        "artsGained": 1
+      },
+      "10": {
+        "maxLevel": 3,
+        "spellsCast": 4,
+        "spellsPrepared": 9
+      }
+    }
+  },
+
+  {
+    "id": 4,
+    "name": "Vowed",
+    "partialTable": {
+      "1": {
+        "artsGained": 1,
+        "punchHitBonus": 0,
+        "punchDamage": "1d6",
+        "punchShock": { "dmg": 1, "ac": 15 }
+      },
+      "2": {
+        "artsGained": 1,
+        "punchHitBonus": 1,
+        "punchDamage": "1d6",
+        "punchShock": { "dmg": 2, "ac": 15 }
+      },
+      "3": { "punchHitBonus": 1, "punchDamage": "1d8", "punchShock": { "dmg": 2, "ac": 15 } },
+      "4": {
+        "artsGained": 1,
+        "punchHitBonus": 2,
+        "punchDamage": "1d8",
+        "punchShock": { "dmg": 2, "ac": 15 }
+      },
+      "5": {
+        "artsGained": 1,
+        "punchHitBonus": 2,
+        "punchDamage": "1d10",
+        "punchShock": { "dmg": 2, "ac": 15 }
+      },
+      "6": {
+        "artsGained": 1,
+        "punchHitBonus": 3,
+        "punchDamage": "1d10",
+        "punchShock": { "dmg": 3, "ac": 15 }
+      },
+      "7": {
+        "punchHitBonus": 3,
+        "punchDamage": "1d10+1",
+        "punchShock": { "dmg": 3, "ac": 15 }
+      },
+      "8": {
+        "artsGained": 1,
+        "punchHitBonus": 4,
+        "punchDamage": "1d10+1",
+        "punchShock": { "dmg": 3, "ac": 15 }
+      },
+      "9": {
+        "punchHitBonus": 4,
+        "punchDamage": "1d10+2",
+        "punchShock": { "dmg": 4, "ac": 15 }
+      },
+      "10": {
+        "artsGained": 1,
+        "punchHitBonus": 5,
+        "punchDamage": "1d10+3",
+        "punchShock": { "dmg": 4, "ac": 15 }
+      }
+    }
+  }
+]

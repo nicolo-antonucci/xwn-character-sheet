@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Button, Card, Modal, Portal, Text } from 'react-native-paper';
-import backgrounds from '../../../assets/rules/backgrounds.json';
+import backgrounds from '../../../assets/rules/wwnBackgrounds.json';
 import { BGBenefit, BGBenefitPickType, BGChoiceBenefit } from '../../model/backgrounds';
 import { SCORE } from '../../model/character';
 import { SWNSKILLS, WWNSKILLS } from '../../model/skills';

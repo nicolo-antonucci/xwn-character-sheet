@@ -16,9 +16,9 @@ export default function ClassBuilderScreen(): JSX.Element {
   return (
     <SafeAreaView style={Style.safeAreaContainer}>
       <StatusBar barStyle={'light-content'} />
-      <View style={{ ...Style.builderScreensContainer, paddingHorizontal: 0 }}>
-        <Text style={Style.title}>Class</Text>
-        <Text style={Style.subHeading}>Choose a character class and its perks</Text>
+      <View style={Style.builderScreensContainer}>
+        <Text style={{ ...Style.title, paddingTop: 18 }}>Class</Text>
+        <Text style={Style.subHeading}>Choose a class and its perks</Text>
         <Tab.Navigator>
           <Tab.Screen
             component={ClassPickerScreen}
@@ -30,9 +30,9 @@ export default function ClassBuilderScreen(): JSX.Element {
           ></Tab.Screen>
           <Tab.Screen
             component={ClassPerksScreen}
-            name="Perks"
+            name="Foci & Traditions"
             options={{
-              tabBarLabel: 'Perks',
+              tabBarLabel: 'Foci & Traditions',
               tabBarIcon: ({ color }) => <FontAwesome6 name="check-double" color={color} size={20} />,
             }}
             listeners={{

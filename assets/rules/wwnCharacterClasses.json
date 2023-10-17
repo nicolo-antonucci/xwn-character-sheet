@@ -15,12 +15,12 @@
       "9": 4,
       "10": 5
     },
-    "levelOneFoci": ["Any Non-Combat"],
+    "levelOneFoci": ["Non-Combat Focus"],
     "perks": [
       {
         "name": "Masterful Expertise",
         "description": [
-          "Once per scene, the Expert may reroll any non-combat skill check as an Instant action. This allows the Expert to make a roll and then immediately use this ability if the resulting total isn’t good enough to succeed. In cases where it matters, the better of the two rolls may be used."
+          "Once per scene, the Expert may reroll Non-Combat Focus skill check as an Instant action. This allows the Expert to make a roll and then immediately use this ability if the resulting total isn’t good enough to succeed. In cases where it matters, the better of the two rolls may be used."
         ]
       },
       {
@@ -50,7 +50,7 @@
     "levelOneFoci": [],
     "perks": [
       {
-        "name": "Arcane tradition",
+        "name": "Arcane Tradition",
         "description": [
           "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
         ]
@@ -73,7 +73,7 @@
       "9": 9,
       "10": 10
     },
-    "levelOneFoci": ["Any Combat"],
+    "levelOneFoci": ["Combat Focus"],
     "perks": [
       {
         "name": "Killing Blow",
@@ -108,7 +108,7 @@
       "9": 6,
       "10": 7
     },
-    "levelOneFoci": ["Any Combat", "Any Non-Combat"],
+    "levelOneFoci": ["Combat Focus", "Non-Combat Focus"],
     "perks": [
       {
         "name": "Quick Learner",
@@ -134,7 +134,7 @@
       "9": 4,
       "10": 5
     },
-    "levelOneFoci": ["Any Non-Combat"],
+    "levelOneFoci": ["Non-Combat Focus"],
     "perks": [
       {
         "name": "Quick Learner",
@@ -143,7 +143,7 @@
         ]
       },
       {
-        "name": "Arcane tradition",
+        "name": "Arcane Tradition",
         "description": [
           "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
         ]
@@ -152,7 +152,7 @@
   },
   {
     "id": 5,
-    "name": "Partial Expert/Partial Mage",
+    "name": "Partial Mage/Partial Warrior",
     "hitDiceModifier": 2,
     "bab": {
       "1": 1,
@@ -166,10 +166,10 @@
       "9": 6,
       "10": 7
     },
-    "levelOneFoci": ["Any Combat"],
+    "levelOneFoci": ["Combat Focus"],
     "perks": [
       {
-        "name": "Arcane tradition",
+        "name": "Arcane Tradition",
         "description": [
           "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
         ]
@@ -195,13 +195,13 @@
     "levelOneFoci": [],
     "perks": [
       {
-        "name": "Arcane tradition",
+        "name": "Arcane Tradition",
         "description": [
           "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
         ]
       },
       {
-        "name": "Arcane tradition",
+        "name": "Arcane Tradition",
         "description": [
           "The Mage may pick one magical tradition to represent their occult powers, as listed in the Magic chapter starting on page 60. This tradition may give them a number of additional benefits and restrictions."
         ]

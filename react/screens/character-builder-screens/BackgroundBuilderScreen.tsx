@@ -16,8 +16,8 @@ export default function BackgroundBuilderScreen(): JSX.Element {
   return (
     <SafeAreaView style={Style.safeAreaContainer}>
       <StatusBar barStyle={'light-content'} />
-      <View style={{ ...Style.builderScreensContainer, paddingHorizontal: 0 }}>
-        <Text style={Style.title}>Background</Text>
+      <View style={Style.builderScreensContainer}>
+        <Text style={{ ...Style.title, paddingTop: 18 }}>Background</Text>
         <Text style={Style.subHeading}>Choose a background and its perks</Text>
         <Tab.Navigator>
           <Tab.Screen
