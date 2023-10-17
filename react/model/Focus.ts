@@ -2,7 +2,9 @@ import { PSYSKILLS, SWNSKILLS, WWNSKILLS } from './skills';
 
 export interface Benefit {
   description: string;
-  perks?: { skill: SWNSKILLS | WWNSKILLS | PSYSKILLS } | unknown;
+  skill?: SWNSKILLS | WWNSKILLS | PSYSKILLS;
+  flag?: string;
+  setFlag?: string;
 }
 
 export interface Focus {

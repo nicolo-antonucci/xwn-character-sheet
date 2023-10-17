@@ -5,12 +5,12 @@
     "description": "You are keenly aware of your surroundings and virtually impossible to take unaware.",
     "lv1": {
       "description": "Gain Notice as a bonus skill. You cannot be surprised, nor can others use the Execution Attack option on you. If the GM rolls initiative by sides, you can add a +1 bonus to your side’s initiative roll, though multiple Alert PCs don’t stack this bonus. If you roll initiative individually, you can roll it twice and take the better result.",
-      "perks": {
-        "skill": "Notice"
-      }
+      "skill": "Notice",
+      "flags": "alert-lv1"
     },
     "lv2": {
-      "description": "You always act first in a combat round unless someone else involved is also this Alert."
+      "description": "You always act first in a combat round unless someone else involved is also this Alert.",
+      "flag": "alert-lv2"
     }
   },
   {
@@ -18,10 +18,12 @@
     "name": "Armored Magic",
     "description": "Usable only by Mage heroes who would otherwise be prevented from casting spells or using arts while armored, this Focus reflects special training in channeling magic through the hindering materials of conventional armor.",
     "lv1": {
-      "description": "You can cast spells or use arts while wearing armor that has an Encumbrance value of no more than two. You can use a shield while casting, provided your other hand is empty for gesturing."
+      "description": "You can cast spells or use arts while wearing armor that has an Encumbrance value of no more than two. You can use a shield while casting, provided your other hand is empty for gesturing.",
+      "flag": "armored-magic-lv1"
     },
     "lv2": {
-      "description": "You can cast spells while wearing armor of any Encumbrance. You’ve also learned to cast spells while both your hands are full, though not bound."
+      "description": "You can cast spells while wearing armor of any Encumbrance. You’ve also learned to cast spells while both your hands are full, though not bound.",
+      "flag": "armored-magic-lv2"
     }
   },
   {
@@ -30,22 +32,181 @@
     "description": "You have an unusual competence with thrown weapons and melee attacks. This Focus’ benefits do not apply to unarmed attacks or non-thrown projectile weapons. This Focus’ bonuses also don’t stack with Deadeye or other Foci that add a skill’s level to your damage or Shock.",
     "lv1": {
       "description": "Gain Stab as a bonus skill. You can Ready a Stowed melee or thrown weapon as an Instant action. You may add your Stab skill level to a melee or thrown weapon’s damage roll or Shock damage, assuming it has any to begin with.",
-      "perks": { "skill": "Stab" }
+      "skill": "Stab",
+      "flag": "armsmaster-lv1"
     },
     "lv2": {
-      "description": "The Shock from your melee attacks always treats the target as if they have AC 10. Gain a +1 bonus to hit with all thrown or melee attacks."
-    },}
-    {
-      "id": 3,
-      "name": "Artisan",
-      "description": "You have remarkable gifts as a crafter and can often improvise techniques even in fields unrelated to your usual background. You are able to create mods for equipment even if you are not an Expert, as per the rules on page 56.",
-      "lv1": {
-        "description": "Gain Craft as a bonus skill. Your Craft skill is treated as one level higher, up to a maximum of 5, for purposes of crafting and maintaining mods. Mods you build require one fewer unit of arcane salvage, down to a minimum of one. Your Craft skill is applicable to any normal crafting profession’s work, allowing you to fashion their wares without penalty.",
-        "perks": { "skill": "Craft"}
-      },
-      "lv2": {
-        "description": "The first mod you add to an item requires no Maintenance and only half the silver piece cost usually required. This benefit is in addition to the benefits of installing a mod in masterwork gear you build. You automatically succeed at any attempt to build masterwork gear, and once per month you can reduce a created mod’s salvage cost by one further unit, down to a minimum of zero."
-      }
+      "description": "The Shock from your melee attacks always treats the target as if they have AC 10. Gain a +1 bonus to hit with all thrown or melee attacks.",
+      "flag": "armsmaster-lv2"
     }
-  
+  },
+  {
+    "id": 3,
+    "name": "Artisan",
+    "description": "You have remarkable gifts as a crafter and can often improvise techniques even in fields unrelated to your usual background. You are able to create mods for equipment even if you are not an Expert, as per the rules on page 56.",
+    "lv1": {
+      "description": "Gain Craft as a bonus skill. Your Craft skill is treated as one level higher, up to a maximum of 5, for purposes of crafting and maintaining mods. Mods you build require one fewer unit of arcane salvage, down to a minimum of one. Your Craft skill is applicable to any normal crafting profession’s work, allowing you to fashion their wares without penalty.",
+      "skill": "Craft",
+      "flag": "artisan-lv1"
+    },
+    "lv2": {
+      "description": "The first mod you add to an item requires no Maintenance and only half the silver piece cost usually required. This benefit is in addition to the benefits of installing a mod in masterwork gear you build. You automatically succeed at any attempt to build masterwork gear, and once per month you can reduce a created mod’s salvage cost by one further unit, down to a minimum of zero."
+    }
+  },
+  {
+    "id": 4,
+    "name": "Assassin",
+    "description": "You are practiced at sudden murder, and have certain advantages in carrying out an Execution Attack as described in the rules on page 44.",
+    "lv1": {
+      "description": "Gain Sneak as a bonus skill. You can conceal an object no larger than a knife from anything less invasive than a strip search. You can draw or produce this object as an On Turn action, and your point-blank thrown or melee attacks made during a surprise round with it cannot miss the target.",
+      "skill": "Sneak"
+    },
+    "lv2": {
+      "description": "You can take a Move action on the same round as you make an Execution Attack, closing rapidly with a target before you attack. You may split this Move action when making an Execution Attack, taking part of it before you murder your target and part of it afterwards. This movement happens too quickly to alert a victim or to be hindered by bodyguards."
+    }
+  },
+  {
+    "id": 5,
+    "name": "Authority",
+    "description": "You have an uncanny kind of charisma about you, one that makes others instinctively follow your instructions and further your causes. At level 1, this is a knack of charm and personal magnetism, while level 2 might suggest latent magical powers or an ancient bloodline of sorcerous rule. Where this Focus refers to followers, it means NPCs who have voluntarily chosen to be in your service. PCs never count as followers.",
+    "lv1": {
+      "description": "Gain Lead as a bonus skill. Once per day, you can make a request from an NPC who is not openly hostile to you, rolling a Cha/Lead skill check at a difficulty of the NPC’s Morale score. If you succeed, they will comply with the request, provided it is not significantly harmful or extremely uncharacteristic.",
+      "skill": "Lead"
+    },
+    "lv2": {
+      "description": "Those who follow you are fired with confidence. Any NPC being directly led by you gains a Morale and hit roll bonus equal to your Lead skill and a +1 bonus on all skill checks. Your followers and henchmen will not act against your interests unless under extreme pressure."
+    }
+  },
+  {
+    "id": 6,
+    "name": "Close Combatant",
+    "description": "You’ve had all too much practice at close-in fighting and sdesperate struggles with drawn blades. You’re extremely skilled at avoiding injury in melee combat, and at level 2 you can dodge through a melee scrum without fear of being knifed in passing.",
+    "lv1": {
+      "description": "Gain any combat skill as a bonus skill. You can use knife-sized thrown weapons in melee without suffering penalties for the proximity of melee attackers. You ignore Shock damage from melee assailants, even if you’re unarmored at the time, but invoking this benefit disrupts any spellcasting you might do that round due to the need for violently active evasion.",
+      "skill": "Any Combat"
+    },
+    "lv2": {
+      "description": "The Shock damage from your melee attacks treats all targets as if they were AC 10. The Fighting Withdrawal combat action is treated as an On Turn action for you and can be performed freely.",
+      "flag": "close-combatant-lv1"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Connected",
+    "description": "You’re remarkably gifted at making friends and forging ties with the people around you. Wherever you go, you always seem to know somebody useful to your ends.",
+    "lv1": {
+      "description": "Gain Connect as a bonus skill. If you’ve spent at least a week in a not-entirely-hostile location, you’ll have built a web of contacts willing to do favors for you that are no more than mildly illegal. You can call on one favor per game day and the GM decides how far they’ll go for you.",
+      "skill": "Connect"
+    },
+    "lv2": {
+      "description": "Once per game session, if it’s not entirely implausible, you meet someone you know who is willing to do modest favors for you. You can decide when and where you want to meet this person, but the GM decides who they are and what they can do for you."
+    }
+  },
+  {
+    "id": 8,
+    "name": "Cultured",
+    "description": "Through wide travel, careful observation, or extensive study, you’ve obtained a wide experience of the cultures of your region and an ability to navigate their customs, laws, and languages. You know what to do and say to impress others with the reasonableness of your wishes.",
+    "lv1": {
+      "description": "Gain Connect as a bonus skill. You can fluently speak all the common languages of your native region and convey at least basic information in the uncommon or esoteric ones. You can learn a new language with only a week’s practice with a native speaker. Once per game day, your polished ways automatically gain a minor favor from an NPC that would not put them to significant expense or risk, assuming the NPC isn’t hostile to you.",
+      "skill": "Connect"
+    },
+    "lv2": {
+      "description": "Once per game session, reroll a failed social skill check as you use your cultural knowledge to push your interlocutor toward the desired result."
+    }
+  },
+  {
+    "id": 9,
+    "name": "Die Hard",
+    "description": "You are surprisingly hard to kill. You can survive injuries or bear up under stresses that would incapacitate a less determined hero.",
+    "lv1": {
+      "description": "You gain an extra 2 maximum hit points per level. This bonus applies retroactively if you take this Focus after first level. You automatically stabilize if Mortally Wounded, provided you have not been incinerated, dismembered, or otherwise torn apart.",
+      "flag": "diehard-lv1"
+    },
+    "lv2": {
+      "description": "The first time each day that you are reduced to zero hit points by an injury, you instead survive with one hit point remaining. This ability can’t save you from large-scale, instantly-lethal trauma."
+    }
+  },
+  {
+    "id": 10,
+    "name": "Deadeye",
+    "description": "You have a gift with ranged weapons. While this talent most commonly applies to bows, it is also applicable to thrown weapons or other ranged weapons that can be used with the Shoot skill. For thrown weapons, you can’t use the benefits of the Armsmaster Focus at the same time as Deadeye.",
+    "lv1": {
+      "description": "Gain Shoot as a bonus skill. You can Ready a Stowed ranged weapon as an Instant action. You may use a bow or two-handed ranged weapon even when an enemy is within melee range, albeit at a -4 hit penalty. You may add your Shoot skill level to a ranged weapon’s damage roll.",
+      "skill": "Shoot",
+      "flag": "deadeye-lv1"
+    },
+    "lv2": {
+      "description": "You can reload crossbows or other slow-loading weapons as an On Turn action, provided they don’t take more than a round to reload. You can use ranged weapons of any size in melee without penalty. Once per scene, as an On Turn action when target shooting at an inanimate, non-creature target, you automatically hit unless you roll a 2 on your Shoot skill check or the shot is physically impossible."
+    }
+  },
+  {
+    "id": 11,
+    "name": "Dealmaker",
+    "description": "You have an uncanny ability to sniff out traders and find good deals, licit or otherwise. Even those who might not normally be disposed to bargain with you can sometimes be persuaded to pause and negotiate, if you have something they want.",
+    "lv1": {
+      "description": "Gain Trade as a bonus skill. With a half hour of effort you can find a buyer or seller for any good or service that can be traded in the community, legal or otherwise. Finding a marginally possible service, like an assassin willing and able to target a king, or some specific precious ancient artifact, may require an adventure if the GM allows it at all.",
+      "skill": "Trade"
+    },
+    "lv2": {
+      "description": "Once per session, target a sentient who is not just then trying to kill you or your allies and make a request of it that it can comprehend. If it’s at all plausible for it to make such terms, it will do so for a price or favor it thinks you can grant, though the price for significant favors might be dear."
+    }
+  },
+  {
+    "id": 12,
+    "name": "Developed Attribute",
+    "description": "Your hero has a remarkable degree of development to one or more of their attributes. This may be derived from an eldritch bloodline, native brilliance, or sheer, stubborn determination. This Focus cannot be taken by heroes with the Mage or Partial Mage classes.",
+    "lv1": {
+      "description": "Choose an attribute; its modifier is increased by +1, up to a maximum of +3. The actual score does not change, but the modifier increases, and may increase again if later advancement improves the attribute enough. You can choose this Focus more than once to improve different attributes.",
+      "setFlag": "developed-attr"
+    }
+  },
+  {
+    "id": 13,
+    "name": "Diplomatic Grace",
+    "description": "Your skill at personal negotiations is enormous and uncanny. Some might even think it supernatural in nature.",
+    "lv1": {
+      "description": "Gain Convince as a bonus skill. You speak all the languages common to your region of the world and can learn new ones to a workable level in a week, becoming fluent in a month. Reroll 1s on any skill check dice related to negotiation or diplomacy.",
+      "skill": "Convince",
+      "flag": "diplomatic-grace-lv1"
+    },
+    "lv2": {
+      "description": "Once per day, silently consecrate a bargain; the target must make a Mental save to break the deal unless their life or something they love as much is imperiled by it. Most NPCs won’t even try to break it. The deal must be for something specific and time-limited, and not an open-ended bargain."
+    }
+  },
+  {
+    "id": 14,
+    "name": "Gifted Chirurgeon",
+    "description": "You have an unusual gift for saving Mortally Wounded allies and quickening the natural recovery of the wounded in your care.",
+    "lv1": {
+      "description": "Gain Heal as a bonus skill. You may attempt to stabilize one Mortally Wounded adjacent person per round as an On Turn action. When rolling Heal skill checks, roll 3d6 and drop the lowest die. You heal twice as many hit points as usual when applying first aid after a battle, as described on page 48.",
+      "skill": "Heal"
+    },
+    "lv2": {
+      "description": "Your curative gifts count as magical healing. You can heal 1d6+Heal skill in damage to an adjacent wounded ally as a Main Action, potentially reviving them without any lingering Frailty. Each such application of healing adds 1 System Strain to the target, and the gift cannot be used on targets already at their maximum System Strain."
+    }
+  },
+  {
+    "id": 15,
+    "name": "Henchkeeper",
+    "description": "You have a distinct knack for picking up lost souls who willingly do your bidding. You might induce them with promises of money, power, excitement, sex, or some other prize that you may or may not eventually grant. A henchman obtained with this Focus will serve in loyal fashion until clearly betrayed or placed in unacceptable danger. Henchmen are not “important” people in their society, and are usually marginal sorts, outcasts, the desperate, or other persons with few options. You can use more conventional pay or inducements to acquire additional henchmen, but these extra hirelings are no more loyal or competent than your pay and treatment can purchase.",
+    "lv1": {
+      "description": "Gain Lead as a bonus skill. You can acquire henchmen within 24 hours of arriving in a community, assuming anyone is suitable hench material. These henchmen will not fight except to save their own lives, but will escort you on adventures and risk great danger to help you. Most henchmen from a civilized society will be treated as Peaceful Humans from the bestiary section of the book. You can have one henchmen at a time for every three character levels you have, rounded up. You can release henchmen with no hard feelings at any plausible time and pick them back up later should you be without a current henchman.",
+      "skill": "Lead"
+    },
+    "lv2": {
+      "description": "Your henchmen are remarkably loyal and determined, and will fight for you against anything but clearly overwhelming odds. Whether through natural competence or their devotion to you, they’re treated as Veteran Soldier from the bestiary section. You can make faithful henchmen out of skilled and highly-capable NPCs, but this requires that you actually have done them some favor or help that would reasonably earn such fierce loyalty."
+    }
+  },
+  {
+    "id": 16,
+    "name": "Impervious Defense",
+    "description": "Whether through uncanny reflexes, remarkable luck, supernatural heritage, or magical talent, you have natural defenses equivalent to high-quality armor. The benefits of this Focus don’t stack with armor, though Dexterity or shield modifiers apply.",
+    "lv1": {
+      "description": "",
+      "skill": ""
+    },
+    "lv2": {
+      "description": ""
+    }
+  }
 ]

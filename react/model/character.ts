@@ -38,6 +38,7 @@ export class Character {
   foci: Focus[];
   characterClass: CharacterClass | null;
   level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = 1;
+  flags: string[] = [];
 
   constructor() {
     this.id = generateId();
