@@ -109,7 +109,7 @@ export default function ArrayAbilitiesSetup(): JSX.Element {
               style={Style.optionBtn}
             >
               {val}
-              {getScoreAt(+val) && `: ${getScoreAt(+val)?.toUpperCase()}`}
+              {getScoreAt(+val) ? `: ${getScoreAt(+val)?.toUpperCase()}` : null}
             </Button>
           ))}
       </View>

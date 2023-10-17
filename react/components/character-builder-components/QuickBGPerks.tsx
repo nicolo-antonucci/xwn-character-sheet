@@ -53,15 +53,15 @@ export default function QuickBGPerks(): JSX.Element {
                 <Text style={{ fontWeight: 'bold' }}>Skill: </Text>
                 <Text>{qp}</Text>
               </View>
-              {qp === SKILL_CHOICE.ANY_COMBAT && choices[i] && (
+              {qp === SKILL_CHOICE.ANY_COMBAT && choices[i] ? (
                 <View style={{ flexDirection: 'row' }}>
                   <Text style={{ fontWeight: 'bold' }}>Selected: </Text>
                   <Text>{choices[i]}</Text>
                 </View>
-              )}
-              {qp === SKILL_CHOICE.ANY_COMBAT && (
+              ) : null}
+              {qp === SKILL_CHOICE.ANY_COMBAT ? (
                 <Button onPress={() => setModal(i)}>{choices[i] ? 'Change' : 'Choose'}</Button>
-              )}
+              ) : null}
             </View>
           ))}
       </View>

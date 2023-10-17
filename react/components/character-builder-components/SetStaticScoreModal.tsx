@@ -1,8 +1,8 @@
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
+import { sortAbilityScores } from '../../commons/Utils';
 import { AbilityScores, SCORE } from '../../model/character';
 import { Style } from '../../styles/StyleSheet';
-import { sortAbilityScores } from '../../commons/Utils';
 
 export default function SetStaticScoreModal(props: SetStaticScoreModalProps): JSX.Element {
   return (
@@ -19,7 +19,7 @@ export default function SetStaticScoreModal(props: SetStaticScoreModalProps): JS
               style={Style.optionBtn}
             >
               {s.toUpperCase()}
-              {props.scores[s as keyof AbilityScores] && ` (${props.scores[s as keyof AbilityScores]})`}
+              {props.scores[s as keyof AbilityScores] ? ` (${props.scores[s as keyof AbilityScores]})` : null}
             </Button>
           ))}
       </View>

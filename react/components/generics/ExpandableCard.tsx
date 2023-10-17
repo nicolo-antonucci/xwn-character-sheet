@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
-import { Focus } from '../../model/Focus';
+import { Focus } from '../../model/focus';
 import { Background } from '../../model/backgrounds';
 import { ArcaneTradition, CharacterClass } from '../../model/characterClass';
 import { Style } from '../../styles/StyleSheet';
@@ -36,23 +36,23 @@ export default function ExpandableCard(props: ExpandableCardProps): JSX.Element 
         <Text style={Style.detailsName}>
           {props.type === 'tradition'
             ? (props.element as ArcaneTradition)
-            : (props.element as Background | Focus | CharacterClass).name ?? ''}
+            : (props.element as Background | Focus | CharacterClass).name}
         </Text>
-        {props.edit && (
+        {props.selectable ? (
           <Button mode={props.chosen ? 'contained' : 'outlined'} onPress={() => props.onSelection?.(props.element)}>
             {props.chosen ? 'CHOSEN' : 'CHOOSE'}
           </Button>
-        )}
+        ) : null}
       </Pressable>
 
-      {isOpen && (
+      {isOpen ? (
         <View style={{ ...Style.colFlex, ...Style.detailsBody }}>
           {getDetailsTemplate()}
           <Button icon="chevron-up" onPress={() => setIsOpen(false)} style={{ margin: 0 }}>
             Collapse
           </Button>
         </View>
-      )}
+      ) : null}
     </Card>
   );
 }
@@ -60,7 +60,7 @@ export default function ExpandableCard(props: ExpandableCardProps): JSX.Element 
 export interface ExpandableCardProps {
   element: Background | Focus | CharacterClass | ArcaneTradition;
   type: 'bg' | 'focus' | 'charClass' | 'tradition';
-  edit?: boolean;
+  selectable?: boolean;
   chosen?: boolean;
   onSelection?: (value: Background | Focus | CharacterClass | ArcaneTradition) => void;
 }

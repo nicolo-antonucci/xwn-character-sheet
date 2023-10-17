@@ -13,7 +13,7 @@ export default function SelectSkill(props: SelectSkillProps): JSX.Element {
     <View style={Style.modal}>
       <Text style={Style.title}>Select a skill {props.type}</Text>
 
-      {props.type === SKILL_CHOICE.ANY_COMBAT && (
+      {props.type === SKILL_CHOICE.ANY_COMBAT ? (
         <View style={Style.modalOptBtnContainer}>
           {[BASESKILLS.PUNCH, BASESKILLS.SHOOT, BASESKILLS.STAB].map(k => (
             <Button
@@ -26,9 +26,9 @@ export default function SelectSkill(props: SelectSkillProps): JSX.Element {
             </Button>
           ))}
         </View>
-      )}
+      ) : null}
 
-      {builderCtx?.character.ruleset && props.type === SKILL_CHOICE.ANY_NON_COMBAT && (
+      {builderCtx?.character.ruleset && props.type === SKILL_CHOICE.ANY_NON_COMBAT ? (
         <View style={Style.modalOptBtnContainer}>
           {Object.values(builderCtx.character.ruleset === RULESET.SWN ? SWNSkills : WWNSkills)
             .filter(k => !([BASESKILLS.PUNCH, BASESKILLS.SHOOT, BASESKILLS.STAB] as string[]).includes(k))
@@ -43,9 +43,9 @@ export default function SelectSkill(props: SelectSkillProps): JSX.Element {
               </Button>
             ))}
         </View>
-      )}
+      ) : null}
 
-      {builderCtx?.character.ruleset && props.type === SKILL_CHOICE.ANY_SKILL && (
+      {builderCtx?.character.ruleset && props.type === SKILL_CHOICE.ANY_SKILL ? (
         <View style={Style.modalOptBtnContainer}>
           {Object.values(builderCtx.character.ruleset === RULESET.SWN ? SWNSkills : WWNSkills).map(k => (
             <Button
@@ -58,7 +58,7 @@ export default function SelectSkill(props: SelectSkillProps): JSX.Element {
             </Button>
           ))}
         </View>
-      )}
+      ) : null}
 
       <Button mode="contained" onPress={props.undoHandler}>
         Cancel

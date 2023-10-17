@@ -1,38 +1,33 @@
 import { useCallback } from 'react';
 import { FlatList, View } from 'react-native';
 import { Text } from 'react-native-paper';
-import traditions from '../../../assets/rules/wwnArcaneTraditions.json';
-import { ArcaneTradition, ArcaneTraditionTable } from '../../model/characterClass';
+import { ArcaneTradition } from '../../model/characterClass';
 import { Style } from '../../styles/StyleSheet';
 import ExpandableCard from '../generics/ExpandableCard';
 
 export default function SelectTradition(props: SelectTraditionProps): JSX.Element {
   const listItem = useCallback(
-    ({ item }: { item: ArcaneTraditionTable }) => (
+    ({ item }: { item: ArcaneTradition }) => (
       <ExpandableCard
-        chosen={props.selectedTradition === item.name}
-        edit={true}
+        chosen={props.selectedTradition === item}
+        selectable={true}
         element={item}
         type={'tradition'}
-        onSelection={() => props.confirmHandler(item.name)}
+        onSelection={() => props.confirmHandler(item)}
       />
     ),
     [],
   );
 
-  listItem.name;
-
   return (
-    <View style={{ ...Style.modal, height: '90%' }}>
-      <Text style={Style.title}>Select a focus</Text>
-      <View style={Style.f1}>
-        <FlatList
-          contentContainerStyle={Style.flatGap}
-          data={traditions as ArcaneTraditionTable[]}
-          renderItem={listItem}
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
+    <View style={{ ...Style.modal, height: '95%', paddingHorizontal: 0 }}>
+      <Text style={Style.title}>Select a tradition</Text>
+      <FlatList
+        contentContainerStyle={Style.flatGap}
+        data={Object.values(ArcaneTradition)}
+        renderItem={listItem}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }

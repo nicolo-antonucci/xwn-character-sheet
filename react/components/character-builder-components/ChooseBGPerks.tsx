@@ -107,12 +107,12 @@ export default function ChooseBGPerks(): JSX.Element {
             )
             .map((c, i) => (
               <View key={`${c}-${i}`} style={{ ...Style.colFlex, gap: 6 }}>
-                {c.subChoice && (
+                {c.subChoice ? (
                   <View style={{ flexDirection: 'row' }}>
                     <Text style={{ fontWeight: 'bold' }}>Selected: </Text>
                     <Text>{c.subChoice}</Text>
                   </View>
-                )}
+                ) : null}
                 <Button onPress={() => setModal(i)}>{c.subChoice ? 'Change' : 'Choose'}</Button>
               </View>
             ))}

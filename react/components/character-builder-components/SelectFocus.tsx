@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { FlatList, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import foci from '../../../assets/rules/wwnFoci.json';
-import { Focus, FocusType } from '../../model/Focus';
+import { Focus, FocusType } from '../../model/focus';
 import { Style } from '../../styles/StyleSheet';
 import ExpandableCard from '../generics/ExpandableCard';
 
@@ -11,7 +11,7 @@ export default function SelectFocus(props: SelectFocusProps): JSX.Element {
     ({ item }: { item: Focus }) => (
       <ExpandableCard
         chosen={props.selectedFocus === item.id}
-        edit={true}
+        selectable={true}
         element={item}
         type={'focus'}
         onSelection={() => props.confirmHandler(item)}
@@ -19,8 +19,6 @@ export default function SelectFocus(props: SelectFocusProps): JSX.Element {
     ),
     [],
   );
-
-  listItem.name;
 
   return (
     <View style={{ ...Style.modal, height: '90%' }}>

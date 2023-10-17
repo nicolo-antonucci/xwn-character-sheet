@@ -1,5 +1,5 @@
-import { FocusType } from './Focus';
-import { Shock } from './ruleTypes';
+import { FocusType } from './focus';
+import { Art, Shock } from './ruleTypes';
 
 export type ClassName =
   | 'Expert'
@@ -34,13 +34,14 @@ export interface MagicLevelPerks {
   maxLevel?: number;
   spellsCast?: number;
   spellsPrepared?: number;
-  artsGained?: number;
+  artsGained?: 'Any One' | 'Any Two';
   punchHitBonus?: 0 | 1 | 2 | 3 | 4 | 5;
   punchDamage?: '1d6' | '1d8' | '1d10' | '1d10+1' | '1d10+2' | '1d10+3';
   punchShock?: Shock;
+  basicArts?: Art[];
 }
 
-export interface MagicTable {
+export interface MagicProgressionTable {
   1: MagicLevelPerks;
   2: MagicLevelPerks;
   3: MagicLevelPerks;
@@ -57,8 +58,8 @@ export interface ArcaneTraditionTable {
   id: number;
   name?: ArcaneTradition;
   description?: string;
-  fullTable?: MagicTable;
-  partialTable?: MagicTable;
+  fullTable?: MagicProgressionTable;
+  partialTable?: MagicProgressionTable;
 }
 
 export interface CharacterClass {
@@ -82,10 +83,11 @@ export interface CharacterClass {
     name: string;
     description: string[];
   }[];
+  arcaneTraditions?: ArcaneTradition[] | null;
   arcaneTraditionTable?: ArcaneTraditionTable;
 }
 
-export const DUAL_TRADITION_TABLE: MagicTable = {
+export const DUAL_TRADITION_TABLE: MagicProgressionTable = {
   1: {
     maxLevel: 1,
     spellsCast: 1,

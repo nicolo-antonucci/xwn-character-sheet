@@ -24,7 +24,7 @@ export default function BackgroundPickerScreen(): JSX.Element {
           element={item}
           type={'bg'}
           chosen={builderCtx?.character.characterBackground.background?.id === item.id}
-          edit={true}
+          selectable={true}
           onSelection={() => handleSelectionToggle(item)}
         />
       )}

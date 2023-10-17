@@ -1,7 +1,7 @@
 import { ReactElement, createContext, useEffect, useState } from 'react';
 import { BGBenefit, BGBenefitPickType, Background } from '../../model/backgrounds';
 import { AbilityScores, Character } from '../../model/character';
-import { CharacterClass } from '../../model/characterClass';
+import { ArcaneTradition, CharacterClass } from '../../model/characterClass';
 import { RULESET } from '../../model/properties';
 
 export const BuilderContext = createContext<{
@@ -12,6 +12,7 @@ export const BuilderContext = createContext<{
   setBackgroundPickType: (bgBenefitPickType: BGBenefitPickType) => void;
   setBackgroundPerks: (bgBenefits: BGBenefit[]) => void;
   setCharacterClass: (characterClass: CharacterClass | null) => void;
+  setArcaneTradition: (traditions: ArcaneTradition[] | null) => void;
 } | null>(null);
 
 export default function BuilderContextProvider({ children }: BuilderContextProviderProps): JSX.Element {
@@ -82,6 +83,13 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
     }));
   }
 
+  function setArcaneTradition(arcaneTraditions: ArcaneTradition[] | null) {
+    setCharacter(current => ({
+      ...current,
+      characterClass: current.characterClass?.id ? { ...current.characterClass, arcaneTraditions } : null,
+    }));
+  }
+
   return (
     <BuilderContext.Provider
       value={{
@@ -92,6 +100,7 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
         setBackgroundPickType,
         setBackgroundPerks,
         setCharacterClass,
+        setArcaneTradition,
       }}
     >
       {children}

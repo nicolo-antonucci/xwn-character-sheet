@@ -2,3 +2,9 @@ export interface Shock {
   ac: number | '-';
   damage: number;
 }
+
+export interface Art {
+  id: number;
+  name: string;
+  description: string;
+}

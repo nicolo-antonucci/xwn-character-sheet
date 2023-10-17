@@ -1,5 +1,5 @@
 import { generateId } from '../commons/Utils';
-import { Focus } from './Focus';
+import { Focus } from './focus';
 import { BGBenefit, BGBenefitPickType, Background } from './backgrounds';
 import { CharacterClass } from './characterClass';
 import { RULESET } from './properties';

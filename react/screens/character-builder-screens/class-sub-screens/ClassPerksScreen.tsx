@@ -5,8 +5,8 @@ import characterClasses from '../../../../assets/rules/wwnCharacterClasses.json'
 import SelectFocus from '../../../components/character-builder-components/SelectFocus';
 import SelectTradition from '../../../components/character-builder-components/SelectTradition';
 import ExpandableCard from '../../../components/generics/ExpandableCard';
-import { Focus, FocusType } from '../../../model/Focus';
 import { ArcaneTradition, CharacterClass } from '../../../model/characterClass';
+import { Focus, FocusType } from '../../../model/focus';
 import { BuilderContext } from '../../../store/context/builder-context';
 import { Style } from '../../../styles/StyleSheet';
 
@@ -39,7 +39,17 @@ export default function ClassPerksScreen(): JSX.Element {
     setFociModal(null);
   };
 
-  const handleTraditionSelection = (tradition: ArcaneTradition | undefined) => {};
+  const handleTraditionSelection = (tradition: ArcaneTradition | undefined) => {
+    setTraditions(
+      current =>
+        current.map((el, i) => {
+          if (i !== traditionModal?.index) return el;
+
+          return tradition;
+        }) as [ArcaneTradition | null, ArcaneTradition | null],
+    );
+    setTraditionModal(null);
+  };
 
   return (
     <View style={{ paddingHorizontal: 12 }}>
@@ -63,13 +73,13 @@ export default function ClassPerksScreen(): JSX.Element {
       </Portal>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 24, gap: 18 }}>
-        {getCharacterClass()?.levelOneFoci?.length && (
+        {getCharacterClass()?.levelOneFoci?.length ? (
           <View style={{ gap: 12 }}>
             <Text style={{ ...Style.title, fontSize: 20 }}>Foci</Text>
             {getCharacterClass()?.levelOneFoci?.map((f, i) => (
               <View key={`class-focus-${i}`} style={{ gap: 12 }}>
                 <Text style={{ ...Style.subHeading, fontSize: 16 }}>Choose a {f.toLowerCase()} as a free pick</Text>
-                {classFoci[i] && <ExpandableCard element={classFoci[i] as Focus} type={'focus'} />}
+                {classFoci[i] ? <ExpandableCard element={classFoci[i] as Focus} type={'focus'} /> : null}
                 <Button
                   mode="contained-tonal"
                   onPress={() => setFociModal({ index: i, focusType: f })}
@@ -80,9 +90,9 @@ export default function ClassPerksScreen(): JSX.Element {
               </View>
             ))}
           </View>
-        )}
+        ) : null}
 
-        {getCharacterClass()?.perks?.some(p => p.name === 'Arcane Tradition') && (
+        {getCharacterClass()?.perks?.some(p => p.name === 'Arcane Tradition') ? (
           <View>
             <Text style={{ ...Style.title, fontSize: 20 }}>Arcane Tradition</Text>
             {getCharacterClass()
@@ -90,7 +100,9 @@ export default function ClassPerksScreen(): JSX.Element {
               .map((p, i) => (
                 <View key={`arcane-tradition-${i}`} style={Style.colFlex}>
                   <Text style={{ ...Style.subHeading, fontSize: 20 }}>Choose an arcane tradition</Text>
-                  {traditions[i] && <ExpandableCard element={traditions[i] as ArcaneTradition} type={'tradition'} />}
+                  {traditions[i] ? (
+                    <ExpandableCard element={traditions[i] as ArcaneTradition} type={'tradition'} />
+                  ) : null}
                   <Button
                     mode="contained-tonal"
                     onPress={() => setTraditionModal({ index: i, tradition: traditions[i] })}
@@ -101,7 +113,7 @@ export default function ClassPerksScreen(): JSX.Element {
                 </View>
               ))}
           </View>
-        )}
+        ) : null}
       </ScrollView>
     </View>
   );

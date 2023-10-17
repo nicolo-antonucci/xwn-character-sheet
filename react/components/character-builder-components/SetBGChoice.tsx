@@ -20,12 +20,12 @@ export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
 
   return (
     <View style={Style.modal}>
-      {(isCombatChoice() || isSkillChoice()) && <Text style={Style.title}>Choose a skill</Text>}
-      {(isScoreChoice() || isMentalChoice() || isPhysicalChoice()) && (
+      {isCombatChoice() || isSkillChoice() ? <Text style={Style.title}>Choose a skill</Text> : null}
+      {isScoreChoice() || isMentalChoice() || isPhysicalChoice() ? (
         <Text style={Style.title}>Choose an ability score</Text>
-      )}
+      ) : null}
 
-      {isCombatChoice() && (
+      {isCombatChoice() ? (
         <View style={Style.modalOptBtnContainer}>
           {[BASESKILLS.PUNCH, BASESKILLS.SHOOT, BASESKILLS.STAB].map(k => (
             <Button
@@ -38,9 +38,9 @@ export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
             </Button>
           ))}
         </View>
-      )}
+      ) : null}
 
-      {isSkillChoice() && props.ruleset === RULESET.SWN && (
+      {isSkillChoice() && props.ruleset === RULESET.SWN ? (
         <View style={Style.modalOptBtnContainer}>
           {Object.values(SWNSkills)
             .sort((a, b) => (a > b ? 1 : -1))
@@ -55,9 +55,9 @@ export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
               </Button>
             ))}
         </View>
-      )}
+      ) : null}
 
-      {isSkillChoice() && props.ruleset === RULESET.WWN && (
+      {isSkillChoice() && props.ruleset === RULESET.WWN ? (
         <View style={Style.modalOptBtnContainer}>
           {Object.values(WWNSkills)
             .sort((a, b) => (a > b ? 1 : -1))
@@ -72,9 +72,9 @@ export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
               </Button>
             ))}
         </View>
-      )}
+      ) : null}
 
-      {isScoreChoice() && (
+      {isScoreChoice() ? (
         <View style={Style.modalOptBtnContainer}>
           {Object.values(SCORE)
             .sort(sortAbilityScores)
@@ -89,9 +89,9 @@ export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
               </Button>
             ))}
         </View>
-      )}
+      ) : null}
 
-      {isMentalChoice() && (
+      {isMentalChoice() ? (
         <View style={Style.modalOptBtnContainer}>
           {[SCORE.INT, SCORE.WIS, SCORE.CHA].sort(sortAbilityScores).map(k => (
             <Button
@@ -104,9 +104,9 @@ export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
             </Button>
           ))}
         </View>
-      )}
+      ) : null}
 
-      {isPhysicalChoice() && (
+      {isPhysicalChoice() ? (
         <View style={Style.modalOptBtnContainer}>
           {[SCORE.STR, SCORE.DEX, SCORE.CON].sort(sortAbilityScores).map(k => (
             <Button
@@ -119,7 +119,7 @@ export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
             </Button>
           ))}
         </View>
-      )}
+      ) : null}
     </View>
   );
 }

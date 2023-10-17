@@ -165,7 +165,7 @@ export default function RollBGPerks(): JSX.Element {
           </Button>
         </View>
 
-        {rolls.length > 0 && (
+        {rolls.length > 0 ? (
           <View style={{ ...Style.colFlex, paddingBottom: 12 }}>
             {rolls.map((roll, index) => (
               <Card key={`roll-result-${index}`} style={Style.perkCard}>
@@ -183,17 +183,16 @@ export default function RollBGPerks(): JSX.Element {
                         BGChoiceBenefit.MENTAL,
                         BGChoiceBenefit.PHYSICAL,
                       ] as string[]
-                    ).includes(roll.skill) &&
-                      roll.subChoice && (
-                        <View style={{ flexDirection: 'row' }}>
-                          <Text style={{ fontWeight: 'bold' }}>Choice: </Text>
-                          <Text>
-                            {(Object.values(SCORE) as string[]).includes(roll.subChoice)
-                              ? roll.subChoice.toUpperCase()
-                              : roll.subChoice}
-                          </Text>
-                        </View>
-                      )}
+                    ).includes(roll.skill) && roll.subChoice ? (
+                      <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontWeight: 'bold' }}>Choice: </Text>
+                        <Text>
+                          {(Object.values(SCORE) as string[]).includes(roll.subChoice)
+                            ? roll.subChoice.toUpperCase()
+                            : roll.subChoice}
+                        </Text>
+                      </View>
+                    ) : null}
                   </View>
                   {(
                     [
@@ -203,7 +202,7 @@ export default function RollBGPerks(): JSX.Element {
                       BGChoiceBenefit.MENTAL,
                       BGChoiceBenefit.PHYSICAL,
                     ] as string[]
-                  ).includes(roll.skill) && (
+                  ).includes(roll.skill) ? (
                     <Button
                       style={{ paddingBottom: 0 }}
                       onPress={() =>
@@ -215,12 +214,12 @@ export default function RollBGPerks(): JSX.Element {
                     >
                       {roll.subChoice ? 'Change' : 'Choose'}
                     </Button>
-                  )}
+                  ) : null}
                 </View>
               </Card>
             ))}
           </View>
-        )}
+        ) : null}
 
         <View style={{ ...Style.rowFlex, gap: 6, alignItems: 'flex-start' }}>
           <RollTable

@@ -63,11 +63,11 @@ export default function BackgroundPerksScreen(): JSX.Element {
           Roll
         </Button>
       </View>
-      {getPickType() === BGBenefitPickType.QUICK && <QuickBGPerks />}
+      {getPickType() === BGBenefitPickType.QUICK ? <QuickBGPerks /> : null}
 
-      {getPickType() === BGBenefitPickType.CHOSEN && <ChooseBGPerks />}
+      {getPickType() === BGBenefitPickType.CHOSEN ? <ChooseBGPerks /> : null}
 
-      {getPickType() === BGBenefitPickType.ROLLED && <RollBGPerks />}
+      {getPickType() === BGBenefitPickType.ROLLED ? <RollBGPerks /> : null}
     </View>
   );
 }

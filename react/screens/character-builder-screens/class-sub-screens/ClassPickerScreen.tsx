@@ -24,7 +24,7 @@ export default function ClassPickerScreen(): JSX.Element {
           element={item}
           type={'charClass'}
           chosen={builderCtx?.character.characterClass?.id === item.id}
-          edit={true}
+          selectable={true}
           onSelection={() => handleSelection(item)}
         />
       )}

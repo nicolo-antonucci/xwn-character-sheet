@@ -118,7 +118,7 @@ export default function RollAbilitiesSetup(): JSX.Element {
       </Portal>
 
       <View style={Style.scoresContainer}>
-        {Object.values(rolledScores).length > 0 && (
+        {Object.values(rolledScores).length > 0 ? (
           <View style={Style.rowFlex}>
             {Object.values(rolledScores)
               .sort((a, b) => (a.value > b.value ? -1 : 1))
@@ -128,18 +128,18 @@ export default function RollAbilitiesSetup(): JSX.Element {
                 </Text>
               ))}
           </View>
-        )}
+        ) : null}
 
-        {Object.values(rolledScores).length > 0 && (
+        {Object.values(rolledScores).length > 0 ? (
           <View style={Style.modalOptBtnContainer}>
             {Object.values(SCORE).map((s, index) => (
               <Button key={index} mode="elevated" onPress={() => openModal(s)} style={Style.optionBtn}>
                 {s.toUpperCase()}
-                {builderCtx?.character.abilityScores[s] && `: ${builderCtx?.character.abilityScores[s]}`}
+                {builderCtx?.character.abilityScores[s] ? `: ${builderCtx?.character.abilityScores[s]}` : null}
               </Button>
             ))}
           </View>
-        )}
+        ) : null}
 
         <Button icon="dice-d6" mode="contained-tonal" onPress={checkBeforeRoll}>
           {Object.values(rolledScores).length === 0 ? 'Roll!' : 'Reroll'}

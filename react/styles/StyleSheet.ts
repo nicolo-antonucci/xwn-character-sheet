@@ -131,6 +131,15 @@ export const Style = StyleSheet.create({
     color: Theme.colors.onPrimaryContainer,
     borderColor: Theme.colors.onPrimaryContainer,
   },
+  magicTableHeaderTxt: {
+    paddingHorizontal: 3,
+    paddingVertical: 6,
+    fontSize: 12,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: Theme.colors.onPrimaryContainer,
+    borderColor: Theme.colors.onPrimaryContainer,
+  },
   tableRow: {
     flexDirection: 'row',
     borderLeftWidth: 1,
@@ -140,6 +149,12 @@ export const Style = StyleSheet.create({
   },
   tableRowTxt: {
     padding: 6,
+    fontSize: 12,
+    borderColor: Theme.colors.onPrimaryContainer,
+    textAlign: 'center',
+  },
+  magicTableRowTxt: {
+    padding: 3,
     fontSize: 12,
     borderColor: Theme.colors.onPrimaryContainer,
     textAlign: 'center',
