@@ -1,13 +1,13 @@
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import { BGChoiceBenefit } from '../../model/backgrounds';
-import { SCORE } from '../../model/character';
-import { RULESET } from '../../model/properties';
-import { BASESKILLS, SWNSKILLS, SWNSkills, WWNSKILLS, WWNSkills } from '../../model/skills';
-import { Style } from '../../styles/StyleSheet';
-import { sortAbilityScores } from '../../commons/Utils';
+import { BGChoiceBenefit } from '../../../model/backgrounds';
+import { SCORE } from '../../../model/character';
+import { RULESET } from '../../../model/properties';
+import { BASESKILLS, SWNSKILLS, SWNSkills, WWNSKILLS, WWNSkills } from '../../../model/skills';
+import { Style } from '../../../styles/StyleSheet';
+import { sortAbilityScores } from '../../../commons/Utils';
 
-export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
+export default function SetBGChoiceModal(props: SetBGChoiceModalProps): JSX.Element {
   const isCombatChoice = () => props.choice === BGChoiceBenefit.ANY_COMBAT;
 
   const isSkillChoice = () => props.choice === BGChoiceBenefit.ANY_SKILL;
@@ -124,7 +124,7 @@ export default function SetBGChoice(props: SetBGChoiceProps): JSX.Element {
   );
 }
 
-export interface SetBGChoiceProps {
+export interface SetBGChoiceModalProps {
   choice: BGChoiceBenefit | undefined;
   ruleset: RULESET | undefined;
   onChoice: (selected: SCORE | SWNSKILLS | WWNSKILLS) => void;

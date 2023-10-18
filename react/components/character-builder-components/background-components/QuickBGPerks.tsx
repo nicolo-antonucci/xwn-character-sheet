@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Button, Modal, Portal, Text } from 'react-native-paper';
-import backgrounds from '../../../assets/rules/wwnBackgrounds.json';
-import { Background } from '../../model/backgrounds';
-import { SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../model/skills';
-import { BuilderContext } from '../../store/context/builder-context';
-import { Style } from '../../styles/StyleSheet';
-import SelectSkill from './SelectSkill';
+import backgrounds from '../../../../assets/rules/wwnBackgrounds.json';
+import { Background } from '../../../model/backgrounds';
+import { SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../../model/skills';
+import { BuilderContext } from '../../../store/context/builder-context';
+import { Style } from '../../../styles/StyleSheet';
+import SelectSkillModal from '../SelectSkillModal';
 
 export default function QuickBGPerks(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
@@ -27,8 +27,8 @@ export default function QuickBGPerks(): JSX.Element {
   return (
     <View>
       <Portal>
-        <Modal visible={modal !== null}>
-          <SelectSkill
+        <Modal visible={modal !== null} onDismiss={() => setModal(null)}>
+          <SelectSkillModal
             confirmHandler={skill => {
               setChoices(current =>
                 current.map((el, i) => {

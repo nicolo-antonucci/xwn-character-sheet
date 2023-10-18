@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import ArrayAbilitiesSetup from '../../components/character-builder-components/ArrayAbilitiesSetup';
-import RollAbilitiesSetup from '../../components/character-builder-components/RollAbilitiesSetup';
+import ArrayAbilitiesSetup from '../../components/character-builder-components/scores-components/ArrayAbilitiesSetup';
+import RollAbilitiesSetup from '../../components/character-builder-components/scores-components/RollAbilitiesSetup';
 import { Style } from '../../styles/StyleSheet';
 
 type ScoreGen = 'array' | 'roll';

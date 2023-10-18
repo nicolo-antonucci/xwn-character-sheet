@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import { SCORE } from '../../model/character';
-import { Style } from '../../styles/StyleSheet';
+import { SCORE } from '../../../model/character';
+import { Style } from '../../../styles/StyleSheet';
 
 export default function SetRolledScoresModal(props: SetRolledScoresModalProps): JSX.Element {
   const findKeyForScore = (score: SCORE) => {
@@ -11,7 +11,7 @@ export default function SetRolledScoresModal(props: SetRolledScoresModalProps): 
   const errorTemplate = (
     <View>
       <Text>Error processing information</Text>
-      <Button onPress={props.undoHandler}>Close</Button>
+      <Button onPress={props.onUndo}>Close</Button>
     </View>
   );
 
@@ -25,7 +25,7 @@ export default function SetRolledScoresModal(props: SetRolledScoresModalProps): 
             <Button
               key={`select-score-${k}`}
               mode="contained-tonal"
-              onPress={() => props.confirmHandler(k, props.score, findKeyForScore(props.score))}
+              onPress={() => props.onConfirm(k, props.score, findKeyForScore(props.score))}
               style={Style.optionBtn}
             >
               {props.rolledScores[k].value +
@@ -35,10 +35,10 @@ export default function SetRolledScoresModal(props: SetRolledScoresModalProps): 
       </View>
 
       <View style={Style.rowFlex}>
-        <Button mode="contained" onPress={props.undoHandler}>
+        <Button mode="contained" onPress={props.onUndo}>
           Cancel
         </Button>
-        <Button mode="contained" onPress={() => props.confirmHandler(findKeyForScore(props.score))}>
+        <Button mode="contained" onPress={() => props.onConfirm(findKeyForScore(props.score))}>
           Unassign
         </Button>
       </View>
@@ -56,6 +56,6 @@ export interface SetRolledScoresModalProps {
     };
   };
   score: SCORE;
-  confirmHandler: (key: string | undefined, score?: SCORE, prevKey?: string) => void;
-  undoHandler: () => void;
+  onConfirm: (key: string | undefined, score?: SCORE, prevKey?: string) => void;
+  onUndo: () => void;
 }

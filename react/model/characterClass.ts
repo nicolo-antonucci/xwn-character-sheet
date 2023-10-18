@@ -1,5 +1,7 @@
+import { SCORE } from './character';
 import { FocusType } from './focus';
 import { Art, Shock } from './ruleTypes';
+import { WWNSKILLS } from './skills';
 
 export type ClassName =
   | 'Expert'
@@ -60,6 +62,12 @@ export interface ArcaneTraditionTable {
   description?: string;
   fullTable?: MagicProgressionTable;
   partialTable?: MagicProgressionTable;
+  artsDescription?: string;
+  effortBase?: number;
+  effortSkill?: WWNSKILLS;
+  effortSillChoice?: WWNSKILLS[];
+  effortScore?: SCORE[];
+  effortPartialModifier?: number;
 }
 
 export interface CharacterClass {
@@ -83,7 +91,6 @@ export interface CharacterClass {
     name: string;
     description: string[];
   }[];
-  arcaneTraditions?: ArcaneTradition[] | null;
   arcaneTraditionTable?: ArcaneTraditionTable;
 }
 

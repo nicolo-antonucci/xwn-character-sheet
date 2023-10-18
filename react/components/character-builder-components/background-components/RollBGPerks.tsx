@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Button, Card, Modal, Portal, Text } from 'react-native-paper';
-import backgrounds from '../../../assets/rules/wwnBackgrounds.json';
-import { BGBenefit, BGBenefitPickType, BGChoiceBenefit } from '../../model/backgrounds';
-import { SCORE } from '../../model/character';
-import { SWNSKILLS, WWNSKILLS } from '../../model/skills';
-import { BuilderContext } from '../../store/context/builder-context';
-import { Style } from '../../styles/StyleSheet';
-import RollTable from '../generics/RollTable';
-import SimpleModal from '../generics/SimpleModal';
-import SetBGChoice from './SetBGChoice';
+import backgrounds from '../../../../assets/rules/wwnBackgrounds.json';
+import { BGBenefit, BGBenefitPickType, BGChoiceBenefit } from '../../../model/backgrounds';
+import { SCORE } from '../../../model/character';
+import { SWNSKILLS, WWNSKILLS } from '../../../model/skills';
+import { BuilderContext } from '../../../store/context/builder-context';
+import { Style } from '../../../styles/StyleSheet';
+import RollTable from '../../generics/RollTable';
+import SimpleModal from '../../generics/SimpleModal';
+import SetBGChoiceModal from './SetBGChoiceModal';
 
 export default function RollBGPerks(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
@@ -136,7 +136,11 @@ export default function RollBGPerks(): JSX.Element {
     <View style={{ ...Style.f1, width: '100%' }}>
       <Portal>
         <Modal visible={modal !== null} onDismiss={() => setModal(null)}>
-          <SetBGChoice choice={modal?.choiceType} ruleset={builderCtx?.character.ruleset} onChoice={handleChoice} />
+          <SetBGChoiceModal
+            choice={modal?.choiceType}
+            ruleset={builderCtx?.character.ruleset}
+            onChoice={handleChoice}
+          />
         </Modal>
 
         <Modal visible={confirmationModal.show} onDismiss={() => setConfirmationModal({ show: false })}>

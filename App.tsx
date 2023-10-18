@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { RootStackParamList } from './react/model/props';
 import BuilderScreen from './react/screens/BuilderScreen';
 import CharactersScreen from './react/screens/CharactersScreen';
@@ -18,7 +18,7 @@ export default function App(): JSX.Element {
     <PaperProvider
       theme={Theme}
       settings={{
-        icon: props => <FontAwesome5 {...props} />,
+        icon: props => <FontAwesome6 {...props} />,
       }}
     >
       <View style={Style.f1}>

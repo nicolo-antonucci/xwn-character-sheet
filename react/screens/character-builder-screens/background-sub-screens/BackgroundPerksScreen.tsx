@@ -2,12 +2,12 @@ import { useContext } from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import backgrounds from '../../../../assets/rules/wwnBackgrounds.json';
-import ChooseBGPerks from '../../../components/character-builder-components/ChooseBGPerks';
-import QuickBGPerks from '../../../components/character-builder-components/QuickBGPerks';
+import ChooseBGPerks from '../../../components/character-builder-components/background-components/ChooseBGPerks';
+import QuickBGPerks from '../../../components/character-builder-components/background-components/QuickBGPerks';
 import { BGBenefitPickType, BGBenefitType, Background } from '../../../model/backgrounds';
 import { BuilderContext } from '../../../store/context/builder-context';
 import { Style } from '../../../styles/StyleSheet';
-import RollBGPerks from '../../../components/character-builder-components/RollBGPerks';
+import RollBGPerks from '../../../components/character-builder-components/background-components/RollBGPerks';
 
 export default function BackgroundPerksScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);

@@ -18,7 +18,7 @@ export type BASESKILLS =
 export const BASESKILLS = {
   ADMINSTER: 'Adminster' as BASESKILLS,
   CONNECT: 'Connect' as BASESKILLS,
-  EXTERT: 'Exert' as BASESKILLS,
+  EXERT: 'Exert' as BASESKILLS,
   HEAL: 'Heal' as BASESKILLS,
   KNOW: 'Know' as BASESKILLS,
   LEAD: 'Lead' as BASESKILLS,

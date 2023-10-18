@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Button, Modal, Portal, Text } from 'react-native-paper';
-import { AbilityScores, SCORE } from '../../model/character';
-import { BuilderContext } from '../../store/context/builder-context';
-import { Style } from '../../styles/StyleSheet';
-import SimpleModal from '../generics/SimpleModal';
+import { AbilityScores, SCORE } from '../../../model/character';
+import { BuilderContext } from '../../../store/context/builder-context';
+import { Style } from '../../../styles/StyleSheet';
+import SimpleModal from '../../generics/SimpleModal';
 import SetRolledScoresModal from './SetRolledScoreModal';
+import SetToFourteenModal from './SetToFourteenModal';
 
 export default function RollAbilitiesSetup(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
@@ -17,7 +18,11 @@ export default function RollAbilitiesSetup(): JSX.Element {
     };
   }>({});
 
+  const [increasedScore, setIncreasedScore] = useState<string | null>(null);
+
   const [modalScore, setModalScore] = useState<SCORE | undefined>(undefined);
+
+  const [showUpModal, setShowUpModal] = useState<boolean>(false);
 
   const [alert, setAlert] = useState<boolean>(false);
 
@@ -68,6 +73,8 @@ export default function RollAbilitiesSetup(): JSX.Element {
 
     if (!key) return;
 
+    if (key === increasedScore) setIncreasedScore(null);
+
     if (!score) {
       setRolledScores({
         ...rolledScores,
@@ -88,10 +95,35 @@ export default function RollAbilitiesSetup(): JSX.Element {
       });
   };
 
+  const handleSetToFourteen = (k?: string) => {
+    const scores: AbilityScores = {
+      cha: null,
+      con: null,
+      dex: null,
+      int: null,
+      str: null,
+      wis: null,
+    };
+    if (k) {
+      const currIncreasedScore = rolledScores[k];
+      Object.keys(rolledScores).forEach(key => {
+        if (key === k) scores[currIncreasedScore.score as SCORE] = 14;
+        else {
+          const rs = rolledScores[key];
+          if (rs.score) scores[rs.score as SCORE] = rs.value;
+        }
+      });
+      builderCtx?.setAbilityScores(scores);
+    } else setRolledScores(rolledScores);
+
+    setIncreasedScore(k ?? null);
+    setShowUpModal(false);
+  };
+
   return (
     <View>
       <Portal>
-        <Modal visible={alert}>
+        <Modal visible={alert} onDismiss={() => setAlert(false)}>
           <SimpleModal
             title="Attention"
             confirmHandler={() => {
@@ -107,12 +139,22 @@ export default function RollAbilitiesSetup(): JSX.Element {
           />
         </Modal>
 
-        <Modal visible={!!modalScore}>
+        <Modal visible={!!modalScore} onDismiss={() => setModalScore(undefined)}>
           <SetRolledScoresModal
-            confirmHandler={handleScoreAssignment}
+            onConfirm={handleScoreAssignment}
             rolledScores={rolledScores}
             score={modalScore as SCORE}
-            undoHandler={() => setModalScore(undefined)}
+            onUndo={() => setModalScore(undefined)}
+          />
+        </Modal>
+
+        <Modal visible={showUpModal} onDismiss={() => setShowUpModal(false)}>
+          <SetToFourteenModal
+            increasedScore={increasedScore}
+            rolledScores={rolledScores}
+            onSelection={handleSetToFourteen}
+            onUnassign={handleSetToFourteen}
+            onUndo={() => setShowUpModal(false)}
           />
         </Modal>
       </Portal>
@@ -141,9 +183,16 @@ export default function RollAbilitiesSetup(): JSX.Element {
           </View>
         ) : null}
 
-        <Button icon="dice-d6" mode="contained-tonal" onPress={checkBeforeRoll}>
-          {Object.values(rolledScores).length === 0 ? 'Roll!' : 'Reroll'}
-        </Button>
+        <View style={Style.rowFlex}>
+          <Button icon="dice-d6" mode="contained-tonal" onPress={checkBeforeRoll}>
+            {Object.values(rolledScores).length === 0 ? 'Roll!' : 'Reroll'}
+          </Button>
+          {Object.values(rolledScores).filter(v => v.score).length === 6 ? (
+            <Button icon={'angles-up'} mode="contained-tonal" onPress={() => setShowUpModal(true)}>
+              Set to 14
+            </Button>
+          ) : null}
+        </View>
       </View>
     </View>
   );

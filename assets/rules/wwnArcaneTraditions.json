@@ -2,6 +2,12 @@
   {
     "id": 0,
     "name": "High Mage",
+    "description": "All High Mages gain Magic as a bonus skill, acquiring it at level-0, or level-1 if was already level-0. Every High Mage is well-educated in the principles of magic as understood by the sorcerers of Latter Earth.\nHigh Mages can prepare and cast High Magic spells, and have a number of arts dedicated to improving their use of these incantations. As usual for spellcasters, they cannot wear bulky clothing or armor while casting or using arts, nor use shields. Mages who have trained to overcome these limits with the Armored Magic Focus have more latitude.\nHigh Mages conduct extensive experimentation and study as part of their daily activities. This relentless focus helps them master High Magic spells without needing the outside help of tutors and discovered texts. Each time they advance a level, they may pick two High Magic spells from the list in this book to add to their repertoire. These spells must be of a level they can cast.\nHigh Mages also gain arts specific to their tradition. At first level, a full High Mage picks two arts and a partial picks one. As they gain levels and experience, they’ll learn additional arts from the adjacent list. Once picked, an art cannot be changed.",
+    "artsDescription": "High Mage Effort is calculated as usual, with each PC’s maximum being equal to one plus their Magic skill level plus the better of their Intelligence or Charisma modifiers. Partial High Mages have a score one point lower than this, albeit not less than one.",
+    "effortBase": 1,
+    "effortSkill": "Magic",
+    "effortScore": ["int", "cha"],
+    "effortPartialModifier": -1,
     "fullTable": {
       "1": {
         "maxLevel": 1,
@@ -121,11 +127,21 @@
   {
     "id": 1,
     "name": "Elementalist",
+    "description": "All Elementalists gain Magic as a bonus skill, acquiring it at level-0, or level-1 if was already level-0. A firm grounding in the arcane science of Latter Earth is necessary to master their particular arts.\nElementalists can prepare and cast High Magic spells in addition to the New Magic spells specific to Elementalists. Some of the latter are given on the following pages, but others doubtless exist. As usual for spellcasters, Elementalists can’t cast spells or use arts while armored or holding a shield.\nElementalists are not as talented at general High Magic research as High Mages are, but their studies still bear fruit in time. Each time they advance a level, they can pick a new High Magic spell or a New Magic Elementalist spell to add to their spellbook. They must be able to cast the spell to add it to their selection.\nElementalists gain the Elemental Resilience and Elemental Sparks arts as part of their basic training, and may pick one additional art from the adjacent list. Further arts are learned as they advance in character level, as given in the tables below. Once chosen, an art cannot be changed.",
+    "artsDescription": "Elementalist Effort is calculated as usual, with each PC’s maximum being equal to one plus their Magic skill level plus the better of their Intelligence or Charisma modifiers. Partial Elementalists have a score one point lower than this, albeit not less than one.\nAll Elementalists learn the Elemental Resilience and Elemental Sparks arts as part of their basic training. Other Arts may be chosen normally afterwards.",
+    "effortBase": 1,
+    "effortSkill": "Magic",
+    "effortScore": ["int", "cha"],
+    "effortPartialModifier": -1,
     "fullTable": {
       "1": {
         "maxLevel": 1,
         "spellsCast": 1,
         "spellsPrepared": 3,
+        "basicArts": [
+          { "id": "ea1", "name": "Elemental Resilience" },
+          { "id": "ea2", "name": "Elemental Sparks" }
+        ],
         "artsGained": "Any One"
       },
       "2": {
@@ -239,8 +255,14 @@
   {
     "id": 2,
     "name": "Healer",
+    "description": "The Healer class exists only as a partial Mage class, to be taken by an Adventurer along with another partial class. Thus, a Partial Warrior/Partial Healer might be a grizzled combat medic, a Partial Expert/Partial Healer might be an erudite physician gifted in both mundane and magical healing methods, and a Partial Necromancer/ Partial Healer might be an adept of life and death.\nAll Healers gain Heal as a bonus skill, acquiring it at level-0, or level-1 if they already have it at level-0. A basic grounding in mundane healing techniques is necessary in order to learn their more sophisticated magical arts.\nHealers do not learn how to cast spells. Instead, they focus on their special arcane healing arts. Wielding these arts usually requires nothing more than touching the target and concentrating on the desired effect, and the process is direct and simple enough to perform even when burdened by armor or carrying a shield. These arts are usually quite subtle, and don’t produce visible or audible indications of their use.\nA Healer may have certain social advantages in some situations, depending on the culture and their own traditions. Even in the roughest surroundings, a proven Healer can likely expect hospitality and decent treatment in exchange for their efforts in treating the innumerable pains and augues of their hosts. A famous Healer can often impose on the powerful in exchange for curing some noble’s persistent or difficult case of illness.\nAt first level, a Healer gains the Healing Touch art and can pick one more of their choice. As they advance in levels afterwards, they can learn new arts. Once chosen, an art is permanent and cannot be exchanged.",
+    "artsDescription": "Healer Effort is calculated with Heal rather than Magic, with each PC’s maximum being equal to their Heal skill level plus the better of their Intelligence or Charisma modifiers, to a minimum of one point.\nAll Healers are trained in the Healing Touch art, but may develop other techniques with time.",
+    "effortBase": 0,
+    "effortSkill": "Heal",
+    "effortScore": ["int", "cha"],
     "partialTable": {
       "1": {
+        "basicArts": [{ "id": "h1", "name": "Healing Touch" }],
         "artsGained": "Any One"
       },
       "2": {
@@ -269,6 +291,12 @@
   {
     "id": 3,
     "name": "Necromancer",
+    "description": "All Necromancers gain Magic as a bonus skill, acquiring it at level-0, or level-1 if was already level-0. The arts of life and death require a proper education in the occult to practice correctly.\nNecromancers can prepare and cast High Magic spells in addition to the New Magic spells specific to Necromancers. Some of the latter are given on the following pages, but others doubtless exist. As usual for spellcasters, Necromancers can’t cast spells or use arts while armored or holding a shield.\nNecromancers are not as talented at general High Magic research as High Mages are, but their studies still bear fruit in time. Each time they advance a level, they can pick a new High Magic spell or a New Magic Necromancer spell to add to their spellbook. They must be able to cast the spell to add it to their selection.\nNecromancers can pick an art specific to their tradition from the adjacent list. Further arts are learned as they advance in character level, as given in the tables below. Once chosen, an art cannot be changed.",
+    "artsDescription": "Necromancer Effort is calculated as usual, with each PC’s maximum being equal to one plus their Magic skill level plus the better of their Intelligence or Charisma modifiers. Partial Necromancers have a score one point lower than this, albeit not less than one.",
+    "effortBase": 1,
+    "effortSkill": "Magic",
+    "effortScore": ["int", "cha"],
+    "effortPartialModifier": -1,
     "fullTable": {
       "1": {
         "maxLevel": 1,
@@ -384,12 +412,21 @@
       }
     }
   },
-
   {
     "id": 4,
     "name": "Vowed",
+    "description": "",
+    "artsDescription": "Vowed Effort is based on the skill they chose to represent their order’s main focus of study, whether Exert, Know, Magic, Pray, or some more esoteric skill.\nTheir maximum Vowed Effort is equal to this skill level plus their best attribute modifier, whatever it may be, to a minimum of one point. All Vowed automatically gain the Martial Style, Unarmed Might, and Unarmored Defense arts as part of their basic training.",
+    "effortBase": 0,
+    "effortSkillChoice": ["Exert", "Know", "Magic", "Pray"],
+    "effortScore": ["str", "dex", "con", "int", "wis", "cha"],
     "partialTable": {
       "1": {
+        "basicArts": [
+          { "id": "v1", "name": "Martial Style" },
+          { "id": "v2", "name": "Unarmed Might" },
+          { "id": "v3", "name": "Unarmored Defense" }
+        ],
         "artsGained": "Any One",
         "punchHitBonus": 0,
         "punchDamage": "1d6",

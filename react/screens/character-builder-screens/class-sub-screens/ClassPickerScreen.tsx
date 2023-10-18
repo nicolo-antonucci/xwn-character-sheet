@@ -10,8 +10,7 @@ export default function ClassPickerScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
 
   const handleSelection = (characterClass: CharacterClass) => {
-    if (builderCtx?.character.characterClass?.id === characterClass.id) builderCtx?.setCharacterClass(null);
-    else builderCtx?.setCharacterClass(characterClass);
+    if (builderCtx?.character.characterClass?.id !== characterClass.id) builderCtx?.setCharacterClass(characterClass);
   };
 
   return (

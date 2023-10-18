@@ -48,12 +48,13 @@ export const Style = StyleSheet.create({
   modal: {
     alignSelf: 'center',
     backgroundColor: Theme.colors.surface,
-    borderRadius: 16,
     color: Theme.colors.onSurface,
+    borderRadius: 16,
     gap: 18,
     paddingHorizontal: 6,
     paddingVertical: 18,
     width: '85%',
+    maxHeight: '95%',
   },
   detailsCard: {},
   detailsCardHeader: {
@@ -74,8 +75,8 @@ export const Style = StyleSheet.create({
     backgroundColor: Theme.colors.surface,
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
-    margin: 3,
-    padding: 9,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
     gap: 8,
   },
   modalOptBtnContainer: {
@@ -97,6 +98,9 @@ export const Style = StyleSheet.create({
     fontWeight: '500',
     fontSize: 18,
     textAlign: 'center',
+  },
+  bold: {
+    fontWeight: 'bold',
   },
   matTopTabs: {
     backgroundColor: Theme.colors.primaryContainer,
@@ -158,6 +162,16 @@ export const Style = StyleSheet.create({
     fontSize: 12,
     borderColor: Theme.colors.onPrimaryContainer,
     textAlign: 'center',
+  },
+  homeBtn: {
+    width: '80%',
+    height: 100,
+    justifyContent: 'center',
+  },
+  homeBtnContent: {
+    height: '100%',
+    alignItems: 'center',
+    gap: 18,
   },
 });
 

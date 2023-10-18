@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Button, Checkbox, Modal, Portal, Text } from 'react-native-paper';
-import backgrounds from '../../../assets/rules/wwnBackgrounds.json';
-import { BGBenefit, BGBenefitPickType, Background } from '../../model/backgrounds';
-import { SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../model/skills';
-import { BuilderContext } from '../../store/context/builder-context';
-import { Style } from '../../styles/StyleSheet';
-import SelectSkill from './SelectSkill';
+import backgrounds from '../../../../assets/rules/wwnBackgrounds.json';
+import { BGBenefit, BGBenefitPickType, Background } from '../../../model/backgrounds';
+import { SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../../model/skills';
+import { BuilderContext } from '../../../store/context/builder-context';
+import { Style } from '../../../styles/StyleSheet';
+import SelectSkillModal from '../SelectSkillModal';
 
 export default function ChooseBGPerks(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
@@ -62,7 +62,7 @@ export default function ChooseBGPerks(): JSX.Element {
     <View>
       <Portal>
         <Modal visible={modal !== null} onDismiss={() => setModal(null)}>
-          <SelectSkill
+          <SelectSkillModal
             confirmHandler={skill => {
               setChoices(current =>
                 current.map((el, i) => ({
@@ -74,7 +74,7 @@ export default function ChooseBGPerks(): JSX.Element {
             }}
             type={modal !== null && choices[modal] ? (choices[modal].skill as SKILL_CHOICE) : SKILL_CHOICE.ANY_SKILL}
             undoHandler={() => setModal(null)}
-          ></SelectSkill>
+          ></SelectSkillModal>
         </Modal>
       </Portal>
 

@@ -10,13 +10,36 @@ export default function HomeScreen({ navigation }: RootNavigationProps): JSX.Ele
       <View style={Style.homeContainer}>
         <Text style={Style.title}>xWN Character Sheet</Text>
         <View style={Style.mainContainer}>
-          <Button mode="contained" onPress={() => navigation.navigate('Builder')}>
+          <Button
+            icon={'square-plus'}
+            mode="contained"
+            onPress={() => navigation.navigate('Builder')}
+            style={Style.homeBtn}
+            contentStyle={Style.homeBtnContent}
+            labelStyle={{ fontSize: 20 }}
+          >
             Create Character
           </Button>
-          <Button mode="contained" onPress={() => navigation.navigate('Characters')}>
-            View Character
+          <Button
+            icon="folder"
+            mode="contained"
+            disabled={true}
+            onPress={() => navigation.navigate('Characters')}
+            style={Style.homeBtn}
+            contentStyle={Style.homeBtnContent}
+            labelStyle={{ fontSize: 20 }}
+          >
+            View Characters
           </Button>
-          <Button mode="contained" onPress={() => navigation.navigate('Database')}>
+          <Button
+            icon="database"
+            mode="contained"
+            disabled={true}
+            onPress={() => navigation.navigate('Database')}
+            style={Style.homeBtn}
+            contentStyle={Style.homeBtnContent}
+            labelStyle={{ fontSize: 20 }}
+          >
             Edit Database
           </Button>
         </View>

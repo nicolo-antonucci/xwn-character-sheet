@@ -10,22 +10,40 @@ export default function ArcaneTraditionDetails(props: ArcaneTraditionDetailsProp
 
   return (
     <View style={{ ...Style.detailsBody, paddingHorizontal: 0 }}>
-      {getTradition()?.description ? <Text>{getTradition()?.description}</Text> : null}
+      {getTradition()?.description ? (
+        <>
+          <Text style={Style.bold}>Description</Text>
+          <Text>{getTradition()?.description}</Text>
+        </>
+      ) : null}
+
+      {getTradition()?.artsDescription ? (
+        <>
+          <Text style={Style.bold}>Arts</Text>
+          <Text>{getTradition()?.artsDescription}</Text>
+        </>
+      ) : null}
 
       {getTradition()?.fullTable ? (
-        <MagicTable
-          table={getTradition()?.fullTable as MagicProgressionTable}
-          tradition={props.tradition}
-          tableId={`full-${props.tradition}`}
-        />
+        <>
+          <Text style={Style.bold}>Full {props.tradition}</Text>
+          <MagicTable
+            table={getTradition()?.fullTable as MagicProgressionTable}
+            tradition={props.tradition}
+            tableId={`full-${props.tradition}`}
+          />
+        </>
       ) : null}
 
       {getTradition()?.partialTable ? (
-        <MagicTable
-          table={getTradition()?.partialTable as MagicProgressionTable}
-          tradition={props.tradition}
-          tableId={`partial-${props.tradition}`}
-        />
+        <>
+          <Text style={Style.bold}>Partial {props.tradition}</Text>
+          <MagicTable
+            table={getTradition()?.partialTable as MagicProgressionTable}
+            tradition={props.tradition}
+            tableId={`partial-${props.tradition}`}
+          />
+        </>
       ) : null}
     </View>
   );

@@ -1,9 +1,9 @@
 import { generateId } from '../commons/Utils';
-import { Focus } from './focus';
 import { BGBenefit, BGBenefitPickType, Background } from './backgrounds';
-import { CharacterClass } from './characterClass';
+import { ArcaneTradition, CharacterClass } from './characterClass';
+import { Focus } from './focus';
 import { RULESET } from './properties';
-import { Skills } from './skills';
+import { Skills, WWNSKILLS } from './skills';
 
 export type SCORE = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
 
@@ -35,8 +35,11 @@ export class Character {
     bgBenefits: BGBenefit[] | null;
   };
   skills: Skills | null;
-  foci: Focus[];
+  foci: { focus: Focus; level: 1 | 2 }[];
   characterClass: CharacterClass | null;
+  levelOneFoci?: { combatFocus: number | null | undefined; nonCombatFocus: number | null | undefined };
+  arcaneTraditions?: (ArcaneTradition | null)[];
+  vowedSkill: WWNSKILLS | undefined;
   level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = 1;
   flags: string[] = [];
 

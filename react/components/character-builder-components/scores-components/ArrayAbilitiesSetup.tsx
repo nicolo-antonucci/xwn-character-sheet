@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Button, Modal, Portal } from 'react-native-paper';
-import { AbilityScores, SCORE } from '../../model/character';
-import { BuilderContext } from '../../store/context/builder-context';
-import { Style } from '../../styles/StyleSheet';
+import { AbilityScores, SCORE } from '../../../model/character';
+import { BuilderContext } from '../../../store/context/builder-context';
+import { Style } from '../../../styles/StyleSheet';
 import SetStaticScoreModal from './SetStaticScoreModal';
 
 interface DefaultArrayScoreMap {
@@ -82,7 +82,7 @@ export default function ArrayAbilitiesSetup(): JSX.Element {
   return (
     <View>
       <Portal>
-        <Modal visible={modal.visible}>
+        <Modal visible={modal.visible} onDismiss={() => setModal({ visible: false })}>
           <SetStaticScoreModal
             confirmHandler={score => handleScoreAssignment(score)}
             value={modal.selectedValue}

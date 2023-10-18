@@ -4,7 +4,7 @@ export interface Shock {
 }
 
 export interface Art {
-  id: string;
+  id: number;
   name: string;
   description?: string;
 }

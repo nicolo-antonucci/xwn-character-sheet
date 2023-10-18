@@ -2,90 +2,113 @@ import { useContext, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Button, Modal, Portal, Text } from 'react-native-paper';
 import characterClasses from '../../../../assets/rules/wwnCharacterClasses.json';
-import SelectFocus from '../../../components/character-builder-components/SelectFocus';
-import SelectTradition from '../../../components/character-builder-components/SelectTradition';
+import SelectFocusModal from '../../../components/character-builder-components/SelectFocusModal';
+import SelectSkillModal from '../../../components/character-builder-components/SelectSkillModal';
+import SelectTraditionModal from '../../../components/character-builder-components/character-class-components/SelectTraditionModal';
 import ExpandableCard from '../../../components/generics/ExpandableCard';
-import { ArcaneTradition, CharacterClass } from '../../../model/characterClass';
+import { ArcaneTradition, CharacterClass, ClassName } from '../../../model/characterClass';
 import { Focus, FocusType } from '../../../model/focus';
+import { SWNSKILLS, WWNSKILLS } from '../../../model/skills';
 import { BuilderContext } from '../../../store/context/builder-context';
 import { Style } from '../../../styles/StyleSheet';
 
 export default function ClassPerksScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
 
-  const [classFoci, setClassFoci] = useState<[Focus | null, Focus | null]>([null, null]);
+  const [fociModal, setFociModal] = useState<FocusType | null>(null);
 
-  const [traditions, setTraditions] = useState<[ArcaneTradition | null, ArcaneTradition | null]>([null, null]);
+  const [traditionModal, setTraditionModal] = useState<0 | 1 | null>(null);
 
-  const [fociModal, setFociModal] = useState<{ index: number; focusType: FocusType } | null>(null);
-
-  const [traditionModal, setTraditionModal] = useState<{
-    index: number;
-    tradition: ArcaneTradition | null;
-  } | null>(null);
+  const [vowedModal, setVowedModal] = useState<boolean>(false);
 
   const getCharacterClass = () =>
     (characterClasses as CharacterClass[]).find(charClass => charClass.id === builderCtx?.character.characterClass?.id);
 
-  const handleFocusSelection = (focus: Focus) => {
-    setClassFoci(
-      current =>
-        current.map((el, i) => {
-          if (i !== fociModal?.index) return el;
+  const getFocusByType = (f: FocusType) => {
+    switch (f) {
+      case FocusType.COMBAT:
+        return builderCtx?.character.levelOneFoci?.combatFocus
+          ? { id: builderCtx?.character.levelOneFoci?.combatFocus }
+          : undefined;
+      case FocusType.NON_COMBAT:
+        return builderCtx?.character.levelOneFoci?.nonCombatFocus
+          ? { id: builderCtx?.character.levelOneFoci?.nonCombatFocus }
+          : undefined;
+      default:
+        return undefined;
+    }
+  };
 
-          return focus;
-        }) as [Focus | null, Focus | null],
-    );
+  const getTradition = (index: number) => builderCtx?.character.arcaneTraditions?.[index];
+
+  const handleFocusSelection = (focus: Focus) => {
+    switch (fociModal) {
+      case FocusType.COMBAT:
+        builderCtx?.setClassFoci(focus.id, builderCtx.character.levelOneFoci?.nonCombatFocus);
+        break;
+      case FocusType.NON_COMBAT:
+        builderCtx?.setClassFoci(builderCtx.character.levelOneFoci?.combatFocus, focus.id);
+        break;
+    }
     setFociModal(null);
   };
 
-  const handleTraditionSelection = (tradition: ArcaneTradition | undefined) => {
-    setTraditions(
-      current =>
-        current.map((el, i) => {
-          if (i !== traditionModal?.index) return el;
-
-          return tradition;
-        }) as [ArcaneTradition | null, ArcaneTradition | null],
-    );
+  const handleTraditionSelection = (tradition: ArcaneTradition | null, index: 0 | 1) => {
+    builderCtx?.setArcaneTradition(tradition, index);
     setTraditionModal(null);
+  };
+
+  const handleVowedSkillSelection = (skill: SWNSKILLS | WWNSKILLS) => {
+    builderCtx?.setVowedSkill(skill as WWNSKILLS);
+    setVowedModal(false);
   };
 
   return (
     <View style={{ paddingHorizontal: 12 }}>
       <Portal>
         <Modal visible={!!fociModal} onDismiss={() => setFociModal(null)}>
-          <SelectFocus
-            selectedFocus={classFoci[fociModal?.index as number]?.id}
-            type={fociModal?.focusType as FocusType}
+          <SelectFocusModal
+            selectedFocus={getFocusByType(fociModal as FocusType)?.id}
+            type={fociModal as FocusType}
             confirmHandler={handleFocusSelection}
             undoHandler={() => setFociModal(null)}
           />
         </Modal>
 
-        <Modal visible={!!traditionModal} onDismiss={() => setTraditionModal(null)}>
-          <SelectTradition
-            selectedTradition={traditions[traditionModal?.index as number]}
-            confirmHandler={handleTraditionSelection}
+        <Modal visible={traditionModal !== null} onDismiss={() => setTraditionModal(null)}>
+          <SelectTraditionModal
+            selectedTradition={getTradition(traditionModal as number)}
+            traditionType={getCharacterClass()?.name === ClassName.MAGE ? 'full' : 'partial'}
+            confirmHandler={tradition => handleTraditionSelection(tradition ?? null, traditionModal as 0 | 1)}
             undoHandler={() => setTraditionModal(null)}
+          />
+        </Modal>
+
+        <Modal visible={vowedModal} onDismiss={() => setVowedModal(false)}>
+          <SelectSkillModal
+            type={'Vowed Effort Skill'}
+            selectedValue={builderCtx?.character.vowedSkill}
+            confirmHandler={handleVowedSkillSelection}
+            undoHandler={() => setVowedModal(false)}
           />
         </Modal>
       </Portal>
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 24, gap: 18 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 6, gap: 18 }}
+      >
         {getCharacterClass()?.levelOneFoci?.length ? (
           <View style={{ gap: 12 }}>
             <Text style={{ ...Style.title, fontSize: 20 }}>Foci</Text>
             {getCharacterClass()?.levelOneFoci?.map((f, i) => (
               <View key={`class-focus-${i}`} style={{ gap: 12 }}>
                 <Text style={{ ...Style.subHeading, fontSize: 16 }}>Choose a {f.toLowerCase()} as a free pick</Text>
-                {classFoci[i] ? <ExpandableCard element={classFoci[i] as Focus} type={'focus'} /> : null}
-                <Button
-                  mode="contained-tonal"
-                  onPress={() => setFociModal({ index: i, focusType: f })}
-                  style={{ alignSelf: 'center' }}
-                >
-                  {classFoci[i] ? 'Change' : 'Choose'}
+                {getFocusByType(f) !== null && getFocusByType(f) !== undefined ? (
+                  <ExpandableCard element={getFocusByType(f) as Focus} type={'focus'} />
+                ) : null}
+                <Button mode="contained-tonal" onPress={() => setFociModal(f)} style={{ alignSelf: 'center' }}>
+                  {getFocusByType(f) ? 'Change' : 'Choose'}
                 </Button>
               </View>
             ))}
@@ -93,23 +116,36 @@ export default function ClassPerksScreen(): JSX.Element {
         ) : null}
 
         {getCharacterClass()?.perks?.some(p => p.name === 'Arcane Tradition') ? (
-          <View>
+          <View style={{ gap: 12 }}>
             <Text style={{ ...Style.title, fontSize: 20 }}>Arcane Tradition</Text>
             {getCharacterClass()
               ?.perks?.filter(p => p.name === 'Arcane Tradition')
               .map((p, i) => (
-                <View key={`arcane-tradition-${i}`} style={Style.colFlex}>
-                  <Text style={{ ...Style.subHeading, fontSize: 20 }}>Choose an arcane tradition</Text>
-                  {traditions[i] ? (
-                    <ExpandableCard element={traditions[i] as ArcaneTradition} type={'tradition'} />
+                <View key={`arcane-tradition-${i}`} style={{ gap: 12 }}>
+                  <Text style={{ ...Style.subHeading, fontSize: 16 }}>Choose an arcane tradition</Text>
+                  {getTradition(i) ? (
+                    <ExpandableCard element={getTradition(i) as ArcaneTradition} type={'tradition'} />
                   ) : null}
                   <Button
                     mode="contained-tonal"
-                    onPress={() => setTraditionModal({ index: i, tradition: traditions[i] })}
+                    onPress={() => setTraditionModal(i as 0 | 1)}
                     style={{ alignSelf: 'center' }}
                   >
-                    {classFoci[i] ? 'Change' : 'Choose'}
+                    {getTradition(i) ? 'Change' : 'Choose'}
                   </Button>
+                  {getTradition(i) === ArcaneTradition.VOWED ? (
+                    <View style={Style.rowFlex}>
+                      {builderCtx?.character.vowedSkill ? (
+                        <>
+                          <Text style={Style.bold}>Effort Skill:</Text>
+                          <Text> {builderCtx?.character.vowedSkill}</Text>
+                        </>
+                      ) : null}
+                      <Button onPress={() => setVowedModal(true)} style={{ alignSelf: 'center' }}>
+                        {builderCtx?.character.vowedSkill ? 'Change' : 'Choose effort skill'}
+                      </Button>
+                    </View>
+                  ) : null}
                 </View>
               ))}
           </View>

@@ -6,7 +6,7 @@ import { Focus, FocusType } from '../../model/focus';
 import { Style } from '../../styles/StyleSheet';
 import ExpandableCard from '../generics/ExpandableCard';
 
-export default function SelectFocus(props: SelectFocusProps): JSX.Element {
+export default function SelectFocusModal(props: SelectFocusModalProps): JSX.Element {
   const listItem = useCallback(
     ({ item }: { item: Focus }) => (
       <ExpandableCard
@@ -21,21 +21,19 @@ export default function SelectFocus(props: SelectFocusProps): JSX.Element {
   );
 
   return (
-    <View style={{ ...Style.modal, height: '90%' }}>
+    <View style={{ ...Style.modal, paddingHorizontal: 0 }}>
       <Text style={Style.title}>Select a focus</Text>
-      <View style={Style.f1}>
-        <FlatList
-          contentContainerStyle={Style.flatGap}
-          data={(foci as Focus[]).filter(f => f.type === props.type)}
-          renderItem={listItem}
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
+      <FlatList
+        contentContainerStyle={Style.flatGap}
+        data={(foci as Focus[]).filter(f => f.type === props.type)}
+        renderItem={listItem}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }
 
-export interface SelectFocusProps {
+export interface SelectFocusModalProps {
   type: FocusType;
   selectedFocus: number | null | undefined;
   confirmHandler: (focus: Focus) => void;

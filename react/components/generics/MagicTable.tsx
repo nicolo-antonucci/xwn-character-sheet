@@ -7,16 +7,16 @@ export default function MagicTable(props: MagicTableProps): JSX.Element {
   const basicTable = (
     <>
       <View style={Style.tableHeader}>
-        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 46 }}>Level</Text>
-        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 46 }}>Max{'\n'}Level</Text>
+        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 48 }}>Level</Text>
+        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 48 }}>Max{'\n'}Level</Text>
         <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 72 }}>Spells{'\n'}Cast</Text>
         <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 72 }}>Spells{'\n'}Prepared</Text>
         <Text style={{ ...Style.magicTableHeaderTxt, flex: 1 }}>Arts Gained</Text>
       </View>
       {(Array.from({ length: 10 }, (x, i) => i + 1) as (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10)[]).map(level => (
         <View key={`${props.tradition}-${level}`} style={Style.tableRow}>
-          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 46 }}>{level}</Text>
-          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 46 }}>
+          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 48 }}>{level}</Text>
+          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 48 }}>
             {props.table[level as keyof MagicProgressionTable].maxLevel}
           </Text>
           <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 72 }}>
@@ -27,7 +27,7 @@ export default function MagicTable(props: MagicTableProps): JSX.Element {
           </Text>
           <Text style={{ ...Style.magicTableRowTxt, flex: 1 }}>
             {props.table[level as keyof MagicProgressionTable].basicArts
-              ? props.table[level as keyof MagicProgressionTable].basicArts?.map(ba => `${ba}, `)
+              ? props.table[level as keyof MagicProgressionTable].basicArts?.map(ba => `${ba.name}, `)
               : null}
             {props.table[level as keyof MagicProgressionTable].artsGained
               ? props.table[level as keyof MagicProgressionTable].artsGained
@@ -41,16 +41,16 @@ export default function MagicTable(props: MagicTableProps): JSX.Element {
   const healerTable = (
     <>
       <View style={Style.tableHeader}>
-        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 46 }}>Level</Text>
+        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 48 }}>Level</Text>
         <Text style={{ ...Style.magicTableHeaderTxt, flex: 1 }}>Arts Gained</Text>
       </View>
 
       {(Array.from({ length: 10 }, (x, i) => i + 1) as (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10)[]).map(level => (
         <View key={`${props.tradition}-${level}`} style={Style.tableRow}>
-          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 46 }}>{level}</Text>
+          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 48 }}>{level}</Text>
           <Text style={{ ...Style.magicTableRowTxt, flex: 1 }}>
             {props.table[level as keyof MagicProgressionTable].basicArts
-              ? props.table[level as keyof MagicProgressionTable].basicArts?.map(ba => `${ba}, `)
+              ? props.table[level as keyof MagicProgressionTable].basicArts?.map(ba => `${ba.name}, `)
               : null}
             {props.table[level as keyof MagicProgressionTable].artsGained ?? '-'}
           </Text>
@@ -62,32 +62,32 @@ export default function MagicTable(props: MagicTableProps): JSX.Element {
   const vowedTable = (
     <>
       <View style={Style.tableHeader}>
-        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 46 }}>Level</Text>
+        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 48 }}>Level</Text>
 
-        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 64 }}>
+        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 48 }}>
           Punch{'\n'}Hit{'\n'}Bonus
         </Text>
-        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 64 }}>Punch{'\n'}Damage</Text>
-        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 64 }}>Punch{'\n'}Shock</Text>
+        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 54 }}>Punch{'\n'}Damage</Text>
+        <Text style={{ ...Style.magicTableHeaderTxt, borderRightWidth: 1, width: 48 }}>Punch{'\n'}Shock</Text>
         <Text style={{ ...Style.magicTableHeaderTxt, flex: 1 }}>Arts Gained</Text>
       </View>
       {(Array.from({ length: 10 }, (x, i) => i + 1) as (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10)[]).map(level => (
         <View key={`${props.tradition}-${level}`} style={Style.tableRow}>
-          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 46 }}>{level}</Text>
-          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 64 }}>
+          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 48 }}>{level}</Text>
+          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 48 }}>
             {props.table[level as keyof MagicProgressionTable].punchHitBonus}
           </Text>
-          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 64 }}>
+          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 54 }}>
             {props.table[level as keyof MagicProgressionTable].punchDamage}
           </Text>
-          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 64 }}>
+          <Text style={{ ...Style.magicTableRowTxt, borderRightWidth: 1, width: 48 }}>
             {`${props.table[level as keyof MagicProgressionTable].punchShock?.damage}/${props.table[
               level as keyof MagicProgressionTable
             ].punchShock?.ac}`}
           </Text>
           <Text style={{ ...Style.magicTableRowTxt, flex: 1 }}>
             {props.table[level as keyof MagicProgressionTable].basicArts
-              ? props.table[level as keyof MagicProgressionTable].basicArts?.map(ba => `${ba}, `)
+              ? props.table[level as keyof MagicProgressionTable].basicArts?.map(ba => `${ba.name}, `)
               : null}
             {props.table[level as keyof MagicProgressionTable].artsGained ?? '-'}
           </Text>

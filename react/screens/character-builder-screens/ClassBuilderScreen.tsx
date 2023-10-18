@@ -7,6 +7,7 @@ import { BuilderContext } from '../../store/context/builder-context';
 import { Style } from '../../styles/StyleSheet';
 import ClassPerksScreen from './class-sub-screens/ClassPerksScreen';
 import ClassPickerScreen from './class-sub-screens/ClassPickerScreen';
+import MagicPickerScreen from './class-sub-screens/MagicPickerScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,15 +25,13 @@ export default function ClassBuilderScreen(): JSX.Element {
             component={ClassPickerScreen}
             name="Classes"
             options={{
-              tabBarLabel: 'Classes',
               tabBarIcon: ({ color }) => <FontAwesome6 name="hat-wizard" color={color} size={20} />,
             }}
-          ></Tab.Screen>
+          />
           <Tab.Screen
             component={ClassPerksScreen}
             name="Foci & Traditions"
             options={{
-              tabBarLabel: 'Foci & Traditions',
               tabBarIcon: ({ color }) => <FontAwesome6 name="check-double" color={color} size={20} />,
             }}
             listeners={{
@@ -40,7 +39,14 @@ export default function ClassBuilderScreen(): JSX.Element {
                 if (builderCtx?.character.characterClass === null) e.preventDefault();
               },
             }}
-          ></Tab.Screen>
+          />
+          {builderCtx?.character.characterClass?.arcaneTraditions?.some(el => !!el) ? (
+            <Tab.Screen
+              component={MagicPickerScreen}
+              name="Spells & Arts"
+              options={{ tabBarIcon: ({ color }) => <FontAwesome6 name="wand-sparkles" color={color} size={20} /> }}
+            />
+          ) : null}
         </Tab.Navigator>
       </View>
     </SafeAreaView>
