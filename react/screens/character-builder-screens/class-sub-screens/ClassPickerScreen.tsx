@@ -10,7 +10,8 @@ export default function ClassPickerScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
 
   const handleSelection = (characterClass: CharacterClass) => {
-    if (builderCtx?.character.characterClass?.id !== characterClass.id) builderCtx?.setCharacterClass(characterClass);
+    if (builderCtx?.character.characterClass?.classId !== characterClass.id)
+      builderCtx?.setCharacterClass(characterClass);
   };
 
   return (
@@ -22,7 +23,7 @@ export default function ClassPickerScreen(): JSX.Element {
           key={`bg-entry-${item.id}`}
           element={item}
           type={'charClass'}
-          chosen={builderCtx?.character.characterClass?.id === item.id}
+          chosen={builderCtx?.character.characterClass?.classId === item.id}
           selectable={true}
           onSelection={() => handleSelection(item)}
         />

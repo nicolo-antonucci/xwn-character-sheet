@@ -86,7 +86,7 @@
     "description": "You’ve had all too much practice at close-in fighting and sdesperate struggles with drawn blades. You’re extremely skilled at avoiding injury in melee combat, and at level 2 you can dodge through a melee scrum without fear of being knifed in passing.",
     "lv1": {
       "description": "Gain any combat skill as a bonus skill. You can use knife-sized thrown weapons in melee without suffering penalties for the proximity of melee attackers. You ignore Shock damage from melee assailants, even if you’re unarmored at the time, but invoking this benefit disrupts any spellcasting you might do that round due to the need for violently active evasion.",
-      "skills": ["Any Combat"]
+      "skillChoice": "Any Combat"
     },
     "lv2": {
       "description": "The Shock damage from your melee attacks treats all targets as if they were AC 10. The Fighting Withdrawal combat action is treated as an On Turn action for you and can be performed freely.",
@@ -229,7 +229,7 @@
     "description": "You are exceedingly skilled at presenting yourself as something you are not, including disguises, voice mimicry, and lightning-fast wardrobe changes. Some impostors rely on the acting skills of Perform, while others lean more to the nefarious tricks of Sneak.",
     "lv1": {
       "description": "Gain Perform or Sneak as a bonus skill. Once per scene, reroll any failed skill check or saving throw related to maintaining an imposture or disguise. Create one false identity of no great social importance; you can flawlessly pretend to be that person, such that only extremely persuasive proof can connect you with it. You can change this identity with a week’s worth of effort in building a new one.",
-      "skillChoice": ["Perform", "Sneak"]
+      "skills": ["Perform", "Sneak"]
     },
     "lv2": {
       "description": "You can alter your clothing and armor such that a single Main Action lets you swap between any of three chosen appearances. In addition to your original false identity, you can establish a new false identity in each city or significant community you spend at least a day in."
@@ -279,7 +279,7 @@
     "description": "You have a passing acquaintance with a vast variety of practical skills and pastimes, and can make a modest attempt at almost any exercise of skill or artisanry. Note that the phantom skill levels granted by this Focus don’t stack with normal skill levels or give a skill purchase discount. Only Experts or Partial Experts can take this Focus.",
     "lv1": {
       "description": "Gain any one bonus skill. You treat all non-combat skills as if they were at least level-0 for purposes of skill checks, even if you lack them entirely.",
-      "skills": ["Any Skill"],
+      "skillChoice": "Any Skill",
       "flag": "polymath-lv1"
     },
     "lv2": {
@@ -307,7 +307,7 @@
     "description": "You’re extremely dangerous to enemies around you. The ferocity of your melee attacks stresses and distracts enemies even when your blows don’t draw blood.",
     "lv1": {
       "description": "Gain Punch or Stab as a bonus skill. The Shock damage of your weapon treats all targets as if they were AC 10, assuming your weapon is capable of harming the target in the first place and the target is not immune to Shock.",
-      "skillChoice": ["Punch", "Stab"],
+      "skills": ["Punch", "Stab"],
       "flag": "shocking-assault-lv1"
     },
     "lv2": {
@@ -335,7 +335,7 @@
     "description": "You are remarkably talented at a particular skill. Whether a marvelous cat burglar, a famed athlete, a brilliant scholar, or some other savant, your expertise is extremely reliable. You may take this Focus more than once for different skills.",
     "lv1": {
       "description": "Gain any skill as a bonus, except for Magic, Stab, Shoot, or Punch. Roll 3d6 and drop the lowest die for all skill checks in this skill.",
-      "skills": ""
+      "skillChoice": "Specialist"
     },
     "lv2": {
       "description": "Roll 4d6 and drop the two lowest dice for all skill checks in this skill."
@@ -413,7 +413,7 @@
     "description": "You are a bodyguard, shieldbearer, or other gifted defender of others, accustomed to the roil of bloody battle and desperate struggle. You have an exceptional ability to shield your allies from the attacks of those who would slay them.",
     "lv1": {
       "description": "Gain Stab or Punch as a bonus skill. Gain a +2 on all skill checks for the Screen Ally combat action. You can screen against one more attacker per round than your skill would normally allow. Once per round, you can Screen Ally against even intangible spells or magical attacks or bodily shield them from an area-effect explosion or magic. Such attempts require the usual successful opposing skill check, with the assailant using their Magic skill.",
-      "skillChoice": ["Punch", "Stab"]
+      "skills": ["Punch", "Stab"]
     },
     "lv2": {
       "description": "The first Screen Ally skill check you make in a round is always successful. Gain +2 AC while screening someone. You can screen against foes as large as ogres or oxen."
@@ -481,12 +481,12 @@
     "description": "Moon elves are thin and tall, with pale skin and black hair and eyes or black skin and silver hair and eyes. They live even longer than their hated sylvan cousins: the blessing of their moon goddess grants them a life spanning more than five centuries and the ability of being reincarnated at the cost of being sterile. Moon elves lack obvious flaws: if any of your ability score is below 9, you must shift points from other attributes to raise the deficient scores up to 9. If you do not have enough points to raise all scores to 9, shift points as to have the most even array of attribute scores then set any score below 9 to 9. A moon elf that is killed is reincarnated after a century with only vague memories of their previous life.",
     "lv1": {
       "description": "Pick any skill as a bonus skill reflecting your past memories. You may reroll a failed skill check in this skill once per day. You have extremely sharp senses, gaining Notice as a bonus skill and being able to see clearly in anything short of complete darkness.",
-      "skills": ["Any Skill"],
+      "skillChoice": "Any Skill",
       "flag": "moon-elf-lv1"
     },
     "lv2": {
       "description": "Pick a mental attribute; gain +1 to your ability modifier in it, up to a maximum of +3 as you draw on past memories. Pick any skill as an additional bonus skill.",
-      "skills": ["Any Skill"],
+      "skillChoice": "Any Skill",
       "flag": "moon-elf-lv2"
     },
     "type": "Origin Focus"

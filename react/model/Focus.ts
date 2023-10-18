@@ -8,14 +8,23 @@ export const FocusType = {
   ORIGIN: 'Origin' as FocusType,
 };
 
+export type FocusSource = 'Warrior' | 'Expert' | 'Standard';
+
+export const FocusSource = {
+  WARRIOR: 'Warrior' as FocusSource,
+  EXPERT: 'Expert' as FocusSource,
+  STANDARD: 'Standard' as FocusSource,
+};
+
 export interface Benefit {
   description: string;
-  skills?: (SWNSKILLS | WWNSKILLS | PSYSKILLS | SKILL_CHOICE)[];
-  skillChoice?: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[];
+  skills?: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[];
+  skillChoice?: SKILL_CHOICE | 'Specialist';
   flag?: string;
   setFlag?: string;
   perks?: { description: string; flag?: string }[];
   canBeCustom?: boolean;
+  canBeTakenMoreTimes?: boolean;
 }
 
 export interface Focus {

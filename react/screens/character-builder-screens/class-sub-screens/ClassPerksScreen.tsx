@@ -2,13 +2,14 @@ import { useContext, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Button, Modal, Portal, Text } from 'react-native-paper';
 import characterClasses from '../../../../assets/rules/wwnCharacterClasses.json';
+import foci from '../../../../assets/rules/wwnFoci.json';
 import SelectFocusModal from '../../../components/character-builder-components/SelectFocusModal';
 import SelectSkillModal from '../../../components/character-builder-components/SelectSkillModal';
 import SelectTraditionModal from '../../../components/character-builder-components/character-class-components/SelectTraditionModal';
 import ExpandableCard from '../../../components/generics/ExpandableCard';
 import { ArcaneTradition, CharacterClass, ClassName } from '../../../model/characterClass';
 import { Focus, FocusType } from '../../../model/focus';
-import { SWNSKILLS, WWNSKILLS } from '../../../model/skills';
+import { SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../../model/skills';
 import { BuilderContext } from '../../../store/context/builder-context';
 import { Style } from '../../../styles/StyleSheet';
 
@@ -16,9 +17,8 @@ export default function ClassPerksScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
 
   const [fociModal, setFociModal] = useState<FocusType | null>(null);
-
   const [traditionModal, setTraditionModal] = useState<0 | 1 | null>(null);
-
+  const [skillModal, setSkillModal] = useState<[SKILL_CHOICE | 'Specialist' | null, boolean]>([null, false]);
   const [vowedModal, setVowedModal] = useState<boolean>(false);
 
   const getCharacterClass = () =>
@@ -28,16 +28,29 @@ export default function ClassPerksScreen(): JSX.Element {
     switch (f) {
       case FocusType.COMBAT:
         return builderCtx?.character.levelOneFoci?.combatFocus
-          ? { id: builderCtx?.character.levelOneFoci?.combatFocus }
+          ? {
+              id: builderCtx?.character.levelOneFoci?.combatFocus,
+            }
           : undefined;
       case FocusType.NON_COMBAT:
         return builderCtx?.character.levelOneFoci?.nonCombatFocus
-          ? { id: builderCtx?.character.levelOneFoci?.nonCombatFocus }
+          ? {
+              id: builderCtx?.character.levelOneFoci?.nonCombatFocus,
+            }
           : undefined;
       default:
         return undefined;
     }
   };
+
+  const getFocusSkills = (focusId: number | undefined) =>
+    (foci as Focus[]).find(focus => focus.id === focusId)?.lv1?.skills;
+
+  const getSkillChoice = (focusId: number | undefined) =>
+    (foci as Focus[]).find(focus => focus.id === focusId)?.lv1?.skillChoice ?? null;
+
+  const getCharacterSkillChoices = (focusId: number | undefined) =>
+    builderCtx?.character.foci?.find(f => f.focus.id === focusId)?.skillChoices;
 
   const getTradition = (index: number) => builderCtx?.character.arcaneTraditions?.[index];
 
@@ -84,6 +97,15 @@ export default function ClassPerksScreen(): JSX.Element {
           />
         </Modal>
 
+        <Modal visible={skillModal[1]} onDismiss={() => setSkillModal([null, false])}>
+          <SelectSkillModal
+            type={skillModal[0] as SKILL_CHOICE | 'Specialist'}
+            selectedValue={builderCtx?.character.vowedSkill}
+            confirmHandler={handleVowedSkillSelection}
+            undoHandler={() => setSkillModal([null, false])}
+          />
+        </Modal>
+
         <Modal visible={vowedModal} onDismiss={() => setVowedModal(false)}>
           <SelectSkillModal
             type={'Vowed Effort Skill'}
@@ -110,6 +132,26 @@ export default function ClassPerksScreen(): JSX.Element {
                 <Button mode="contained-tonal" onPress={() => setFociModal(f)} style={{ alignSelf: 'center' }}>
                   {getFocusByType(f) ? 'Change' : 'Choose'}
                 </Button>
+
+                {getFocusSkills(getFocusByType(f)?.id)?.map((sk, i) => (
+                  <View key={`focus-sk-${f}-${i}`} style={Style.rowFlex}>
+                    <Text style={Style.bold}>Bonus Skill:</Text>
+                    <Text> {getCharacterSkillChoices(getFocusByType(f)?.id) ?? ' - '}</Text>
+                  </View>
+                ))}
+
+                {getSkillChoice(getFocusByType(f)?.id) ? (
+                  <View key={`focus-sk-${f}-${i}`} style={Style.rowFlex}>
+                    <Text style={Style.bold}>Bonus Skill:</Text>
+                    <Text> {getCharacterSkillChoices(getFocusByType(f)?.id) ?? ' - '}</Text>
+                    <Button
+                      onPress={() => setSkillModal([getSkillChoice(getFocusByType(f)?.id), true])}
+                      style={{ alignSelf: 'center' }}
+                    >
+                      {getCharacterSkillChoices(getFocusByType(f)?.id) ? 'Change' : 'Choose skill'}
+                    </Button>
+                  </View>
+                ) : null}
               </View>
             ))}
           </View>

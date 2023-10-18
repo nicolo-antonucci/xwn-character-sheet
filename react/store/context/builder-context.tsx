@@ -1,9 +1,9 @@
 import { ReactElement, createContext, useEffect, useState } from 'react';
-import foci from '../../../assets/rules/wwnFoci.json';
+import { generateId } from '../../commons/Utils';
 import { BGBenefit, BGBenefitPickType, Background } from '../../model/backgrounds';
-import { AbilityScores, Character } from '../../model/character';
+import { AbilityScores, Character, CharacterClassInfo } from '../../model/character';
 import { ArcaneTradition, CharacterClass } from '../../model/characterClass';
-import { Focus } from '../../model/focus';
+import { FocusSource } from '../../model/focus';
 import { RULESET } from '../../model/properties';
 import { WWNSKILLS, WWNSkills } from '../../model/skills';
 
@@ -15,7 +15,9 @@ export const BuilderContext = createContext<{
   setBackgroundPickType: (bgBenefitPickType: BGBenefitPickType) => void;
   setBackgroundPerks: (bgBenefits: BGBenefit[]) => void;
   setCharacterClass: (characterClass: CharacterClass) => void;
-  setClassFoci: (combatFocus: number | null | undefined, nonCombatFocus: number | null | undefined) => void;
+  setWarriorFocus: (focusId: number) => void;
+  setExpertFocus: (focusId: number) => void;
+  setFocus: (focusId: number, entityId?: string) => void;
   setArcaneTradition: (tradition: ArcaneTradition | null, index: 0 | 1) => void;
   setVowedSkill: (skill: WWNSKILLS) => void;
 } | null>(null);
@@ -84,54 +86,62 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
   }
 
   function setCharacterClass(characterClass: CharacterClass) {
-    setCharacter(current => {
-      return {
-        ...current,
-        characterClass: characterClass ? { id: characterClass.id } : null,
-        foci: current.foci.filter(
-          f => current.levelOneFoci?.combatFocus !== f.focus.id && current.levelOneFoci?.nonCombatFocus !== f.focus.id,
-        ),
-        levelOneFoci: { combatFocus: undefined, nonCombatFocus: undefined },
-        vowedSkill: undefined,
-      };
-    });
-  }
-
-  function setClassFoci(combatFocus: number | null | undefined, nonCombatFocus: number | null | undefined) {
-    const cf = (foci as Focus[]).find(f => f.id === combatFocus);
-    const ncf = (foci as Focus[]).find(f => f.id === nonCombatFocus);
     setCharacter(current => ({
       ...current,
-      foci:
-        cf || ncf
-          ? ([
-              ...current.foci.filter(
-                f =>
-                  current.levelOneFoci?.combatFocus !== f.focus.id &&
-                  current.levelOneFoci?.nonCombatFocus !== f.focus.id &&
-                  combatFocus !== f.focus.id &&
-                  nonCombatFocus !== f.focus.id,
-              ),
-              cf ? { focus: { id: cf.id }, level: 1 } : undefined,
-              ncf ? { focus: { id: ncf.id }, level: 1 } : undefined,
-            ].filter(f => f?.focus) as { focus: Focus; level: 1 | 2 }[])
-          : current.foci.filter(
-              f =>
-                current.levelOneFoci?.combatFocus !== f.focus.id || current.levelOneFoci?.nonCombatFocus !== f.focus.id,
-            ),
-      levelOneFoci: { combatFocus, nonCombatFocus },
+      characterClass: { classId: characterClass.id, level: 1 },
+      foci: new Set(Array.from(current.foci).filter(f => f.source === FocusSource.STANDARD)),
     }));
   }
 
+  function setWarriorFocus(focusId: number) {
+    setCharacter(current => ({
+      ...current,
+      foci: new Set([
+        ...Array.from(current.foci).filter(f => f.source !== FocusSource.WARRIOR),
+        { id: generateId(), source: FocusSource.WARRIOR, focusId, level: 1 },
+      ]),
+    }));
+  }
+
+  function setExpertFocus(focusId: number) {
+    setCharacter(current => ({
+      ...current,
+      foci: new Set([
+        ...Array.from(current.foci).filter(f => f.source !== FocusSource.EXPERT),
+        { id: generateId(), source: FocusSource.EXPERT, focusId, level: 1 },
+      ]),
+    }));
+  }
+
+  function setFocus(focusId: number, entityId?: string) {
+    if (!entityId)
+      setCharacter(current => ({
+        ...current,
+        foci: new Set([
+          ...Array.from(current.foci).filter(f => f.source !== FocusSource.EXPERT),
+          { id: generateId(), source: FocusSource.STANDARD, focusId, level: 1 },
+        ]),
+      }));
+    else {
+      const focus = Array.from(character.foci).find(f => f.id === entityId);
+      if (focus)
+        setCharacter(current => ({
+          ...current,
+          foci: new Set([...Array.from(current.foci).filter(f => f.id !== entityId), { ...focus, level: 2 }]),
+        }));
+    }
+  }
+
   function setArcaneTradition(tradition: ArcaneTradition | null, index: 0 | 1) {
-    const arcaneTraditions: (ArcaneTradition | null)[] = character.arcaneTraditions ?? [null, null];
+    const arcaneTraditions: (ArcaneTradition | null)[] = character.characterClass?.arcaneTraditions ?? [null, null];
     arcaneTraditions[index] = tradition;
 
     setCharacter(current => ({
       ...current,
-      characterClass: current.characterClass?.id ? { ...current.characterClass } : null,
-      arcaneTraditions,
-      vowedSkill: undefined,
+      characterClass: {
+        ...(current.characterClass as CharacterClassInfo),
+        arcaneTraditions,
+      },
     }));
   }
 
@@ -154,7 +164,9 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
         setBackgroundPickType,
         setBackgroundPerks,
         setCharacterClass,
-        setClassFoci,
+        setWarriorFocus,
+        setExpertFocus,
+        setFocus,
         setArcaneTradition,
         setVowedSkill,
       }}

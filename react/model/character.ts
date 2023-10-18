@@ -1,9 +1,9 @@
 import { generateId } from '../commons/Utils';
 import { BGBenefit, BGBenefitPickType, Background } from './backgrounds';
-import { ArcaneTradition, CharacterClass } from './characterClass';
-import { Focus } from './focus';
+import { ArcaneTradition } from './characterClass';
+import { FocusSource } from './focus';
 import { RULESET } from './properties';
-import { Skills, WWNSKILLS } from './skills';
+import { PSYSKILLS, SWNSKILLS, Skills, WWNSKILLS } from './skills';
 
 export type SCORE = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
 
@@ -25,6 +25,13 @@ export interface AbilityScores {
   cha: number | null;
 }
 
+export interface CharacterClassInfo {
+  classId: number;
+  arcaneTraditions?: (ArcaneTradition | null)[];
+  vowedSkill?: WWNSKILLS;
+  level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+}
+
 export class Character {
   id: string;
   ruleset: RULESET = RULESET.WWN;
@@ -34,13 +41,15 @@ export class Character {
     benefitPickType: BGBenefitPickType | null;
     bgBenefits: BGBenefit[] | null;
   };
+  characterClass?: CharacterClassInfo;
+  foci: Set<{
+    id: string;
+    source: FocusSource;
+    focusId: number;
+    level: 1 | 2;
+    skillChoices?: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[];
+  }>;
   skills: Skills | null;
-  foci: { focus: Focus; level: 1 | 2 }[];
-  characterClass: CharacterClass | null;
-  levelOneFoci?: { combatFocus: number | null | undefined; nonCombatFocus: number | null | undefined };
-  arcaneTraditions?: (ArcaneTradition | null)[];
-  vowedSkill: WWNSKILLS | undefined;
-  level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = 1;
   flags: string[] = [];
 
   constructor() {
@@ -54,12 +63,17 @@ export class Character {
       wis: null,
     };
     this.skills = null;
-    this.foci = [];
+    this.foci = new Set<{
+      id: string;
+      source: FocusSource;
+      focusId: number;
+      level: 1 | 2;
+      skillChoices?: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[];
+    }>();
     this.characterBackground = {
       background: null,
       benefitPickType: null,
       bgBenefits: null,
     };
-    this.characterClass = null;
   }
 }

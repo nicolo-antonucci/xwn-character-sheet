@@ -60,6 +60,23 @@ export default function SelectSkillModal(props: SelectSkillModalProps): JSX.Elem
         </View>
       ) : null}
 
+      {props.type === 'Specialist' ? (
+        <View style={Style.modalOptBtnContainer}>
+          {Object.values(WWNSkills)
+            .filter(k => ![WWNSkills.MAGIC, WWNSkills.STAB, WWNSkills.SHOOT, WWNSkills.PUNCH].includes(k))
+            .map(k => (
+              <Button
+                key={`select-score-${k}`}
+                mode="contained-tonal"
+                onPress={() => props.confirmHandler(k)}
+                style={Style.optionBtn}
+              >
+                {k}
+              </Button>
+            ))}
+        </View>
+      ) : null}
+
       {props.type === 'Vowed Effort Skill' ? (
         <View style={Style.modalOptBtnContainer}>
           {[BASESKILLS.EXERT, BASESKILLS.KNOW, WWNSkills.MAGIC, WWNSkills.PRAY].map(k => (
@@ -79,7 +96,7 @@ export default function SelectSkillModal(props: SelectSkillModalProps): JSX.Elem
 }
 
 export interface SelectSkillModalProps {
-  type: SKILL_CHOICE | 'Vowed Effort Skill';
+  type: SKILL_CHOICE | 'Specialist' | 'Vowed Effort Skill';
   selectedValue?: SWNSKILLS | WWNSKILLS;
   confirmHandler: (skill: SWNSKILLS | WWNSKILLS) => void;
   undoHandler: () => void;
