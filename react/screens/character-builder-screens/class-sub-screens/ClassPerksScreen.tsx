@@ -17,13 +17,6 @@ export default function ClassPerksScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
 
   const [fociModal, setFociModal] = useState<FocusSource | null>(null);
-  const [fociSkillChoice, setFociSkillChoice] = useState<{
-    cb: SKILL_CHOICE | (WWNSKILLS | SWNSKILLS)[] | null;
-    ncb: SKILL_CHOICE | 'Specialist' | (WWNSKILLS | SWNSKILLS | PSYSKILLS)[] | null;
-  }>({
-    cb: null,
-    ncb: null,
-  });
   const [traditionModal, setTraditionModal] = useState<0 | 1 | null>(null);
   const [skillModal, setSkillModal] = useState<{
     visible: boolean;
@@ -63,7 +56,8 @@ export default function ClassPerksScreen(): JSX.Element {
   };
 
   const handleSkillSelection = (skill: SWNSKILLS | WWNSKILLS | PSYSKILLS) => {
-    builderCtx?.setFocusSkillChoices(skillModal.source as string, [skill]);
+    const entityId = getFocusInfoBySource(skillModal.source as FocusSource)?.id;
+    if (entityId) builderCtx?.setFocusSkillChoice(entityId, [skill]);
     setSkillModal({ visible: false });
   };
 

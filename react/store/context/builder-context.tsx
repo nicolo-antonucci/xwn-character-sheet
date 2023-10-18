@@ -18,7 +18,7 @@ export const BuilderContext = createContext<{
   setWarriorFocus: (focusId: number) => void;
   setExpertFocus: (focusId: number) => void;
   setFocus: (focusId: number, entityId?: string) => void;
-  setFocusSkillChoices: (entityId: string, skillChoices: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[]) => void;
+  setFocusSkillChoice: (entityId: string, skillChoices: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[]) => void;
   setArcaneTradition: (tradition: ArcaneTradition | null, index: 0 | 1) => void;
   setVowedSkill: (skill: WWNSKILLS) => void;
 } | null>(null);
@@ -182,7 +182,7 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
         setWarriorFocus,
         setExpertFocus,
         setFocus,
-        setFocusSkillChoices: setFocusSkillChoice,
+        setFocusSkillChoice,
         setArcaneTradition,
         setVowedSkill,
       }}

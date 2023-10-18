@@ -67,7 +67,7 @@ export default function ChooseBGPerks(): JSX.Element {
               setChoices(current =>
                 current.map((el, i) => ({
                   ...el,
-                  subChoice: modal === i ? skill : el.subChoice,
+                  subChoice: modal === i ? (skill as SWNSKILLS | WWNSKILLS) : el.subChoice,
                 })),
               );
               setModal(null);

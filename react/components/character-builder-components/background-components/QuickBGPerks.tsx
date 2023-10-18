@@ -32,8 +32,8 @@ export default function QuickBGPerks(): JSX.Element {
             confirmHandler={skill => {
               setChoices(current =>
                 current.map((el, i) => {
-                  if (modal === i) return skill;
-                  return el;
+                  if (modal === i) return skill as SWNSKILLS | WWNSKILLS;
+                  return el as SWNSKILLS | WWNSKILLS;
                 }),
               );
               setModal(null);
