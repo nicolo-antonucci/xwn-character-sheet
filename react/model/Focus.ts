@@ -18,8 +18,8 @@ export const FocusSource = {
 
 export interface Benefit {
   description: string;
-  skills?: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[];
-  skillChoice?: SKILL_CHOICE | 'Specialist';
+  skill?: SWNSKILLS | WWNSKILLS | PSYSKILLS;
+  skillChoice?: SKILL_CHOICE | 'Specialist' | (SWNSKILLS | WWNSKILLS | PSYSKILLS)[];
   flag?: string;
   setFlag?: string;
   perks?: { description: string; flag?: string }[];
@@ -33,7 +33,6 @@ export interface Focus {
   description?: string;
   lv1?: Benefit;
   lv2?: Benefit;
-  level?: 1 | 2;
   type: FocusType;
   hasCustomDescription?: boolean;
   customDescription?: string;

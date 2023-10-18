@@ -80,10 +80,9 @@ export const Style = StyleSheet.create({
     gap: 8,
   },
   modalOptBtnContainer: {
-    alignItems: 'center',
+    gap: 12,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
     justifyContent: 'center',
   },
   optionBtn: {

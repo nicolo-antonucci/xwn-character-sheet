@@ -5,7 +5,7 @@ import { AbilityScores, Character, CharacterClassInfo } from '../../model/charac
 import { ArcaneTradition, CharacterClass } from '../../model/characterClass';
 import { FocusSource } from '../../model/focus';
 import { RULESET } from '../../model/properties';
-import { WWNSKILLS, WWNSkills } from '../../model/skills';
+import { PSYSKILLS, SWNSKILLS, WWNSKILLS, WWNSkills } from '../../model/skills';
 
 export const BuilderContext = createContext<{
   character: Character;
@@ -18,6 +18,7 @@ export const BuilderContext = createContext<{
   setWarriorFocus: (focusId: number) => void;
   setExpertFocus: (focusId: number) => void;
   setFocus: (focusId: number, entityId?: string) => void;
+  setFocusSkillChoices: (entityId: string, skillChoices: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[]) => void;
   setArcaneTradition: (tradition: ArcaneTradition | null, index: 0 | 1) => void;
   setVowedSkill: (skill: WWNSKILLS) => void;
 } | null>(null);
@@ -132,6 +133,20 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
     }
   }
 
+  function setFocusSkillChoice(entityId: string, skillChoices: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[]) {
+    const fociList = Array.from(character.foci);
+    const foci = new Set(
+      fociList.map(f => {
+        if (f.id === entityId) return { ...f, skillChoices };
+        else return f;
+      }),
+    );
+    setCharacter(current => ({
+      ...current,
+      foci,
+    }));
+  }
+
   function setArcaneTradition(tradition: ArcaneTradition | null, index: 0 | 1) {
     const arcaneTraditions: (ArcaneTradition | null)[] = character.characterClass?.arcaneTraditions ?? [null, null];
     arcaneTraditions[index] = tradition;
@@ -167,6 +182,7 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
         setWarriorFocus,
         setExpertFocus,
         setFocus,
+        setFocusSkillChoices: setFocusSkillChoice,
         setArcaneTradition,
         setVowedSkill,
       }}

@@ -30,3 +30,5 @@ export const sortAbilityScores = (a: SCORE | string, b: SCORE | string) => {
       return a <= b ? -1 : 1;
   }
 };
+
+export const sortAlphabetically = (a: string, b: string) => (a > b ? 1 : -1);

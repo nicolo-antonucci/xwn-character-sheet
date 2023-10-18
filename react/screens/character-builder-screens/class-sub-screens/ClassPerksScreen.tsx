@@ -1,66 +1,57 @@
 import { useContext, useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Button, Modal, Portal, Text } from 'react-native-paper';
+import { Modal, Portal, Text } from 'react-native-paper';
 import characterClasses from '../../../../assets/rules/wwnCharacterClasses.json';
-import foci from '../../../../assets/rules/wwnFoci.json';
+import FocusPicker from '../../../components/character-builder-components/FocusPicker';
 import SelectFocusModal from '../../../components/character-builder-components/SelectFocusModal';
 import SelectSkillModal from '../../../components/character-builder-components/SelectSkillModal';
 import SelectTraditionModal from '../../../components/character-builder-components/character-class-components/SelectTraditionModal';
-import ExpandableCard from '../../../components/generics/ExpandableCard';
 import { ArcaneTradition, CharacterClass, ClassName } from '../../../model/characterClass';
-import { Focus, FocusType } from '../../../model/focus';
-import { SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../../model/skills';
+import { Focus, FocusSource, FocusType } from '../../../model/focus';
+import { PSYSKILLS, SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../../model/skills';
 import { BuilderContext } from '../../../store/context/builder-context';
 import { Style } from '../../../styles/StyleSheet';
+import foci from '../../../../assets/rules/wwnFoci.json';
 
 export default function ClassPerksScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
 
-  const [fociModal, setFociModal] = useState<FocusType | null>(null);
+  const [fociModal, setFociModal] = useState<FocusSource | null>(null);
+  const [fociSkillChoice, setFociSkillChoice] = useState<{
+    cb: SKILL_CHOICE | (WWNSKILLS | SWNSKILLS)[] | null;
+    ncb: SKILL_CHOICE | 'Specialist' | (WWNSKILLS | SWNSKILLS | PSYSKILLS)[] | null;
+  }>({
+    cb: null,
+    ncb: null,
+  });
   const [traditionModal, setTraditionModal] = useState<0 | 1 | null>(null);
-  const [skillModal, setSkillModal] = useState<[SKILL_CHOICE | 'Specialist' | null, boolean]>([null, false]);
+  const [skillModal, setSkillModal] = useState<{
+    visible: boolean;
+    skillChoiceType?: SKILL_CHOICE | 'Specialist' | (WWNSKILLS | SWNSKILLS | PSYSKILLS)[] | null;
+    source?: FocusSource;
+  }>({ visible: false });
   const [vowedModal, setVowedModal] = useState<boolean>(false);
 
   const getCharacterClass = () =>
-    (characterClasses as CharacterClass[]).find(charClass => charClass.id === builderCtx?.character.characterClass?.id);
+    (characterClasses as CharacterClass[]).find(
+      charClass => charClass.id === builderCtx?.character.characterClass?.classId,
+    );
 
-  const getFocusByType = (f: FocusType) => {
-    switch (f) {
-      case FocusType.COMBAT:
-        return builderCtx?.character.levelOneFoci?.combatFocus
-          ? {
-              id: builderCtx?.character.levelOneFoci?.combatFocus,
-            }
-          : undefined;
-      case FocusType.NON_COMBAT:
-        return builderCtx?.character.levelOneFoci?.nonCombatFocus
-          ? {
-              id: builderCtx?.character.levelOneFoci?.nonCombatFocus,
-            }
-          : undefined;
-      default:
-        return undefined;
-    }
-  };
+  const getFocusInfoBySource = (source: FocusSource) =>
+    Array.from(builderCtx?.character.foci ?? []).find(focus => focus.source === source);
 
-  const getFocusSkills = (focusId: number | undefined) =>
-    (foci as Focus[]).find(focus => focus.id === focusId)?.lv1?.skills;
+  const getFocusBySource = (source: FocusSource) =>
+    (foci as Focus[]).find(f => f.id === getFocusInfoBySource(source)?.focusId);
 
-  const getSkillChoice = (focusId: number | undefined) =>
-    (foci as Focus[]).find(focus => focus.id === focusId)?.lv1?.skillChoice ?? null;
-
-  const getCharacterSkillChoices = (focusId: number | undefined) =>
-    builderCtx?.character.foci?.find(f => f.focus.id === focusId)?.skillChoices;
-
-  const getTradition = (index: number) => builderCtx?.character.arcaneTraditions?.[index];
+  const getTradition = (index: number) => builderCtx?.character.characterClass?.arcaneTraditions?.[index];
 
   const handleFocusSelection = (focus: Focus) => {
     switch (fociModal) {
-      case FocusType.COMBAT:
-        builderCtx?.setClassFoci(focus.id, builderCtx.character.levelOneFoci?.nonCombatFocus);
+      case FocusSource.WARRIOR:
+        builderCtx?.setWarriorFocus(focus.id);
         break;
-      case FocusType.NON_COMBAT:
-        builderCtx?.setClassFoci(builderCtx.character.levelOneFoci?.combatFocus, focus.id);
+      case FocusSource.EXPERT:
+        builderCtx?.setExpertFocus(focus.id);
         break;
     }
     setFociModal(null);
@@ -71,7 +62,12 @@ export default function ClassPerksScreen(): JSX.Element {
     setTraditionModal(null);
   };
 
-  const handleVowedSkillSelection = (skill: SWNSKILLS | WWNSKILLS) => {
+  const handleSkillSelection = (skill: SWNSKILLS | WWNSKILLS | PSYSKILLS) => {
+    builderCtx?.setFocusSkillChoices(skillModal.source as string, [skill]);
+    setSkillModal({ visible: false });
+  };
+
+  const handleVowedSkillSelection = (skill: SWNSKILLS | WWNSKILLS | PSYSKILLS) => {
     builderCtx?.setVowedSkill(skill as WWNSKILLS);
     setVowedModal(false);
   };
@@ -81,8 +77,8 @@ export default function ClassPerksScreen(): JSX.Element {
       <Portal>
         <Modal visible={!!fociModal} onDismiss={() => setFociModal(null)}>
           <SelectFocusModal
-            selectedFocus={getFocusByType(fociModal as FocusType)?.id}
-            type={fociModal as FocusType}
+            selectedFocus={getFocusInfoBySource(fociModal as FocusSource)?.focusId}
+            type={fociModal === FocusSource.WARRIOR ? FocusType.COMBAT : FocusType.NON_COMBAT}
             confirmHandler={handleFocusSelection}
             undoHandler={() => setFociModal(null)}
           />
@@ -97,19 +93,19 @@ export default function ClassPerksScreen(): JSX.Element {
           />
         </Modal>
 
-        <Modal visible={skillModal[1]} onDismiss={() => setSkillModal([null, false])}>
+        <Modal visible={skillModal.visible} onDismiss={() => setSkillModal({ visible: false })}>
           <SelectSkillModal
-            type={skillModal[0] as SKILL_CHOICE | 'Specialist'}
-            selectedValue={builderCtx?.character.vowedSkill}
-            confirmHandler={handleVowedSkillSelection}
-            undoHandler={() => setSkillModal([null, false])}
+            type={skillModal.skillChoiceType as SKILL_CHOICE | (WWNSKILLS | SWNSKILLS | PSYSKILLS)[] | 'Specialist'}
+            selectedValue={getFocusInfoBySource(skillModal.source as FocusSource)?.skillChoices?.[0]}
+            confirmHandler={handleSkillSelection}
+            undoHandler={() => setSkillModal({ visible: false })}
           />
         </Modal>
 
         <Modal visible={vowedModal} onDismiss={() => setVowedModal(false)}>
           <SelectSkillModal
             type={'Vowed Effort Skill'}
-            selectedValue={builderCtx?.character.vowedSkill}
+            selectedValue={builderCtx?.character.characterClass?.vowedSkill}
             confirmHandler={handleVowedSkillSelection}
             undoHandler={() => setVowedModal(false)}
           />
@@ -120,44 +116,43 @@ export default function ClassPerksScreen(): JSX.Element {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 6, gap: 18 }}
       >
-        {getCharacterClass()?.levelOneFoci?.length ? (
+        {getCharacterClass()?.name?.includes('Warrior') || getCharacterClass()?.name?.includes('Expert') ? (
           <View style={{ gap: 12 }}>
             <Text style={{ ...Style.title, fontSize: 20 }}>Foci</Text>
-            {getCharacterClass()?.levelOneFoci?.map((f, i) => (
-              <View key={`class-focus-${i}`} style={{ gap: 12 }}>
-                <Text style={{ ...Style.subHeading, fontSize: 16 }}>Choose a {f.toLowerCase()} as a free pick</Text>
-                {getFocusByType(f) !== null && getFocusByType(f) !== undefined ? (
-                  <ExpandableCard element={getFocusByType(f) as Focus} type={'focus'} />
-                ) : null}
-                <Button mode="contained-tonal" onPress={() => setFociModal(f)} style={{ alignSelf: 'center' }}>
-                  {getFocusByType(f) ? 'Change' : 'Choose'}
-                </Button>
 
-                {getFocusSkills(getFocusByType(f)?.id)?.map((sk, i) => (
-                  <View key={`focus-sk-${f}-${i}`} style={Style.rowFlex}>
-                    <Text style={Style.bold}>Bonus Skill:</Text>
-                    <Text> {getCharacterSkillChoices(getFocusByType(f)?.id) ?? ' - '}</Text>
-                  </View>
-                ))}
+            {getCharacterClass()?.name?.includes('Warrior') ? (
+              <FocusPicker
+                focus={getFocusInfoBySource(FocusSource.WARRIOR)}
+                type={FocusSource.WARRIOR}
+                onRequestFocusPick={() => setFociModal(FocusSource.WARRIOR)}
+                onRequestSkillPick={() =>
+                  setSkillModal({
+                    visible: true,
+                    source: FocusSource.WARRIOR,
+                    skillChoiceType: getFocusBySource(FocusSource.WARRIOR)?.lv1?.skillChoice,
+                  })
+                }
+              />
+            ) : null}
 
-                {getSkillChoice(getFocusByType(f)?.id) ? (
-                  <View key={`focus-sk-${f}-${i}`} style={Style.rowFlex}>
-                    <Text style={Style.bold}>Bonus Skill:</Text>
-                    <Text> {getCharacterSkillChoices(getFocusByType(f)?.id) ?? ' - '}</Text>
-                    <Button
-                      onPress={() => setSkillModal([getSkillChoice(getFocusByType(f)?.id), true])}
-                      style={{ alignSelf: 'center' }}
-                    >
-                      {getCharacterSkillChoices(getFocusByType(f)?.id) ? 'Change' : 'Choose skill'}
-                    </Button>
-                  </View>
-                ) : null}
-              </View>
-            ))}
+            {getCharacterClass()?.name?.includes('Expert') ? (
+              <FocusPicker
+                focus={getFocusInfoBySource(FocusSource.EXPERT)}
+                type={FocusSource.EXPERT}
+                onRequestFocusPick={() => setFociModal(FocusSource.EXPERT)}
+                onRequestSkillPick={() =>
+                  setSkillModal({
+                    visible: true,
+                    source: FocusSource.EXPERT,
+                    skillChoiceType: getFocusBySource(FocusSource.EXPERT)?.lv1?.skillChoice,
+                  })
+                }
+              />
+            ) : null}
           </View>
         ) : null}
 
-        {getCharacterClass()?.perks?.some(p => p.name === 'Arcane Tradition') ? (
+        {/* {getCharacterClass()?.perks?.some(p => p.name === 'Arcane Tradition') ? (
           <View style={{ gap: 12 }}>
             <Text style={{ ...Style.title, fontSize: 20 }}>Arcane Tradition</Text>
             {getCharacterClass()
@@ -191,7 +186,7 @@ export default function ClassPerksScreen(): JSX.Element {
                 </View>
               ))}
           </View>
-        ) : null}
+        ) : null} */}
       </ScrollView>
     </View>
   );

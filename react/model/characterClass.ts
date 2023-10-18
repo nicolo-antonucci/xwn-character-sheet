@@ -1,5 +1,4 @@
 import { SCORE } from './character';
-import { FocusType } from './focus';
 import { Art, Shock } from './ruleTypes';
 import { WWNSKILLS } from './skills';
 
@@ -86,7 +85,6 @@ export interface CharacterClass {
     9: number;
     10: number;
   };
-  levelOneFoci?: FocusType[];
   perks?: {
     name: string;
     description: string[];

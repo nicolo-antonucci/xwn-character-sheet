@@ -5,7 +5,7 @@
     "description": "You are keenly aware of your surroundings and virtually impossible to take unaware.",
     "lv1": {
       "description": "Gain Notice as a bonus skill. You cannot be surprised, nor can others use the Execution Attack option on you. If the GM rolls initiative by sides, you can add a +1 bonus to your side’s initiative roll, though multiple Alert PCs don’t stack this bonus. If you roll initiative individually, you can roll it twice and take the better result.",
-      "skills": ["Notice"],
+      "skill": "Notice",
       "flags": "alert"
     },
     "lv2": {
@@ -31,7 +31,7 @@
     "description": "You have an unusual competence with thrown weapons and melee attacks. This Focus’ benefits do not apply to unarmed attacks or non-thrown projectile weapons. This Focus’ bonuses also don’t stack with Deadeye or other Foci that add a skill’s level to your damage or Shock.",
     "lv1": {
       "description": "Gain Stab as a bonus skill. You can Ready a Stowed melee or thrown weapon as an Instant action. You may add your Stab skill level to a melee or thrown weapon’s damage roll or Shock damage, assuming it has any to begin with.",
-      "skills": ["Stab"],
+      "skill": "Stab",
       "flag": "armsmaster-lv1"
     },
     "lv2": {
@@ -46,7 +46,7 @@
     "description": "You have remarkable gifts as a crafter and can often improvise techniques even in fields unrelated to your usual background. You are able to create mods for equipment even if you are not an Expert, as per the rules on page 56.",
     "lv1": {
       "description": "Gain Craft as a bonus skill. Your Craft skill is treated as one level higher, up to a maximum of 5, for purposes of crafting and maintaining mods. Mods you build require one fewer unit of arcane salvage, down to a minimum of one. Your Craft skill is applicable to any normal crafting profession’s work, allowing you to fashion their wares without penalty.",
-      "skills": ["Craft"],
+      "skill": "Craft",
       "flag": "artisan"
     },
     "lv2": {
@@ -60,7 +60,7 @@
     "description": "You are practiced at sudden murder, and have certain advantages in carrying out an Execution Attack as described in the rules on page 44.",
     "lv1": {
       "description": "Gain Sneak as a bonus skill. You can conceal an object no larger than a knife from anything less invasive than a strip search. You can draw or produce this object as an On Turn action, and your point-blank thrown or melee attacks made during a surprise round with it cannot miss the target.",
-      "skills": ["Sneak"]
+      "skill": "Sneak"
     },
     "lv2": {
       "description": "You can take a Move action on the same round as you make an Execution Attack, closing rapidly with a target before you attack. You may split this Move action when making an Execution Attack, taking part of it before you murder your target and part of it afterwards. This movement happens too quickly to alert a victim or to be hindered by bodyguards."
@@ -73,7 +73,7 @@
     "description": "You have an uncanny kind of charisma about you, one that makes others instinctively follow your instructions and further your causes. At level 1, this is a knack of charm and personal magnetism, while level 2 might suggest latent magical powers or an ancient bloodline of sorcerous rule. Where this Focus refers to followers, it means NPCs who have voluntarily chosen to be in your service. PCs never count as followers.",
     "lv1": {
       "description": "Gain Lead as a bonus skill. Once per day, you can make a request from an NPC who is not openly hostile to you, rolling a Cha/Lead skill check at a difficulty of the NPC’s Morale score. If you succeed, they will comply with the request, provided it is not significantly harmful or extremely uncharacteristic.",
-      "skills": ["Lead"]
+      "skill": "Lead"
     },
     "lv2": {
       "description": "Those who follow you are fired with confidence. Any NPC being directly led by you gains a Morale and hit roll bonus equal to your Lead skill and a +1 bonus on all skill checks. Your followers and henchmen will not act against your interests unless under extreme pressure."
@@ -100,7 +100,7 @@
     "description": "You’re remarkably gifted at making friends and forging ties with the people around you. Wherever you go, you always seem to know somebody useful to your ends.",
     "lv1": {
       "description": "Gain Connect as a bonus skill. If you’ve spent at least a week in a not-entirely-hostile location, you’ll have built a web of contacts willing to do favors for you that are no more than mildly illegal. You can call on one favor per game day and the GM decides how far they’ll go for you.",
-      "skills": ["Connect"]
+      "skill": "Connect"
     },
     "lv2": {
       "description": "Once per game session, if it’s not entirely implausible, you meet someone you know who is willing to do modest favors for you. You can decide when and where you want to meet this person, but the GM decides who they are and what they can do for you."
@@ -113,7 +113,7 @@
     "description": "Through wide travel, careful observation, or extensive study, you’ve obtained a wide experience of the cultures of your region and an ability to navigate their customs, laws, and languages. You know what to do and say to impress others with the reasonableness of your wishes.",
     "lv1": {
       "description": "Gain Connect as a bonus skill. You can fluently speak all the common languages of your native region and convey at least basic information in the uncommon or esoteric ones. You can learn a new language with only a week’s practice with a native speaker. Once per game day, your polished ways automatically gain a minor favor from an NPC that would not put them to significant expense or risk, assuming the NPC isn’t hostile to you.",
-      "skills": ["Connect"]
+      "skill": "Connect"
     },
     "lv2": {
       "description": "Once per game session, reroll a failed social skill check as you use your cultural knowledge to push your interlocutor toward the desired result."
@@ -139,7 +139,7 @@
     "description": "You have a gift with ranged weapons. While this talent most commonly applies to bows, it is also applicable to thrown weapons or other ranged weapons that can be used with the Shoot skill. For thrown weapons, you can’t use the benefits of the Armsmaster Focus at the same time as Deadeye.",
     "lv1": {
       "description": "Gain Shoot as a bonus skill. You can Ready a Stowed ranged weapon as an Instant action. You may use a bow or two-handed ranged weapon even when an enemy is within melee range, albeit at a -4 hit penalty. You may add your Shoot skill level to a ranged weapon’s damage roll.",
-      "skills": ["Shoot"],
+      "skill": "Shoot",
       "flag": "deadeye"
     },
     "lv2": {
@@ -153,7 +153,7 @@
     "description": "You have an uncanny ability to sniff out traders and find good deals, licit or otherwise. Even those who might not normally be disposed to bargain with you can sometimes be persuaded to pause and negotiate, if you have something they want.",
     "lv1": {
       "description": "Gain Trade as a bonus skill. With a half hour of effort you can find a buyer or seller for any good or service that can be traded in the community, legal or otherwise. Finding a marginally possible service, like an assassin willing and able to target a king, or some specific precious ancient artifact, may require an adventure if the GM allows it at all.",
-      "skills": ["Trade"]
+      "skill": "Trade"
     },
     "lv2": {
       "description": "Once per session, target a sentient who is not just then trying to kill you or your allies and make a request of it that it can comprehend. If it’s at all plausible for it to make such terms, it will do so for a price or favor it thinks you can grant, though the price for significant favors might be dear."
@@ -176,7 +176,7 @@
     "description": "Your skill at personal negotiations is enormous and uncanny. Some might even think it supernatural in nature.",
     "lv1": {
       "description": "Gain Convince as a bonus skill. You speak all the languages common to your region of the world and can learn new ones to a workable level in a week, becoming fluent in a month. Reroll 1s on any skill check dice related to negotiation or diplomacy.",
-      "skills": ["Convince"],
+      "skill": "Convince",
       "flag": "diplomatic-grace"
     },
     "lv2": {
@@ -190,7 +190,7 @@
     "description": "You have an unusual gift for saving Mortally Wounded allies and quickening the natural recovery of the wounded in your care.",
     "lv1": {
       "description": "Gain Heal as a bonus skill. You may attempt to stabilize one Mortally Wounded adjacent person per round as an On Turn action. When rolling Heal skill checks, roll 3d6 and drop the lowest die. You heal twice as many hit points as usual when applying first aid after a battle, as described on page 48.",
-      "skills": ["Heal"]
+      "skill": "Heal"
     },
     "lv2": {
       "description": "Your curative gifts count as magical healing. You can heal 1d6+Heal skill in damage to an adjacent wounded ally as a Main Action, potentially reviving them without any lingering Frailty. Each such application of healing adds 1 System Strain to the target, and the gift cannot be used on targets already at their maximum System Strain."
@@ -203,7 +203,7 @@
     "description": "You have a distinct knack for picking up lost souls who willingly do your bidding. You might induce them with promises of money, power, excitement, sex, or some other prize that you may or may not eventually grant. A henchman obtained with this Focus will serve in loyal fashion until clearly betrayed or placed in unacceptable danger. Henchmen are not “important” people in their society, and are usually marginal sorts, outcasts, the desperate, or other persons with few options. You can use more conventional pay or inducements to acquire additional henchmen, but these extra hirelings are no more loyal or competent than your pay and treatment can purchase.",
     "lv1": {
       "description": "Gain Lead as a bonus skill. You can acquire henchmen within 24 hours of arriving in a community, assuming anyone is suitable hench material. These henchmen will not fight except to save their own lives, but will escort you on adventures and risk great danger to help you. Most henchmen from a civilized society will be treated as Peaceful Humans from the bestiary section of the book. You can have one henchmen at a time for every three character levels you have, rounded up. You can release henchmen with no hard feelings at any plausible time and pick them back up later should you be without a current henchman.",
-      "skills": ["Lead"]
+      "skill": "Lead"
     },
     "lv2": {
       "description": "Your henchmen are remarkably loyal and determined, and will fight for you against anything but clearly overwhelming odds. Whether through natural competence or their devotion to you, they’re treated as Veteran Soldier from the bestiary section. You can make faithful henchmen out of skilled and highly-capable NPCs, but this requires that you actually have done them some favor or help that would reasonably earn such fierce loyalty."
@@ -229,7 +229,7 @@
     "description": "You are exceedingly skilled at presenting yourself as something you are not, including disguises, voice mimicry, and lightning-fast wardrobe changes. Some impostors rely on the acting skills of Perform, while others lean more to the nefarious tricks of Sneak.",
     "lv1": {
       "description": "Gain Perform or Sneak as a bonus skill. Once per scene, reroll any failed skill check or saving throw related to maintaining an imposture or disguise. Create one false identity of no great social importance; you can flawlessly pretend to be that person, such that only extremely persuasive proof can connect you with it. You can change this identity with a week’s worth of effort in building a new one.",
-      "skills": ["Perform", "Sneak"]
+      "skillChoice": ["Perform", "Sneak"]
     },
     "lv2": {
       "description": "You can alter your clothing and armor such that a single Main Action lets you swap between any of three chosen appearances. In addition to your original false identity, you can establish a new false identity in each city or significant community you spend at least a day in."
@@ -266,7 +266,7 @@
     "description": "You are a skilled poisoner, capable of compounding toxins out of readily-available flora and minerals. It takes an hour to brew a poison, and you can keep as many doses fresh as you have levels. Blade venoms take a Main Action to apply and last for ten minutes or until a hit or Shock is inflicted, whichever comes first. Detecting poisoned food is a Wis/Notice skill check against 10, or 12 if the diner’s not a noble or otherwise normally wary of poison. One dose can poison up to a half-dozen diners.",
     "lv1": {
       "description": "Gain Heal as a bonus skill. Gain a reroll on any failed saving throw versus poison. Your toxins inflict 2d6 damage plus your level on a hit or Shock, with a Physical save for half. Your incapacitating or hallucinogenic toxins do the same, but those reduced to zero hit points are simply incapacitated for an hour.",
-      "skills": ["Heal"]
+      "skill": "Heal"
     },
     "lv2": {
       "description": "You are immune to poison and can apply a universal antidote to any poisoned ally as a Main Action. Any attempt to detect or save against your poisons takes a penalty equal to your Heal skill. Your ingested poisons count as an Execution Attack against unsuspecting targets, as per page 44, with Heal used for the Physical saving throw penalty and 1d6 damage per level done on a success. Such poisons can be non-lethal at your discretion."
@@ -294,7 +294,7 @@
     "description": "Anyone with any level of Ride skill can fight competently on horseback or keep their mount healthy. You have an almost supernatural bond with your steeds, however, and can push them beyond normal limits.",
     "lv1": {
       "description": "Gain Ride as a bonus skill. Your steeds all count as Morale 12 in battle, use your AC if it’s higher than theirs, and can travel 50% further in a day than normal for their kind. You can intuitively communicate with riding beasts, gaining as much information from it as its intellect can convey.",
-      "skills": ["Ride"]
+      "skill": "Ride"
     },
     "lv2": {
       "description": "Once per scene, negate a successful attack against your steed as an Instant action. Once per scene, reroll any failed Ride skill check. You can telepathically send and receive simple warnings, thoughts, and commands to and from your steed so long as it’s within two hundred feet. You can so bond with one steed at a time, taking an hour to do so."
@@ -307,7 +307,7 @@
     "description": "You’re extremely dangerous to enemies around you. The ferocity of your melee attacks stresses and distracts enemies even when your blows don’t draw blood.",
     "lv1": {
       "description": "Gain Punch or Stab as a bonus skill. The Shock damage of your weapon treats all targets as if they were AC 10, assuming your weapon is capable of harming the target in the first place and the target is not immune to Shock.",
-      "skills": ["Punch", "Stab"],
+      "skillChoice": ["Punch", "Stab"],
       "flag": "shocking-assault-lv1"
     },
     "lv2": {
@@ -322,7 +322,7 @@
     "description": "You are an expert at placing a thrown knife or arrow on an unsuspecting target. These special benefits only apply when making an Execution Attack with a bow, hurlant, or thrown weapon, as described on page 44.",
     "lv1": {
       "description": "Gain Shoot as a bonus skill. When making a skill check for a ranged Execution Attack or target shooting, roll 3d6 and drop the lowest die.",
-      "skills": ["Shoot"]
+      "skill": "Shoot"
     },
     "lv2": {
       "description": "You don’t miss ranged Execution Attacks. A target hit by one takes a -4 penalty on the Physical saving throw to avoid immediate mortal injury. Even if the save is successful, the target takes double the normal damage inflicted by the attack."
@@ -378,7 +378,7 @@
     "description": "You have uncommon expertise in handling traps and snares, both mundane ones and the magical perils sometimes found in Deeps or the lairs of sorcerers. You know how to improvise traps with materials you easily carry.",
     "lv1": {
       "description": "Gain Notice as a bonus skill. Once per scene, reroll any failed saving throw or skill check related to traps or snares. Given five minutes of work you can trap a portal, container, passageway, or other relatively narrow space with foot snares, caltrops, toxic needles, or other hazards. Non-lethal traps cause the first victim to trigger it to lose a round of actions while dangerous ones inflict 1d6 damage plus twice the character’s level, with an appropriate saving throw for half. Only one such improvised trap can be maintained at a time. More fearsome traps may be laid with congenial circumstances and the GM’s permission.",
-      "skills": ["Notice"]
+      "skill": "Notice"
     },
     "lv2": {
       "description": "You know secrets for unraveling even magical traps or arcane hazards that would normally require a wizard to dispel them. Once per scene, your efforts count as an Extirpate Arcana spell against the trap or hazard, cast as if a Mage of twice your level, with any relevant skill check being Int/Notice or Dex/Notice. This ability can be used against any stationary magical effect that’s susceptible to being dispelled by Extirpate Arcana."
@@ -391,7 +391,7 @@
     "description": "Your empty hands are more dangerous than swords in the grip of the less gifted. Your unarmed attacks are counted as melee weapons when it comes to binding up opponents wielding bows and similar ranged long arms, though you need at least one hand free to do so.",
     "lv1": {
       "description": "Gain Punch as a bonus skill. Your unarmed attacks become more dangerous as your Punch skill increases. At level-0, they do 1d6 damage. At level-1, they do 1d8 damage. At level-2 they do 1d10, level-3 does 1d12, and level-4 does 1d12+1. At Punch-1 or better, they have the Shock quality equal to your Punch skill against AC 15 or less. While you normally add your Punch skill level to any unarmed damage, don’t add it twice to this Shock damage",
-      "skills": ["Punch"],
+      "skill": "Punch",
       "flag": "unarmed-combatant-lv1"
     },
     "lv2": {
@@ -413,7 +413,7 @@
     "description": "You are a bodyguard, shieldbearer, or other gifted defender of others, accustomed to the roil of bloody battle and desperate struggle. You have an exceptional ability to shield your allies from the attacks of those who would slay them.",
     "lv1": {
       "description": "Gain Stab or Punch as a bonus skill. Gain a +2 on all skill checks for the Screen Ally combat action. You can screen against one more attacker per round than your skill would normally allow. Once per round, you can Screen Ally against even intangible spells or magical attacks or bodily shield them from an area-effect explosion or magic. Such attempts require the usual successful opposing skill check, with the assailant using their Magic skill.",
-      "skills": ["Punch", "Stab"]
+      "skillChoice": ["Punch", "Stab"]
     },
     "lv2": {
       "description": "The first Screen Ally skill check you make in a round is always successful. Gain +2 AC while screening someone. You can screen against foes as large as ogres or oxen."
@@ -438,7 +438,7 @@
     "description": "You are a frenzy of bloody havoc in melee combat, and can hack down numerous lesser foes in close combat… assuming you survive being surrounded.",
     "lv1": {
       "description": "Gain Stab as a bonus skill. Once per scene, as an On Turn action, apply your Shock damage to all foes within melee range, assuming they’re susceptible to your Shock.",
-      "skills": ["Stab"]
+      "skill": "Stab"
     },
     "lv2": {
       "description": "The first time you kill someone in a round with a normal attack, either with its rolled damage on a hit or with the Shock damage it inflicts, instantly gain a second attack on any target within range using any Ready weapon you have."
@@ -496,12 +496,12 @@
     "name": "Origin: Sylvan Elf",
     "description": "Silvan elves are stockier  and more muscular than their gloomy cousins. They usually have slightly darker skin, dark wavy hair and brightly colored eyes. They can live up to five centuries and reproduce at a lower rate than other humanoids. Every sylvan elf is blessed by the druids with minor shapeshifting abilities, including the ability to change gender (and so, their physical features) after resting. This ability isn’t powerful enough to hide an elf’s identity: even after changing gender, they will clearly look as a differently gendered version of the same person.",
     "lv1": {
-      "description": "After resting you can shift any number of points from a physical ability score to another, but you cannot lower a score below 9. You can communicate simple emotions to beasts. You are adept at living in a wild environment, gaining Survive as a bonus skill. You have extremely sharp senses, gaining Notice as a bonus skill and being able to see clearly in anything short of complete darkness. ",
-      "skills": ["Notice", "Survive"],
+      "description": "After resting you can shift any number of points from a physical ability score to another, but you cannot lower a score below 9. You can communicate simple emotions to beasts. You are adept at living in a wild environment, gaining Notice or Survive as a bonus skill. You are able to see clearly in anything short of complete darkness. You can alter you physical appearance and gender but you are recognizable to anyone who is familiar with you.",
+      "skillChoice": ["Notice", "Survive"],
       "flags": "sylvan-elf"
     },
     "lv2": {
-      "description": "You can communicate with beasts as if you shared a language. By spending one minute hiding in foliage you can become invisible as long as you do not move. You leave no trace of your passage while sneaking unless you want to, even on snow or other terrain."
+      "description": "You can communicate with beasts as if you shared a language. When you alter your appearance or change gender, you can try to become unrecognizable: any creature who tries to discern your identity must make a Wis+Notice check against a DC of 8 + your Charisma modifier to recognize you. By spending one minute hiding in foliage you can become invisible as long as you do not move. You leave no trace of your passage while sneaking unless you want to, even on snow or other terrain."
     },
     "type": "Origin Focus"
   },
@@ -511,7 +511,7 @@
     "description": "Dwarves are a short and brawny kind, with even women able to sport thick beards. They have hardened skin which often takes the color of stone or metal and grants them improved resistance to magic. Dwarves are known for their hunger and thirst which borderlines gluttony but they can alter their metabolism as to quickly burn or store excess food and water. ",
     "lv1": {
       "description": "Gain Craft as a bonus skill. You have the dwarven surrounding-sense out to twenty feet, able to distinguish solid objects as if you were using your sense of sight. You have a natural resistance to magic, gaining a +2 bonus on all saves against hostile magical effects. You need only half the usual amount of food, water, and air and gain a +1 bonus to your hit point die at each level. ",
-      "skills": ["Craft"],
+      "skill": "Craft",
       "flag": "dwarf"
     },
     "lv2": {

@@ -32,6 +32,14 @@ export interface CharacterClassInfo {
   level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 }
 
+export interface CharacterFocusInfo {
+  id: string;
+  source: FocusSource;
+  focusId: number;
+  level: 1 | 2;
+  skillChoices?: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[];
+}
+
 export class Character {
   id: string;
   ruleset: RULESET = RULESET.WWN;
@@ -42,13 +50,7 @@ export class Character {
     bgBenefits: BGBenefit[] | null;
   };
   characterClass?: CharacterClassInfo;
-  foci: Set<{
-    id: string;
-    source: FocusSource;
-    focusId: number;
-    level: 1 | 2;
-    skillChoices?: (SWNSKILLS | WWNSKILLS | PSYSKILLS)[];
-  }>;
+  foci: Set<CharacterFocusInfo>;
   skills: Skills | null;
   flags: string[] = [];
 
