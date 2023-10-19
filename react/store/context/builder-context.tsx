@@ -1,7 +1,7 @@
 import { ReactElement, createContext, useEffect, useState } from 'react';
 import { generateId } from '../../commons/Utils';
 import { BGBenefit, BGBenefitPickType, Background } from '../../model/backgrounds';
-import { AbilityScores, Character, CharacterClassInfo } from '../../model/character';
+import { AbilityScores, Character } from '../../model/character';
 import { ArcaneTradition, CharacterClass } from '../../model/characterClass';
 import { FocusSource } from '../../model/focus';
 import { RULESET } from '../../model/properties';
@@ -153,10 +153,13 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
 
     setCharacter(current => ({
       ...current,
-      characterClass: {
-        ...(current.characterClass as CharacterClassInfo),
-        arcaneTraditions,
-      },
+      characterClass: current.characterClass
+        ? {
+            classId: current.characterClass.classId,
+            level: current.characterClass.level,
+            arcaneTraditions,
+          }
+        : undefined,
     }));
   }
 
@@ -165,7 +168,7 @@ export default function BuilderContextProvider({ children }: BuilderContextProvi
 
     setCharacter(current => ({
       ...current,
-      vowedSkill: skill,
+      characterClass: current.characterClass ? { ...current.characterClass, vowedSkill: skill } : undefined,
     }));
   }
 

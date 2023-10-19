@@ -1,17 +1,18 @@
 import { useContext, useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Modal, Portal, Text } from 'react-native-paper';
+import { Button, Modal, Portal, Text } from 'react-native-paper';
 import characterClasses from '../../../../assets/rules/wwnCharacterClasses.json';
+import foci from '../../../../assets/rules/wwnFoci.json';
 import FocusPicker from '../../../components/character-builder-components/FocusPicker';
 import SelectFocusModal from '../../../components/character-builder-components/SelectFocusModal';
 import SelectSkillModal from '../../../components/character-builder-components/SelectSkillModal';
 import SelectTraditionModal from '../../../components/character-builder-components/character-class-components/SelectTraditionModal';
+import ExpandableCard from '../../../components/generics/ExpandableCard';
 import { ArcaneTradition, CharacterClass, ClassName } from '../../../model/characterClass';
 import { Focus, FocusSource, FocusType } from '../../../model/focus';
 import { PSYSKILLS, SKILL_CHOICE, SWNSKILLS, WWNSKILLS } from '../../../model/skills';
 import { BuilderContext } from '../../../store/context/builder-context';
 import { Style } from '../../../styles/StyleSheet';
-import foci from '../../../../assets/rules/wwnFoci.json';
 
 export default function ClassPerksScreen(): JSX.Element {
   const builderCtx = useContext(BuilderContext);
@@ -146,7 +147,7 @@ export default function ClassPerksScreen(): JSX.Element {
           </View>
         ) : null}
 
-        {/* {getCharacterClass()?.perks?.some(p => p.name === 'Arcane Tradition') ? (
+        {getCharacterClass()?.perks?.some(p => p.name === 'Arcane Tradition') ? (
           <View style={{ gap: 12 }}>
             <Text style={{ ...Style.title, fontSize: 20 }}>Arcane Tradition</Text>
             {getCharacterClass()
@@ -166,21 +167,21 @@ export default function ClassPerksScreen(): JSX.Element {
                   </Button>
                   {getTradition(i) === ArcaneTradition.VOWED ? (
                     <View style={Style.rowFlex}>
-                      {builderCtx?.character.vowedSkill ? (
+                      {builderCtx?.character.characterClass?.vowedSkill ? (
                         <>
                           <Text style={Style.bold}>Effort Skill:</Text>
-                          <Text> {builderCtx?.character.vowedSkill}</Text>
+                          <Text> {builderCtx?.character.characterClass?.vowedSkill}</Text>
                         </>
                       ) : null}
                       <Button onPress={() => setVowedModal(true)} style={{ alignSelf: 'center' }}>
-                        {builderCtx?.character.vowedSkill ? 'Change' : 'Choose effort skill'}
+                        {builderCtx?.character.characterClass?.vowedSkill ? 'Change' : 'Choose effort skill'}
                       </Button>
                     </View>
                   ) : null}
                 </View>
               ))}
           </View>
-        ) : null} */}
+        ) : null}
       </ScrollView>
     </View>
   );
